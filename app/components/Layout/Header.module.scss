@@ -1,0 +1,74 @@
+@import "../../src/partials/variables";
+@import "../../src/partials/mixin";
+
+header {
+    .wrapper {
+        @include Flex($f-f: column, $a-i: center);
+        padding: 15px 0 20px;
+
+        .langs {
+            display: flex;
+            margin: 0 0 9px;
+
+            li {
+                margin: 0 5px;
+
+                a {
+                    color: $clr_grey_text;
+                    font-size: 12px;
+                    &:hover{
+                        color: $clr_text;                        
+                    }
+                    &.active{
+                        color: $clr_text;
+                    }
+                }
+            }
+        }
+    }
+
+    .menu {
+        position: relative;
+        padding: 18px 0;
+        border-top: 1px solid $clr_border;
+        border-bottom: 1px solid $clr_border;
+        @include Flex($a-i: center, $j-c: space-between);
+
+        ul {
+            width: calc(100% - 60px);
+            @include Flex($j-c: space-between);
+
+            a {
+                color: #000;
+            }
+        }
+
+        .searchBox {
+            position: absolute;
+            height: 100%;
+            top: 0;
+            width: 100%;
+            background-color: aqua;
+
+            input {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                border: none;
+                outline: none;
+                padding: 18px 30px;
+
+                &::before {
+                    content: "\e804";
+                    position: absolute;
+                    font-family: 'fontello';
+                    font-size: 18px;
+                    left: 0;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    z-index: 15;
+                }
+            }
+        }
+    }
+}

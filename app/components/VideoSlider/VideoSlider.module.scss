@@ -1,0 +1,42 @@
+@import "../../src/partials/mixin";
+@import "../../src/partials/extend";
+
+.videoNews {
+    margin: 20px 0 15px;
+
+    .title {
+
+
+        @extend %title;
+
+    }
+
+    .content {
+        width: 100%;
+
+        .wrapper {
+            .videoItem {
+                iframe {
+                    width: 100%;
+
+                }
+            }
+
+            .pagination {
+                @include Flex($j-c: center);
+                margin: 10px 0 0;
+
+                li {
+                    width: 10px;
+                    height: 10px;
+                    background-color: #000;
+                    border-radius: 50%;
+
+                    &:not(:last-child) {
+                        margin: 0 14px 0 0;
+                    }
+                }
+            }
+        }
+    }
+}

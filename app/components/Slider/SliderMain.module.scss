@@ -1,0 +1,21 @@
+.mainSlider {
+    margin: 20px 0 15px;
+    position: relative;
+    height: 500px;
+    background-color: aquamarine;
+
+    .mySwiper {
+        display: flex;
+        height: 30px;
+        overflow: hidden;
+        .swiper-slide {
+            width: 25%;
+            height: 10px;
+            opacity: 0.4;
+            border-radius: 50%;
+            img{
+
+            }
+        }
+    }
+}

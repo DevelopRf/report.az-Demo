@@ -1,0 +1,54 @@
+@import "../../src/partials/variables";
+@import "../../src/partials/mixin";
+@import "../../src/partials/extend";
+
+
+.latestNews {
+    .wrapper {
+        .title {
+            @extend %title;
+
+            a {
+                color: #000;
+            }
+        }
+
+        .contentWrapper {
+            height: 1500px;
+            overflow-y: scroll;
+
+            .content {
+                padding: 15px 10px;
+                @include Flex($c-g: 20px, $a-i: center);
+
+                .time {
+                    span {
+                        display: inline-block;
+                        width: 50px;
+                    }
+                }
+
+                .info {
+                    .newsTitle {
+                        a {
+                            color: $clr_text;
+
+                            &:hover {
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+
+                    .category {
+                        a {
+                            font-size: 12px;
+                            text-transform: uppercase;
+                            color: $clr_grey_text;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}

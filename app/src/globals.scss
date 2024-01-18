@@ -1,0 +1,28 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.col-12, .col-lg-8, .col-lg-4{
+  padding: 0 15px;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6{
+  margin: 0;
+}
