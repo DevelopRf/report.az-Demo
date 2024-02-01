@@ -1,0 +1,82 @@
+@import "../../styles/partials/variables";
+@import "../../styles/partials/mixin";
+@import "../../styles/partials/extend";
+
+.ImportantNews {
+    padding: 35px 0 30px;
+    background-color: $clr_second_important;
+
+    .wrapper {
+        padding: 0 15px;
+
+        .title {
+            @extend %titleMain;
+            .navigator{                
+                @extend %navigator;
+                .prev, .next{
+                    border: 1px solid $clr_primary;
+                }
+            }
+        }
+
+        .content {
+            overflow: hidden;
+
+            .mySwiper {
+                .swiper-slide {
+
+                    .newsCard {
+                        .image {
+                            margin: 0 0 10px;
+
+                            img {
+                                @extend %img;
+                            }
+                        }
+
+                        .info {
+                            font-family: "Montserrat-SemiBold", sans-serif;
+                            @include Flex($f-w: wrap, $r-g: 15px);
+
+                            .number {
+                                font-family: "Montserrat-ExtraBold", sans-serif;
+                                border: 1px solid #000;
+                                width: 52px;
+                                height: 52px;
+                                @include Flex($j-c: center, $a-i: center);
+                            }
+
+                            .newsTitle {
+                                padding: 0 0 0 10px;
+                                width: calc(100% - 52px);
+
+                                a {
+                                    @extend %newsTitle;
+                                    display: inline-block;
+                                    font-size: 14px;
+                                }
+                            }
+
+                            .category{
+                                @extend %category;
+                                a{
+                                    &:hover{
+                                        text-decoration: underline
+                                    }
+                                }
+                            }
+
+                            .date {
+                                @extend %date;
+                                font-size: 12px;
+                                color: $clr_grey_text;
+                            }
+
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}

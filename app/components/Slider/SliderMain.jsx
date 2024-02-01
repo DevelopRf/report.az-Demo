@@ -1,74 +1,83 @@
 'use client'
-import React, { useState } from 'react';
+import { useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-import styles from "./SliderMain.module.scss"
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
-import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
+import "./SliderMain.scss"
+import { convertDateUTC } from '@/app/libs/date';
+import { convertTimeUTC } from '@/app/libs/date';
+import { Autoplay, FreeMode, Navigation, Thumbs } from 'swiper/modules';
 
-const SliderMain = () => {
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
-    return (
-        <div className={styles.mainSlider}>
-{/* <Swiper
+const SliderMain = ({ news }) => {
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
+ 
+  return (
+    <section className="mainSlider">
+      <div className="wrapper">
+      <Swiper
         style={{
           '--swiper-navigation-color': '#fff',
           '--swiper-pagination-color': '#fff',
         }}
+        autoplay={{
+          delay: 3500,
+          disableOnInteraction: false,
+        }}
         loop={true}
         spaceBetween={5}
-        navigation={true}
+        navigation={false}
         thumbs={{ swiper: thumbsSwiper }}
-        modules={[FreeMode, Navigation, Thumbs]}
+        modules={[Autoplay, FreeMode, Navigation, Thumbs]}
         className="mySwiper2"
       >
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-        </SwiperSlide>
+        {news && news.map(dataitem => {
+          return (
+            <SwiperSlide key={dataitem.id}>
+              <Image src={dataitem.img} width={823} height={500} />
+              <div className="info">
+                <div className="category">
+                  <Link href="#">{dataitem.sub_category}</Link>
+                </div>
+                <div className="newsTitle">
+                  <Link href="#">{dataitem.title}</Link>
+                </div>
+                <div className="date">
+                  <span>{convertDateUTC(dataitem.date)} <span>&#x2B1D;</span> {convertTimeUTC(dataitem.date)}</span>
+                </div>
+                <div className="pattern">
+
+                </div>
+              </div>
+            </SwiperSlide>
+          )
+        })}
       </Swiper>
       <Swiper
         onSwiper={setThumbsSwiper}
         loop={true}
-        spaceBetween={5}
+        spaceBetween={10}
         slidesPerView={5}
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper"
       >
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-        </SwiperSlide>        
-      </Swiper> */}
-        </div>
-    )
+        {news && news.map(dataitem => {
+          return (
+            <SwiperSlide key={dataitem.id}>
+              <Image src={dataitem.img} width={823} height={500} />
+            </SwiperSlide>
+          )
+        })}
+      </Swiper>
+      </div>
+    </section>
+  )
 }
 
 export default SliderMain

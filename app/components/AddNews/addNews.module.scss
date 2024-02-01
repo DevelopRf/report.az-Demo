@@ -1,0 +1,25 @@
+@import "../../styles/partials/variables";
+@import "../../styles/partials/mixin";
+@import "../../styles/partials/extend";
+
+.addNews {
+    @extend %section;
+    .title {
+        h2 {
+            margin: 0 0 20px;
+            font-family: "Montserrat-SemiBold", sans-serif;
+            @include Font($f-s:20px, $l-s: 1px);
+        }
+    }
+
+    .formContent {
+        textarea {
+            width: 100%;
+            resize: none;
+            border: 1px solid #3535354f;
+            outline: none;
+            padding: 10px;
+            margin: 15px 0;
+        }
+    }
+}

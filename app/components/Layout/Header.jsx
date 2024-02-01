@@ -1,13 +1,8 @@
 import styles from "./Header.module.scss"
 import Link from "next/link"
 import Image from "next/image"
-import localFont from "next/font/local"
 
-const montserratSemibold = localFont({ src: '../../fonts/Montserrat-SemiBold.woff2' })
-const montserratMedium = localFont({ src: '../../fonts/Montserrat-Medium.woff2' })
-const Header = () => {
-
-    
+const Header = () => {    
     return (
         <header>
             <div className="headerBottom">
@@ -15,7 +10,7 @@ const Header = () => {
                     <div className="row">
                         <div className="col-12">
                             <div className={styles.wrapper}>
-                                <ul className={`${styles.langs} ${montserratMedium.className}`}>
+                                <ul className={styles.langs}>
                                     <li>
                                         <Link href="#">Azərbaycan</Link>
                                     </li>
@@ -27,8 +22,8 @@ const Header = () => {
                                     </li>
                                 </ul>
                                 <div className={styles.logo}>
-                                    <Link href="#"><Image
-                                        src="/img/logo-victory-az.webp"
+                                    <Link href="/"><Image className={styles.logo}
+                                        src="https://report.az/public/images/logo-dark-az.png"
                                         priority={true}
                                         width={280}
                                         height={49}
@@ -36,10 +31,10 @@ const Header = () => {
                                     /></Link>
                                 </div>
                             </div>
-                            <nav className={`${styles.menu} ${montserratSemibold.className}`}>
+                            <nav className={styles.menu}>
                                 <ul>
-                                    <li><Link href="#">Əsas xəbərlər</Link></li>
-                                    <li><Link href="#">Son xəbərlər</Link></li>
+                                    <li><Link href="/">Əsas xəbərlər</Link></li>
+                                    <li><Link href={`latest`}>Son xəbərlər</Link></li>
                                     <li><Link href="#">Siyasət</Link></li>
                                     <li><Link href="#">İqtisadiyyat</Link></li>
                                     <li><Link href="#">COP29</Link></li>

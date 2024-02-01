@@ -1,0 +1,16 @@
+{
+  "name": "fontello",
+  "css_prefix_text": "icon-flash",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "3212f42c65d41ed91cb435d0490e29ed",
+      "css": "flash",
+      "code": 59629,
+      "src": "fontawesome"
+    }
+  ]
+}

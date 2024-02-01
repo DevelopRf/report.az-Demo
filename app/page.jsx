@@ -1,10 +1,10 @@
-import { register } from 'swiper/element/bundle';
-
-register();
 import Main from './components/Main/Main';
+import { getNews } from './libs/newsData';
 
-export default function Home() {
+
+export default async function Home() {
+  const data = await getNews()
   return (
-    <Main />
+    <Main data={data}/>
   )
 }

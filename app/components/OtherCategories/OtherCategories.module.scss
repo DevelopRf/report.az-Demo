@@ -1,0 +1,69 @@
+@import "../../styles/partials/variables";
+@import "../../styles/partials/mixin";
+@import "../../styles/partials/extend";
+
+.newsCards {
+    @include Flex($f-d: column, $j-c: space-between);
+    font-family: "Montserrat-SemiBold", sans-serif;
+    height: 100svh;
+
+    .bigNewsCard {
+        width: 100%;
+
+        .image {
+            img {
+                @extend %img;
+            }
+        }
+
+        .info {
+
+
+            .newsTitle {
+                a {
+                    @extend %infoSmallCard;
+                    height: auto;
+                }
+            }
+
+            .date {
+                @extend %date;
+                font-size: 10px;
+                color: $clr_grey_text;
+            }
+        }
+    }
+
+    .smallCards {
+        @include Flex($j-c: space-between);
+        padding: 10px 0 0;
+
+        .newsCard {
+            width: calc(50% - 5px);
+
+
+            .image {
+                img {
+                    @extend %img;
+                }
+            }
+
+            .info {
+
+
+                .newsTitle {
+                    a {
+                        @extend %infoSmallCard;
+
+                    }
+                }
+
+                .date {
+                    @extend %date;
+                    font-size: 10px;
+                    color: $clr_grey_text;
+                }
+            }
+        }
+    }
+}

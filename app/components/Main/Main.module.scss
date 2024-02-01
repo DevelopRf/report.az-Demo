@@ -1,8 +1,11 @@
-@import "../../src/partials/variables";
-@import "../../src/partials/mixin";
+@import "../../styles/partials/variables";
+@import "../../styles/partials/extend";
+@import "../../styles/partials/mixin";
 
 .mainSection {
-    .filterLinks {
+    @extend %section;
+    .filterLink {
+margin: 0 0 25px;
         .btn {
             padding: 0 15px;
 
@@ -22,6 +25,12 @@
             }
         }
     }
-
-
+}
+.otherCategories{
+    .title{
+        @extend %titleMain;
+        a{
+            color: $clr_primary;
+        }
+    }
 }

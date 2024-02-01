@@ -1,5 +1,5 @@
-@import "../../src/partials/variables";
-@import "../../src/partials/mixin";
+@import "../../styles/partials/variables";
+@import "../../styles/partials/mixin";
 
 header {
     .wrapper {
@@ -8,6 +8,8 @@ header {
 
         .langs {
             display: flex;
+            font-family: "Montserrat-Medium", sans-serif;
+
             margin: 0 0 9px;
 
             li {
@@ -16,23 +18,34 @@ header {
                 a {
                     color: $clr_grey_text;
                     font-size: 12px;
-                    &:hover{
-                        color: $clr_text;                        
+
+                    &:hover {
+                        color: $clr_primary;
                     }
-                    &.active{
-                        color: $clr_text;
+
+                    &.active {
+                        color: $clr_primary;
                     }
                 }
             }
         }
+
+        .logo {
+            height: auto;
+        }
     }
 
     .menu {
+        display: none;
+        font-family: "Montserrat-SemiBold", sans-serif;
         position: relative;
         padding: 18px 0;
         border-top: 1px solid $clr_border;
         border-bottom: 1px solid $clr_border;
-        @include Flex($a-i: center, $j-c: space-between);
+
+        @include screenSize(desktop) {
+            @include Flex($a-i: center, $j-c: space-between);
+        }
 
         ul {
             width: calc(100% - 60px);
@@ -46,8 +59,9 @@ header {
         .searchBox {
             position: absolute;
             height: 100%;
+            right: 20px;
+            width: 0;
             top: 0;
-            width: 100%;
             background-color: aqua;
 
             input {
@@ -56,7 +70,7 @@ header {
                 height: 100%;
                 border: none;
                 outline: none;
-                padding: 18px 30px;
+                // padding: 18px 30px;
 
                 &::before {
                     content: "\e804";

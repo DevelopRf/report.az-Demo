@@ -1,0 +1,141 @@
+@import "../../styles/partials/variables";
+@import "../../styles/partials/mixin";
+@import "../../styles/partials/extend";
+
+.actualNews {
+    margin: 35px 0 25px;
+
+    .wrapper {
+        .cards {
+            @include Flex($c-g: 10px, $r-g: 20px, $f-w: wrap);
+
+            .bigCard {
+                display: none;
+
+                @include screenSize(mobil) {
+                    display: block;
+                }
+
+                width: calc((100% / 2) - 10px + (10px / 2));
+                height: 325px;
+                position: relative;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    inset: 0;
+                    background-color: #0000004c;
+                    z-index: 1;
+                }
+
+                .image {
+                    height: 100%;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+
+                .info {
+                    font-family: "Montserrat-Bold", sans-serif;
+                    position: relative;
+                    position: absolute;
+                    inset: 0;
+                    padding: 50px;
+                    @include Flex($f-f: column, $j-c: flex-end);
+
+
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        top: 20px;
+                        left: 20px;
+                        right: 20px;
+                        bottom: 20px;
+                        border: 1px dashed $clr_white_text;
+                        z-index: 5;
+                    }
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        top: 15px;
+                        left: 15px;
+                        right: 15px;
+                        bottom: 15px;
+                        border: 1px dashed $clr_white_text;
+                        z-index: 5;
+                    }
+
+                    .category {
+                        z-index: 6;
+                        display: block;
+
+                        a {
+                            display: inline-block;
+                            padding: 5px 17px;
+                            border: 1px solid #fff;
+                            text-transform: uppercase;
+                            color: #fff;
+                            @include Font($f-s: 10px, $l-s: 2px);
+                        }
+                    }
+
+                    .newsTitle {
+                        z-index: 6;
+                        margin: 12px 0;
+
+                        a {
+                            font-size: 17px;
+                            color: #fff;
+                        }
+                    }
+
+                    .date {
+                        @extend %date;
+                        z-index: 6;
+                        color: $clr_white_text;
+                        font-size: 10px;
+                    }
+                }
+            }
+
+            .card {
+                width: calc((100% / 2) - 10px + (10px / 2));
+                
+                @include screenSize(mobil) {
+
+                    &:nth-child(3),
+                    &:nth-child(4) {
+                        display: none;
+                    }
+                    width: calc((100% / 4) - 10px + (10px / 4));
+                }
+
+                .image {
+                    img {
+                        @extend %img;
+                    }
+                }
+
+                .info {
+                    font-family: "Montserrat-SemiBold", sans-serif;
+
+                    .newsTitle {
+                        a {
+                            @extend %infoSmallCard;
+                        }
+                    }
+
+                    .date {
+                        @extend %date;
+                        font-size: 10px;
+                        color: $clr_grey_text;
+                    }
+                }
+            }
+        }
+    }
+}

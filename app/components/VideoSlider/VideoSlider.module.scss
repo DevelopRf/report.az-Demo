@@ -1,14 +1,11 @@
-@import "../../src/partials/mixin";
-@import "../../src/partials/extend";
+@import "../../styles/partials/mixin";
+@import "../../styles/partials/extend";
 
 .videoNews {
     margin: 20px 0 15px;
 
     .title {
-
-
-        @extend %title;
-
+        @extend %titleMain;
     }
 
     .content {

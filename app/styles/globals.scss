@@ -1,0 +1,83 @@
+@import "./partials/variables";
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  line-height: normal;
+}
+
+body {
+  color: $clr_primary;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.type {
+  font-size: 11px;
+  padding: 2px 6px;
+  margin: 0 5px 0 0;
+  background-color: $clr_primary;
+  color: #fff;
+
+}
+
+.iconLock {
+  margin: 0 0 0 3px;
+
+  &:after {
+    font-family: "fontello";
+    display: inline-block;
+    content: "\01F512";
+  }
+}
+
+@font-face {
+  font-family: "Montserrat-Bold";
+  src: url('../fonts/Montserrat-Bold.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Montserrat-SemiBold";
+  src: url('../fonts/Montserrat-SemiBold.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Montserrat-Medium";
+  src: url('../fonts/Montserrat-Medium.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Montserrat-ExtraBold";
+  src: url('../fonts/Montserrat-ExtraBold.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}

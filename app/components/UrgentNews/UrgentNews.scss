@@ -1,0 +1,111 @@
+@import "../../styles/partials/variables";
+@import "../../styles/partials/mixin";
+@import "../../styles/partials/extend";
+
+.urgentNews {
+  margin: 20px 0;
+
+  .wrapper {
+
+    @include Flex($a-i: center);
+    padding: 10px;
+    border: 1px solid $clr_border;
+    @include screenSize(mobil){
+      column-gap: 14px;
+    }
+
+    .title {
+      background-color: $clr_second;
+      padding: 11px 15px;
+      @include Flex($a-i: center, $c-g: 5px);
+
+      .icon-flash {
+
+        &::before {
+          margin: 0;
+          font-family: "fontello";
+          content: '\e8ed';
+          color: #fff;
+        }
+      }
+
+      h3 {
+        display: none;
+
+        @include screenSize(mobil) {
+          display: block;
+        }
+
+        font-family: "Montserrat-Bold",
+        sans-serif;
+        text-wrap: nowrap;
+        color: #fff;
+        @include Font($f-s: 12px, $l-s: 2px);
+      }
+    }
+
+    .content {
+      position: relative;
+      height: max-content;
+      @include screenSize(mobil) {
+        overflow: hidden;
+        padding: 0 74px 0 0;
+      }
+      
+      .mySwiper {
+        display: none;
+        @include screenSize(mobil) {
+          display: block;
+        }
+        
+        width: 100%;
+        .swiper-slide {
+          @include Flex($f-w: wrap);
+          font-family: "Montserrat-SemiBold", sans-serif;
+
+          .newsTitle {
+            a {
+              @extend %newsTitle;
+              font-size: 15px;
+            }
+          }
+
+          .date {
+            font-size: 12px;
+            color: $clr_grey_text;
+          }
+        }
+      }
+
+      .scrollingText {
+        display: block;
+        @include screenSize(mobil){
+          display: none;
+        }
+        font-family: "Montserrat-SemiBold", sans-serif;
+        @include Flex($c-g: 100px, $f-f: row);
+        width: 100%;
+        .newsItem {
+          @include Flex($c-g: 20px, $a-i: center);
+
+          .newsTitle {
+            a {
+              @extend %newsTitle;
+              font-size: 12px;
+            }
+          }
+          .date{
+            font-size: 10px;
+            color: $clr_grey_text;
+          }
+        }
+
+      }
+
+      .navigator {
+        
+        @extend %navigator;
+      }
+    }
+  }
+}

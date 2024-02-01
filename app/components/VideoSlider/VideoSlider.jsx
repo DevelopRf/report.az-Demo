@@ -6,8 +6,8 @@ const MontserratExtraBold = localFont({src: '../../fonts/Montserrat-ExtraBold.wo
 const VideoSlider = () => {
     return (
         <div className={styles.videoNews}>
-            <div className={`${styles.title} ${MontserratExtraBold.className}`}>
-                <h2>Video xəbərlər</h2>
+            <div className={styles.title}>
+                <h2>VİDEO XƏBƏRLƏR</h2>
             </div>
             <div className={styles.content}>
                 <div className={styles.wrapper}>

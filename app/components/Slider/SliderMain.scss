@@ -1,0 +1,96 @@
+@import "../../styles/partials/variables";
+@import "../../styles/partials/extend";
+@import "../../styles/partials/mixin";
+
+.mainSlider {
+    margin: 20px 0 15px;
+    position: relative;
+
+    .wrapper {
+        .mySwiper2 {
+            position: relative;
+            height: 500px;
+            width: 100%;
+
+            .swiper-slide {
+
+                img {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            .info {
+                position: absolute;
+                inset: 0;
+                @include Flex($f-f: column, $j-c: flex-end);
+                padding: 20px 25px;
+                background: linear-gradient(360deg, rgba(26, 26, 26, 0.7) 15%, rgba(0, 0, 0, 0) 30%);
+
+                .category {
+                    z-index: 6;
+                    display: block;
+
+                    a {
+                        display: inline-block;
+                        padding: 5px 17px;
+                        border: 1px solid #fff;
+                        text-transform: uppercase;
+                        color: #fff;
+                    }
+                }
+
+                .newsTitle {
+                    margin: 15px 0;
+                    font-family: "Montserrat-Bold", sans-serif;
+
+                    a {
+                        @include Font($f-s: 26px, $l-s: .7px);
+                        color: #fff;
+                    }
+                }
+
+                .date {
+                    @extend %date;
+                    color: $clr_white_text;
+                }
+
+                .pattern {
+                    height: 14px;
+                    margin: 15px 0 0;
+                    background-image: url('../../../public/img/divider-bg-light.svg');
+                }
+            }
+        }
+
+        .mySwiper {
+            display: none;
+            @include screenSize(tablet)
+            {
+                display: block;
+            }
+            height: 120px;
+            box-sizing: border-box;
+            padding: 10px 0;
+
+            .swiper-slide {
+                height: 100%;
+                opacity: 1;
+                cursor: pointer;
+
+                img {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            .swiper-slide-thumb-active {
+                opacity: 0.7;
+            }
+        }
+    }
+}

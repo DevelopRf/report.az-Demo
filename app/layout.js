@@ -1,7 +1,7 @@
 import Header from './components/Layout/Header'
 import Footer from './components/Layout/Footer'
 import "bootstrap/dist/css/bootstrap.min.css"
-import './src/globals.scss'
+import './styles/globals.scss'
 
 export const metadata = {
   title: 'Create Next App',
