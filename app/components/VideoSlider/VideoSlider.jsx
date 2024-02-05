@@ -1,27 +1,51 @@
-import styles from "./VideoSlider.module.scss"
+"use client"
+import Image from "next/image";
+import "./VideoSlider.scss"
 import localFont from "next/font/local"
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/effect-fade';
+import 'swiper/css/pagination';
 
-const MontserratExtraBold = localFont({src: '../../fonts/Montserrat-ExtraBold.woff2'})
+import { EffectFade, Pagination, Autoplay } from 'swiper/modules';
 
-const VideoSlider = () => {
+const MontserratExtraBold = localFont({ src: '../../fonts/Montserrat-ExtraBold.woff2' })
+
+const VideoSlider = ({ videoNews }) => {
+
     return (
-        <div className={styles.videoNews}>
-            <div className={styles.title}>
+        <div className="videoNews">
+            <div className="title">
                 <h2>VİDEO XƏBƏRLƏR</h2>
             </div>
-            <div className={styles.content}>
-                <div className={styles.wrapper}>
-                    <div className={styles.videoItem}>
-                        <iframe width="560" height="225" src="https://www.youtube.com/embed/7dfKrPoIFlE?si=IlawNIkxDb7mOcyN" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-                    </div>
-                    <ul className={styles.pagination}>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                </div>
+            <div className="wrapper">
+                <Swiper
+                    autoplay={
+                        {
+                            delay: 3000,
+                            disableOnInteraction: false
+                        }
+                    }
+                    spaceBetween={30}
+                    effect={'fade'}
+                    pagination={{
+                        clickable: true
+                    }}
+                    modules={[EffectFade, Pagination, Autoplay]}
+                    className="mySwiper"
+                >
+                    {
+                        videoNews && videoNews.map(item => {
+                            return (
+                                <SwiperSlide key={item.id}>
+                                    <iframe width="500" height="225" src={item.link} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+                                </SwiperSlide>
+                            )
+                        })
+                    }
+                </Swiper>
             </div>
-        </div>
+        </div >
     )
 }
 

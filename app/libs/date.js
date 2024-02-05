@@ -7,7 +7,7 @@ export const convertDateUTC = (date)=>{
     const months = [
         "Yanvar", "Fevral", "Mart", "Aprel", "May", "İyun",
         "İyul", "Avqust", "Sentyabr", "Oktyabr", "Noyabr", "Dekabr"
-    ];
+    ]
 
     const d = new Date(date)
     const day = d.getUTCDay()

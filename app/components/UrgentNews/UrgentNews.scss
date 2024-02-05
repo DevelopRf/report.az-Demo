@@ -45,6 +45,7 @@
     }
 
     .content {
+      @include Flex($f-d: column);
       position: relative;
       height: max-content;
       @include screenSize(mobil) {

@@ -2,11 +2,9 @@
 @import "../../styles/partials/mixin";
 @import "../../styles/partials/extend";
 
-.newsCards {
+.newsCards {    
     @include Flex($f-d: column, $j-c: space-between);
-    font-family: "Montserrat-SemiBold", sans-serif;
-    height: 100svh;
-
+   height: 100%;
     .bigNewsCard {
         width: 100%;
 
@@ -17,12 +15,11 @@
         }
 
         .info {
-
+            font-family: "Montserrat-SemiBold", sans-serif;
 
             .newsTitle {
                 a {
-                    @extend %infoSmallCard;
-                    height: auto;
+                    @extend %infoBigCard;                    
                 }
             }
 
@@ -36,7 +33,7 @@
 
     .smallCards {
         @include Flex($j-c: space-between);
-        padding: 10px 0 0;
+        padding: 20px 0 0;       
 
         .newsCard {
             width: calc(50% - 5px);

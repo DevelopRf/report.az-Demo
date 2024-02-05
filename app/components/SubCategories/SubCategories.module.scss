@@ -1,0 +1,42 @@
+@import "../../styles/partials/extend";
+
+.newsCategory {
+    @extend %section;
+
+    .title {
+        h1 {
+            @extend %titleGlobal;
+        }
+    }
+
+    .filter {
+        @extend %filters;
+    }
+
+    .card {
+        .image {
+            width: 290px;
+            height: 205px;
+
+            img {
+                @extend %img;
+            }
+        }
+
+        .info {
+            font-family: "Montserrat-SemiBold", sans-serif;
+
+            .newsTitle {
+                a {
+                    @extend %infoBigCard;
+                }
+            }
+
+            .date {
+                @extend %date;
+                font-size: 12px;
+                color: $clr_grey_text;
+            }
+        }
+    }
+}

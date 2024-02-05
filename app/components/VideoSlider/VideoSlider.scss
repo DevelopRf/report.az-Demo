@@ -8,30 +8,27 @@
         @extend %titleMain;
     }
 
-    .content {
-        width: 100%;
+    .wrapper {
 
-        .wrapper {
-            .videoItem {
+        .mySwiper {
+
+            .swiper-slide {
+                width: 100%;
+
                 iframe {
                     width: 100%;
 
                 }
             }
 
-            .pagination {
-                @include Flex($j-c: center);
-                margin: 10px 0 0;
-
-                li {
+            .swiper-pagination {
+                margin: 12px 0 0;
+                position: relative;
+                .swiper-pagination-bullet {
                     width: 10px;
                     height: 10px;
+                    margin: 0 7px;
                     background-color: #000;
-                    border-radius: 50%;
-
-                    &:not(:last-child) {
-                        margin: 0 14px 0 0;
-                    }
                 }
             }
         }

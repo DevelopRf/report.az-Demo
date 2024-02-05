@@ -13,7 +13,7 @@ const LatestNews = ({ news }) => {
         <section className={styles.latestNews}>
             <div className={styles.wrapper}>
                 <div className={`${styles.title} ${MontserratExtraBold.className}`}>
-                    <h2><Link href="#">Son xəbərlər</Link></h2>
+                    <h2><Link href="son-xeberler">Son xəbərlər</Link></h2>
                 </div>
                 <div className={`${styles.contentWrapper} ${MontserratMedium.className}`}>
                     {
@@ -26,10 +26,10 @@ const LatestNews = ({ news }) => {
                                     </div>
                                     <div className={styles.info}>
                                         <div className={styles.newsTitle}>
-                                            <Link href="#">{item.photo && <span className="type">FOTO</span>}{item.video && <span className="type">VİDEO</span>}{item.title}{item.paid_info && <span className="iconLock"></span>}</Link>
+                                            <Link href={`${item.catUrl}/${item.subCatUrl}/${item.id}`}>{item.photo && <span className="type">FOTO</span>}{item.video && <span className="type">VİDEO</span>}{item.title}{item.paid_info && <span className="iconLock"></span>}</Link>
                                         </div>
                                         <div className={styles.category}>
-                                            <Link href="#">{item.sub_category}</Link>
+                                            <Link href={`${item.catUrl}/${item.subCatUrl}/${item.id}`}>{item.sub_category}</Link>
                                         </div>
                                     </div>
                                 </div>

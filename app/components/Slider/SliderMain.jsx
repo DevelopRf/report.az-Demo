@@ -35,19 +35,19 @@ const SliderMain = ({ news }) => {
         modules={[Autoplay, FreeMode, Navigation, Thumbs]}
         className="mySwiper2"
       >
-        {news && news.map(dataitem => {
+        {news && news.map(item => {
           return (
-            <SwiperSlide key={dataitem.id}>
-              <Image src={dataitem.img} width={823} height={500} />
+            <SwiperSlide key={item.id}>
+              <Image src={item.img} width={823} height={500} />
               <div className="info">
                 <div className="category">
-                  <Link href="#">{dataitem.sub_category}</Link>
+                  <Link href={`/${item.catUrl}/${item.subCatUrl}/${item.id}`}>{item.sub_category}</Link>
                 </div>
                 <div className="newsTitle">
-                  <Link href="#">{dataitem.title}</Link>
+                  <Link href={`/${item.catUrl}/${item.subCatUrl}/${item.id}`}>{item.title}</Link>
                 </div>
                 <div className="date">
-                  <span>{convertDateUTC(dataitem.date)} <span>&#x2B1D;</span> {convertTimeUTC(dataitem.date)}</span>
+                  <span>{convertDateUTC(item.date)} <span>&#x2B1D;</span> {convertTimeUTC(item.date)}</span>
                 </div>
                 <div className="pattern">
 
@@ -67,10 +67,10 @@ const SliderMain = ({ news }) => {
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper"
       >
-        {news && news.map(dataitem => {
+        {news && news.map(item => {
           return (
-            <SwiperSlide key={dataitem.id}>
-              <Image src={dataitem.img} width={823} height={500} />
+            <SwiperSlide key={item.id}>
+              <Image src={item.img} width={823} height={500} />
             </SwiperSlide>
           )
         })}

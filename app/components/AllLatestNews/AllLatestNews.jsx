@@ -12,7 +12,7 @@ const AllLatestNews = ({ news }) => {
     } */
 
     return (
-        <section className={styles.allLatestNews}>
+        <section className={styles.categories}>
             <div className="container">
                 <div className="row">
                     <div className="col-12">
@@ -42,12 +42,13 @@ const AllLatestNews = ({ news }) => {
                                                         <Image src={item.img}
                                                             width={180}
                                                             height={106}
+                                                            alt={item.title}
                                                         />
                                                     </Link>
                                                 </div>
                                                 <div className={styles.info}>
                                                     <div className={styles.newsTitle}>
-                                                        <Link href={`news/${item.id}`}>{item.photo && <span className="type">FOTO</span>}{item.video && <span className="type">VİDEO</span>}{item.title}{item.paid_info && <span className="iconLock"></span>}</Link>
+                                                        <Link href={`${item.catUrl}/${item.subCatUrl}/${item.id}`}>{item.photo && <span className="type">FOTO</span>}{item.video && <span className="type">VİDEO</span>}{item.title}{item.paid_info && <span className="iconLock"></span>}</Link>
                                                     </div>
                                                     <div className={styles.date}>
                                                         <span>{convertDateUTC(item.date)} <span>&#x2B1D;</span> {convertTimeUTC(item.date)}</span>

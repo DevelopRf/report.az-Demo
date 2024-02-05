@@ -10,7 +10,7 @@ import { ImportantNews } from "../ImportantNews/ImportantNews";
 import OtherCategories from "../OtherCategories/OtherCategories";
 const montserratBold = localFont({ src: '../../fonts/Montserrat-Bold.woff2' })
 
-export default async function Main({ data }) {
+export default async function Main({ data, videoData }) {
 
     const slider = data.filter(item => item.slider)
     const urgentNews = data.filter(item => item.urgent)
@@ -40,7 +40,7 @@ export default async function Main({ data }) {
                             <ImportantNews news={importantNews} />
                         </div>
                         <div className="col-lg-4">
-                            <VideoSlider />
+                            <VideoSlider videoNews = {videoData}/>
                             <LatestNews news={data} />
                         </div>
                     </div>
@@ -49,27 +49,27 @@ export default async function Main({ data }) {
             <section className={styles.otherCategories}>
                 <div className="container">
                     <div className="row gy-4">
-                        <div className="col-lg-4 col-md-6">
+                        <div className="col-lg-4 col-md-6 d-flex flex-column">
                             <div className={styles.title}><Link href="#"><h2>SİYASƏT</h2></Link></div>
                             <OtherCategories news={politic} />
                         </div>
-                        <div className="col-lg-4 col-md-6">
+                        <div className="col-lg-4 col-md-6 d-flex flex-column">
                             <div className={styles.title}><Link href="#"><h2>İQTİSADİYYAT</h2></Link></div>
                             <OtherCategories news={economy} />
                         </div>
-                        <div className="col-lg-4 col-md-6">
+                        <div className="col-lg-4 col-md-6 d-flex flex-column">
                             <div className={styles.title}><Link href="#"><h2>COP 29</h2></Link></div>
                             <OtherCategories news={cop29} />
                         </div>
-                        <div className="col-lg-4 col-md-6">
+                        <div className="col-lg-4 col-md-6 d-flex flex-column">
                             <div className={styles.title}><Link href="#"><h2>CƏMİYYƏT</h2></Link></div>
                             <OtherCategories news={society} />
                         </div>
-                        <div className="col-lg-4 col-md-6">
+                        <div className="col-lg-4 col-md-6 d-flex flex-column">
                             <div className={styles.title}><Link href="#"><h2>İDMAN</h2></Link></div>
                             <OtherCategories news={sport} />
                         </div>
-                        <div className="col-lg-4 col-md-6">
+                        <div className="col-lg-4 col-md-6 d-flex flex-column">
                             <div className={styles.title}><Link href="#"><h2>MƏDƏNİYYƏT</h2></Link></div>
                             <OtherCategories news={culture} />
                         </div>

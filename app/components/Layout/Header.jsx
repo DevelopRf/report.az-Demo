@@ -34,16 +34,16 @@ const Header = () => {
                             <nav className={styles.menu}>
                                 <ul>
                                     <li><Link href="/">Əsas xəbərlər</Link></li>
-                                    <li><Link href={`latest`}>Son xəbərlər</Link></li>
-                                    <li><Link href="#">Siyasət</Link></li>
-                                    <li><Link href="#">İqtisadiyyat</Link></li>
-                                    <li><Link href="#">COP29</Link></li>
-                                    <li><Link href="#">Cəmiyyət</Link></li>
-                                    <li><Link href="#">İdman</Link></li>
-                                    <li><Link href="#">Mədəniyyət</Link></li>
-                                    <li><Link href="#">Dünya</Link></li>
-                                    <li><Link href="#">Analitika</Link></li>
-                                    <li><Link href="#">Multimedia</Link></li>
+                                    <li><Link href="/son-xeberler">Son xəbərlər</Link></li>
+                                    <li><Link href="/siyaset">Siyasət</Link></li>
+                                    <li><Link href="/iqtisadiyyat">İqtisadiyyat</Link></li>
+                                    <li><Link href="/cop29">COP29</Link></li>
+                                    <li><Link href="/cemiyyet">Cəmiyyət</Link></li>
+                                    <li><Link href="/idman">İdman</Link></li>
+                                    <li><Link href="/medeniyyet">Mədəniyyət</Link></li>
+                                    <li><Link href="/dunya">Dünya</Link></li>
+                                    <li><Link href="/analitik">Analitika</Link></li>
+                                    <li><Link href="/multimedia">Multimedia</Link></li>
                                 </ul>
                                 <form className={styles.searchBox}>
                                     <input type="text" placeholder="Açar sözü daxil edin" />

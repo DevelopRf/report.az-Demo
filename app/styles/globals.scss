@@ -54,6 +54,11 @@ h6 {
   }
 }
 
+.p-x{
+  --bs-gutter-x: 15px;
+  padding: 0 var(--bs-gutter-x) 0 var(--bs-gutter-x);
+}
+
 @font-face {
   font-family: "Montserrat-Bold";
   src: url('../fonts/Montserrat-Bold.woff2') format('woff2');

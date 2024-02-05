@@ -1,6 +1,7 @@
 const url = "http://localhost:1100/news"
 const urlcat = "http://localhost:1100/category"
 const urltype = "http://localhost:1100/news_type"
+const urlvideo = "http://localhost:1100/video_slider"
 
 export const getNews = async () => {
     const res = await fetch(url)
@@ -27,22 +28,39 @@ export const getSingleNews = async (news_id) => {
         }
         const data = await res.json()
         return data
+
     } catch (error) {
         console.error('Xəta baş verdi', error)
         throw error
     }
 }
 
-export const getNewsCategory = async ({ cat_id }) => {
-    const res = await fetch(`${url}/${cat_id}`)
+export const getSingleCategory = async (cat) => {
+    const res = await fetch(`${url}?catUrl=${cat}`)
     try {
         if (!res.ok) {
-            throw new Error(`Məlumat əldə edilə bilmədi. Status: ${res.status}`)
+            throw new Error(`Məlumatlar əldə edilə bilmədi. Status: ${res.status}`)
         }
         const data = await res.json()
+        
         return data
     } catch (error) {
-        console.error("Xəta baş verdi", error)
+        console.error('Xəta baş verdi', error)
+        throw error
+    }
+}
+
+export const getSingleSubCategory = async (cat) => {
+    const res = await fetch(`${url}?subCatUrl=${cat}`)
+    try {
+        if (!res.ok) {
+            throw new Error(`Məlumatlar əldə edilə bilmədi. Status: ${res.status}`)
+        }
+        const data = await res.json()
+        
+        return data
+    } catch (error) {
+        console.error('Xəta baş verdi', error)
         throw error
     }
 }
@@ -76,6 +94,20 @@ export const getNewsType = async () => {
         return data
     } catch (error) {
         console.error('Xəta baş verdi', error)
+        throw error
+    }
+}
+
+export const getVideoLink = async () => {
+    const res = await fetch(urlvideo)
+    try {
+        if (!res.ok) {
+            throw new Error(`Məlumat əldə edilə bilmədi. Status: ${res.status}`)
+        }
+        const data = await res.json()
+        return data
+    } catch (error) {
+        console.error("Xəta baş verdi", error)
         throw error
     }
 }

@@ -17,6 +17,12 @@ module.exports = {
         hostname: 'report.az',
         port: '',
         pathname: '/public/images/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'swiperjs.com',
+        port: '',
+        pathname: '/demos/images/**',
       }
 
     ]

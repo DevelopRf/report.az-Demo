@@ -2,7 +2,7 @@
 @import "../../styles/partials/extend";
 @import "../../styles/partials/mixin";
 
-.allLatestNews {
+.categories {
     @extend %section;
 
     .wrapper {
@@ -56,6 +56,5 @@
                 }
             }
         }
-
     }
 }
