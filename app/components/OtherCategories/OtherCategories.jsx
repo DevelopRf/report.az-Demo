@@ -12,7 +12,7 @@ const OtherCategories = ({ news }) => {
                     return (
                         <div className={styles.bigNewsCard} key={item.id}>
                             <div className={styles.image}>
-                                <Image src={item.img} width={400} height={250} alt={item.title} />
+                                <Link href={`${item.catUrl}/${item.subCatUrl}/${item.id}`}><Image src={item.img} width={400} height={250} alt={item.title} /></Link>
                             </div>
                             <div className={styles.info}>
                                 <div className={styles.newsTitle}>
@@ -33,7 +33,7 @@ const OtherCategories = ({ news }) => {
                         return (
                             <div className={styles.newsCard} key={item.id}>
                                 <div className={styles.image}>
-                                    <Image src={item.img} width={400} height={250} alt={item.title} />
+                                <Link href={`${item.catUrl}/${item.subCatUrl}/${item.id}`}><Image src={item.img} width={400} height={250} alt={item.title} /></Link>
                                 </div>
                                 <div className={styles.info}>
                                     <div className={styles.newsTitle}>

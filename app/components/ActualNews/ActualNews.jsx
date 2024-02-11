@@ -20,7 +20,7 @@ const ActualNews = ({ news }) => {
                                     </div>
                                     <div className={styles.info}>
                                         <div className={styles.category}>
-                                            <Link href={`${item.category}`}>{item.sub_category}</Link>
+                                            <Link href={`${item.catUrl}/${item.subCatUrl}`}>{item.sub_category}</Link>
                                         </div>
                                         <div className={styles.newsTitle}>
                                             <Link href={`${item.catUrl}/${item.subCatUrl}/${item.id}`}>{item.title}</Link>

@@ -51,7 +51,7 @@ export const ImportantNews = ({ news }) => {
                                         </div>
                                         <div>
                                             <div className="category">
-                                                <Link href={`${item.catUrl}/${item.subCatUrl}/${item.id}`}>{item.sub_category}</Link>
+                                                <Link href={`${item.catUrl}/${item.subCatUrl}`}>{item.sub_category}</Link>
                                             </div>
                                             <div className="date">
                                                 <span>{convertDateUTC(item.date)} <span>&#x2B1D;</span> {convertTimeUTC(item.date)}</span>

@@ -37,7 +37,7 @@ const SliderMain = ({ news }) => {
               <Image src={item.img} width={823} height={500} alt={item.title}/>
               <div className="info">
                 <div className="category">
-                  <Link href={`/${item.catUrl}/${item.subCatUrl}/${item.id}`}>{item.sub_category}</Link>
+                  <Link href={`/${item.catUrl}/${item.subCatUrl}`}>{item.sub_category}</Link>
                 </div>
                 <div className="newsTitle">
                   <Link href={`/${item.catUrl}/${item.subCatUrl}/${item.id}`}>{item.title}</Link>

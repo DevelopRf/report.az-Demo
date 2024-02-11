@@ -5,7 +5,7 @@ import styles from "./Header.module.scss"
 import Link from "next/link"
 import Image from "next/image"
 
-const Header = ({news}) => {
+const Header = ({ news }) => {
 
     const { toggle, setToggle } = useContext(HookContext)
     const [searchCancel, setSearchCancel] = useState(false)
@@ -14,7 +14,13 @@ const Header = ({news}) => {
         setToggle(!toggle)
     }
 
-    
+    const searchBtn = () => {
+        setSearchCancel(true)
+    }
+
+    const cancelBtn = () => {
+        setSearchCancel(false)
+    }
 
     return (
         <header>
