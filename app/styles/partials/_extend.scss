@@ -9,7 +9,7 @@
     }
 
     position: relative;
-    padding: 15px 0 20px;
+    padding: 0 0 20px;
     margin: 0 0 20px;
 
     &::after {
@@ -26,12 +26,25 @@
 
 %titleGlobal {
     font-family: "Montserrat-Bold", sans-serif;
-    @include Font($f-s: 26px, $l-s: .7);
+    @include Font($f-s: 20px, $l-s: .7px);
     margin: 0 0 25px;
+
+    @include screenSize(mobil){
+        font-size: 26px;
+    }
 }
 
 %section {
     padding: 20px 0;
+    margin: 80px 0 0;
+
+    @include screenSize(mobil){
+        margin: 100px 0 0;
+    }
+
+    @include screenSize(large){
+        margin: 0;
+    }
 }
 
 %filters {
@@ -39,6 +52,7 @@
     width: 100%;
     margin: 0 0 25px;
     padding: 0 0 10px;
+    overflow-x: scroll;
 
     li {
         flex-grow: 1;
@@ -115,7 +129,7 @@
     overflow: hidden;
 }
 
-%infoBigCard{
+%infoBigCard {
     margin: 12px 0;
     @extend %newsTitle;
     font-size: 16px;
@@ -125,6 +139,18 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+%logo {
+    width: 150px;
+
+    @include screenSize(mobil) {
+        width: 240px;
+    }
+
+    @include screenSize(large) {
+        width: 280px;
+    }
 }
 
 %navigator {
@@ -185,4 +211,13 @@
         text-transform: uppercase;
         color: $clr_grey_text;
     }
+}
+
+%categoryFrame {
+    font-family: "Montserrat-Bold", sans-serif;
+    display: inline-block;
+    padding: 5px 17px;
+    border: 1px solid #fff;
+    text-transform: uppercase;
+    color: #fff;
 }

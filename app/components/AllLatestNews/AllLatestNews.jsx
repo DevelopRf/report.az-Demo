@@ -1,3 +1,4 @@
+'use client'
 import Link from "next/link"
 import Image from "next/image"
 import styles from "./AllLatestNews.module.scss"
@@ -6,10 +7,6 @@ import { convertTimeUTC } from "@/app/libs/date"
 
 
 const AllLatestNews = ({ news }) => {
-
-    /* const newsCount = () => {
-        a += 20;
-    } */
 
     return (
         <section className={styles.categories}>
@@ -20,15 +17,15 @@ const AllLatestNews = ({ news }) => {
                             <div className={styles.title}>
                                 <h1>Son xəbərlər</h1>
                                 <div className={styles.addNews}>
-                                    <Link href={`addnews`}>Xəbər əlavə et</Link>
+                                    <Link href={`/addnews`}>Xəbər əlavə et</Link>
                                 </div>
                             </div>
                             <ul className={styles.filter}>
-                                <li><Link href="">BU GÜN</Link></li>
-                                <li><Link href="">DÜNƏN</Link></li>
-                                <li><Link href="">BU HƏFTƏ</Link></li>
-                                <li><Link href="">BU AY</Link></li>
-                                <li><Link href="">KEÇƏN HƏFTƏ</Link></li>
+                                <li><Link href="/son-xeberler/today">BU GÜN</Link></li>
+                                <li><Link href="/son-xeberler/yesterday">DÜNƏN</Link></li>
+                                <li><Link href="/son-xeberler/this-week">BU HƏFTƏ</Link></li>
+                                <li><Link href="/son-xeberler/this-month">BU AY</Link></li>
+                                <li><Link href="/son-xeberler/last-week">KEÇƏN HƏFTƏ</Link></li>
                                 <li><Link href="">KEÇƏN AY</Link></li>
                             </ul>
 

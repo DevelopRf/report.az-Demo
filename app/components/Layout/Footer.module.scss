@@ -1,0 +1,165 @@
+@import "../../styles/partials/variables";
+@import "../../styles/partials/mixin";
+@import "../../styles/partials/extend";
+
+footer {
+
+
+    .footerTop {
+        padding: 50px 0 35px;
+
+        .wrapper {
+            @include Flex($f-w: wrap, $f-d: column, $a-i: center, $r-g: 20px);
+
+            @include screenSize(mobil) {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .logo {
+                @extend %logo;
+                img {
+                    @extend %img;
+                }
+            }
+
+            .navbar {
+
+                @include screenSize(mobil) {
+                    @include Flex($j-c: flex-end, $f-w: wrap);
+                }
+
+                @include screenSize(desktop) {
+                    justify-content: space-between;
+                    width: calc(100% - 280px);
+                    padding: 0 0 0 60px;
+                }
+
+
+
+                ul {
+
+                    font-family: "Montserrat-SemiBold", sans-serif;
+                    font-size: 14px;
+                    @include Flex($f-w: wrap, $r-g: 6px);
+
+                    a {
+                        color: $clr_primary;
+                        padding: 5px 10px;
+                    }
+
+                    &:first-child {
+                        width: 100%;
+                        justify-content: center;
+
+                        @include screenSize(mobil) {
+                            li {
+                                width: 50%;
+                            }
+
+                            width: 300px;
+                        }
+
+                        @include screenSize(desktop) {
+                            width: 33.3333%;
+                        }
+                    }
+
+                    &:last-child {
+                        width: 50%;
+                        display: none;
+
+                        li {
+                            width: 33.3333%;
+                        }
+
+                        @include screenSize(desktop) {
+                            display: flex;
+                        }
+                    }
+                }
+            }
+
+            .pattern {
+                width: 100%;
+                background-image: url('../../../public/img/pattern/divider-bg-dark.svg');
+                height: 6px;
+                margin: 25px 0;
+            }
+
+            .copyrightWrapper {
+                width: 100%;
+                @include Flex($j-c: space-between, $f-w: wrap, $r-g: 20px);
+
+                .copyrights {
+                    font-family: "Montserrat-Medium", sans-serif;
+                    font-size: 14px;
+                    max-width: 518px;
+                }
+
+                .socialNetwork {
+                    @include Flex($c-g: 10px, $f-w: wrap);
+
+                    li {
+                        display: inline-block;
+
+                        &:nth-child(3) {
+                            margin: 0 10px 0 0;
+                        }
+
+                        &:nth-child(1),
+                        &:nth-child(2),
+                        &:nth-child(3) {
+                            a {
+                                background-color: $clr_primary;
+
+                                i {
+                                    color: #fff;
+                                }
+                            }
+                        }
+
+                        &:nth-child(4),
+                        &:nth-child(5),
+                        &:nth-child(6),
+                        &:nth-child(7),
+                        &:nth-child(8),
+                        &:nth-child(9),
+                        &:nth-child(10) {
+                            a {
+                                background-color: $clr_second_social;
+
+                                i {
+                                    color: $clr_primary;
+                                }
+                            }
+                        }
+
+                        a {
+                            width: 38px;
+                            height: 38px;
+                            @include Flex($j-c: center, $a-i: center);
+
+                            i {
+                                &::before {
+                                    display: block;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .footerBottom {
+        padding: 25px 0;
+        text-align: center;
+
+        p {
+            font-family: "Montserrat-Medium", sans-serif;
+            @include Font($f-s: 12px, $l-h: 18px);
+            color: $clr_grey_text ;
+        }
+    }
+}

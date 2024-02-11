@@ -42,7 +42,7 @@ export const getSingleCategory = async (cat) => {
             throw new Error(`Məlumatlar əldə edilə bilmədi. Status: ${res.status}`)
         }
         const data = await res.json()
-        
+
         return data
     } catch (error) {
         console.error('Xəta baş verdi', error)
@@ -57,7 +57,7 @@ export const getSingleSubCategory = async (cat) => {
             throw new Error(`Məlumatlar əldə edilə bilmədi. Status: ${res.status}`)
         }
         const data = await res.json()
-        
+
         return data
     } catch (error) {
         console.error('Xəta baş verdi', error)

@@ -1,0 +1,46 @@
+@import "../../styles/partials/variables";
+@import "../../styles/partials/extend";
+@import "../../styles/partials/mixin";
+
+
+.newsContent {
+    @extend %section;
+
+    .title {
+        font-family: "Montserrat-Bold";
+        font-size: 26px;
+    }
+
+    .catDate {
+        margin: 15px 0 20px;
+        @include Flex($j-c: space-between);
+
+        .category {
+            a {
+                @extend %categoryFrame;
+                color: #000;
+                border-color: #000;
+                @include Font($f-s: 12px, $l-s: 2px);
+            }
+        }
+
+        .date {
+            @extend %date;
+            font-size: 14px;
+            color: $clr_grey_text;
+        }
+    }
+
+    .content {
+        font-family: "Montserrat-Medium", sans-serif;
+        p{
+            @include Font($l-h: 26px, $l-s: .6px);
+        }
+        .image {
+            margin: 0 0 25px;
+            img {
+                @extend %img;
+            }
+        }
+    }
+}

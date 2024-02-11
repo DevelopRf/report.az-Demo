@@ -5,10 +5,28 @@
   margin: 0;
   box-sizing: border-box;
   line-height: normal;
+  
 }
 
 body {
   color: $clr_primary;
+  position: relative;
+
+  .overlay {
+    display: none;
+    position: absolute;
+    inset: 0;
+    background-color: #0000007c;
+    z-index: 9999;
+
+    &.active {
+      display: block;
+    }
+  }
+}
+
+p {
+  margin: 0;
 }
 
 ul {
@@ -54,10 +72,18 @@ h6 {
   }
 }
 
-.p-x{
+.p-x {  
   --bs-gutter-x: 15px;
   padding: 0 var(--bs-gutter-x) 0 var(--bs-gutter-x);
 }
+
+.row{
+  --bs-gutter-x: 15px;
+  margin-left:  calc(-1 * var(--bs-gutter-x));
+  margin-right: calc(-1 * var(--bs-gutter-x));
+  
+}
+
 
 @font-face {
   font-family: "Montserrat-Bold";

@@ -4,8 +4,10 @@
 
 .mainSection {
     @extend %section;
+
     .filterLink {
-margin: 0 0 25px;
+        margin: 0 0 25px;
+
         .btn {
             padding: 0 15px;
 
@@ -17,7 +19,7 @@ margin: 0 0 25px;
                 color: $clr_second;
                 transition: all 0.2s;
                 font-size: 18px;
-                
+
                 &:hover {
                     background-color: $clr_btn_hover;
                     color: #000;
@@ -26,10 +28,13 @@ margin: 0 0 25px;
         }
     }
 }
-.otherCategories{
-    .title{
+
+.otherCategories {
+   padding: 45px 0 0;
+    .title {
         @extend %titleMain;
-        a{
+
+        a {
             color: $clr_primary;
         }
     }

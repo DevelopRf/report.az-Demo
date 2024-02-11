@@ -10,8 +10,8 @@ import { ImportantNews } from "../ImportantNews/ImportantNews";
 import OtherCategories from "../OtherCategories/OtherCategories";
 const montserratBold = localFont({ src: '../../fonts/Montserrat-Bold.woff2' })
 
-export default async function Main({ data, videoData }) {
-
+export default function Main({ data, videoData }) {
+    
     const slider = data.filter(item => item.slider)
     const urgentNews = data.filter(item => item.urgent)
     const importantNews = data.filter(item => item.important)
@@ -25,6 +25,7 @@ export default async function Main({ data, videoData }) {
 
     return (
         <main>
+            <div className="overlay"></div>
             <section className={styles.mainSection}>
                 <div className="container">
                     <div className="row">
@@ -40,8 +41,10 @@ export default async function Main({ data, videoData }) {
                             <ImportantNews news={importantNews} />
                         </div>
                         <div className="col-lg-4">
-                            <VideoSlider videoNews = {videoData}/>
-                            <LatestNews news={data} />
+                            <div className={styles.sideBar}>
+                                <VideoSlider videoNews={videoData} />
+                                <LatestNews news={data} />
+                            </div>
                         </div>
                     </div>
                 </div>

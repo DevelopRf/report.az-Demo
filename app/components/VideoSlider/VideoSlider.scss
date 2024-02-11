@@ -2,7 +2,7 @@
 @import "../../styles/partials/extend";
 
 .videoNews {
-    margin: 20px 0 15px;
+    margin: 20px 0 0;
 
     .title {
         @extend %titleMain;
@@ -22,7 +22,7 @@
             }
 
             .swiper-pagination {
-                margin: 12px 0 0;
+                margin: 10px 0 10px;
                 position: relative;
                 .swiper-pagination-bullet {
                     width: 10px;

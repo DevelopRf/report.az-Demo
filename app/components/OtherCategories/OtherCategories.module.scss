@@ -2,7 +2,7 @@
 @import "../../styles/partials/mixin";
 @import "../../styles/partials/extend";
 
-.newsCards {    
+.newsCards {
     @include Flex($f-d: column, $j-c: space-between);
    height: 100%;
     .bigNewsCard {

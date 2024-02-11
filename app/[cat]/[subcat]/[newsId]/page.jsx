@@ -1,9 +1,11 @@
 import SingleNews from "@/app/components/SingleNews/SingleNews"
 import { getSingleNews } from "@/app/libs/newsData"
+import { getNews } from "@/app/libs/newsData"
 
-const singleSport = async ({ params: { newsId } }) => {
+const singleNews = async ({ params: { newsId } }) => {
     const newsData = await getSingleNews(newsId)
-    return <SingleNews news={newsData} />
+    const latestNews = await getNews()
+    return <SingleNews singleNews={newsData} latestNews={latestNews} />
 }
 
-export default singleSport
+export default singleNews

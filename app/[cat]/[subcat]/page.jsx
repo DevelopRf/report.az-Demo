@@ -2,6 +2,7 @@ import { getSingleSubCategory } from "@/app/libs/newsData"
 import SubCategories from "@/app/components/SubCategories/SubCategories"
 import SingleNews from "@/app/components/SingleNews/SingleNews"
 import { getSingleNews } from "@/app/libs/newsData";
+import { getNews } from "@/app/libs/newsData";
 
 const football = async ({ params: { subcat } }) => {
     const data = await getSingleSubCategory(subcat)
@@ -11,8 +12,8 @@ const football = async ({ params: { subcat } }) => {
 
     else {
         const newsData = await getSingleNews(subcat)
-
-        return <SingleNews news={newsData} />
+        const latestNews = await getNews()
+        return <SingleNews singleNews={newsData} latestNews={latestNews} />
     }
 }
 

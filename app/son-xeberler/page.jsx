@@ -1,7 +1,7 @@
 import { getNews } from "../libs/newsData"
 import AllLatestNews from "../components/AllLatestNews/AllLatestNews"
 
-const latestNews = async () => {
+const latest = async () => {
 
     const  data = await getNews()
     
@@ -10,4 +10,4 @@ const latestNews = async () => {
     )
 }
 
-export default latestNews
+export default latest

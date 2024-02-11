@@ -2,96 +2,99 @@
 @import "../../styles/partials/mixin";
 @import "../../styles/partials/extend";
 
-.latestNews {
-    .wrapper {
-        .title {
-            @extend %titleMain;
 
-            a {
-                color: #000;
-            }
+.wrapper {
+    display: flex;
+    flex-flow: column;
+
+    .title {
+        @extend %titleMain;
+
+        a {
+            color: #000;
         }
-
-        .contentWrapper {
-            height: 1850px;
-            margin: 0 0 20px;
-            overflow-y: scroll;
-
-            &::-webkit-scrollbar {
-                width: 6px;
-            }
-
-            &::-webkit-scrollbar-thumb {
-                border-radius: 10px;
-                background-color: #8f8f8f6f;
-
-                &:hover {
-                    background-color: #8f8f8fba;
-                }
-            }
-
-            .content {
-                padding: 15px 10px;
-
-                @include Flex($c-g: 20px, $a-i: center);
-
-                @extend %contentType;
-
-                .time {
-                    color: $clr_grey_text;
-
-                    span {
-                        display: inline-block;
-                        width: 50px;
-                    }
-                }
-
-                .info {
-                    a {
-                        &:hover {
-                            text-decoration: underline;
-                        }
-                    }
-
-                    .newsTitle {
-                        a {
-                            @extend %newsTitle;
-                        }
-                    }
-
-                    .category {
-                       @extend %category;
-                    }
-                }
-            }
-        }
-
-        .btnAllNews {
-            a {
-                font-family: "Montserrat-Bold", sans-serif;
-                font-size: 13px;
-                padding: 18px 25px;
-                display: block;
-                color: $clr_primary;
-                position: relative;
-                background-color: #fbfbfb;
-                transition: all 0.2s;
-
-                &:hover {
-                    background-color: #f6f6f6;
-                }
-
-                &::after {
-                    font-family: "fontello";
-                    content: "\f178";
-                    position: absolute;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    right: 25px;
-
-                }
-            }
-        }
-
     }
+
+    .contentWrapper {
+        height: 1820px;
+        margin: 0 0 20px;
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background-color: #8f8f8f6f;
+
+            &:hover {
+                background-color: #8f8f8fba;
+            }
+        }
+
+        .content {
+            padding: 15px 10px;
+
+            @include Flex($c-g: 20px, $a-i: center);
+
+            @extend %contentType;
+
+            .time {
+                color: $clr_grey_text;
+
+                span {
+                    display: inline-block;
+                    width: 50px;
+                }
+            }
+
+            .info {
+                a {
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+
+                .newsTitle {
+                    a {
+                        @extend %newsTitle;
+                        margin: 0 0 7px;
+                    }
+                }
+
+                .category {
+                    @extend %category;
+                }
+            }
+        }
+    }
+
+    .btnAllNews {
+        a {
+            font-family: "Montserrat-Bold", sans-serif;
+            font-size: 13px;
+            padding: 18px 25px;
+            display: block;
+            color: $clr_primary;
+            position: relative;
+            background-color: #fbfbfb;
+            transition: all 0.2s;
+
+            &:hover {
+                background-color: #f6f6f6;
+            }
+
+            &::after {
+                font-family: "fontello";
+                content: "\f178";
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                right: 25px;
+
+            }
+        }
+    }
+
 }

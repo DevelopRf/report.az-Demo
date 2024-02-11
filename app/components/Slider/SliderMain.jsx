@@ -20,10 +20,6 @@ const SliderMain = ({ news }) => {
     <section className="mainSlider">
       <div className="wrapper">
       <Swiper
-        style={{
-          '--swiper-navigation-color': '#fff',
-          '--swiper-pagination-color': '#fff',
-        }}
         autoplay={{
           delay: 3500,
           disableOnInteraction: false,
@@ -38,7 +34,7 @@ const SliderMain = ({ news }) => {
         {news && news.map(item => {
           return (
             <SwiperSlide key={item.id}>
-              <Image src={item.img} width={823} height={500} />
+              <Image src={item.img} width={823} height={500} alt={item.title}/>
               <div className="info">
                 <div className="category">
                   <Link href={`/${item.catUrl}/${item.subCatUrl}/${item.id}`}>{item.sub_category}</Link>
@@ -70,7 +66,7 @@ const SliderMain = ({ news }) => {
         {news && news.map(item => {
           return (
             <SwiperSlide key={item.id}>
-              <Image src={item.img} width={823} height={500} />
+              <Image src={item.img} width={823} height={500} alt={item.title}/>
             </SwiperSlide>
           )
         })}

@@ -74,11 +74,7 @@
                         display: block;
 
                         a {
-                            display: inline-block;
-                            padding: 5px 17px;
-                            border: 1px solid #fff;
-                            text-transform: uppercase;
-                            color: #fff;
+                            @extend %categoryFrame;
                             @include Font($f-s: 10px, $l-s: 2px);
                         }
                     }

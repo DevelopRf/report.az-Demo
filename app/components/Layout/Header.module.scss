@@ -1,20 +1,42 @@
 @import "../../styles/partials/variables";
+@import "../../styles/partials/extend";
 @import "../../styles/partials/mixin";
 
-header {
-    .wrapper {
-        @include Flex($f-f: column, $a-i: center);
-        padding: 15px 0 20px;
+.headerBottom {
+    position: relative;
+    position: fixed;
+    z-index: 9999999;
+    background-color: #fff;
+    border-bottom: 1px solid $clr_border;
+    top: 0;
+    width: 100%;
+
+    @include screenSize(large) {
+        position: static;
+        border: 0;
+    }
+
+    .logoLang {
+        @include Flex($j-c: space-between, $a-i: center);
+        padding: 15px 0;
+
+        @include screenSize(large) {
+            padding: 15px 0 20px;
+            flex-flow: column;
+            row-gap: 9px;
+        }
 
         .langs {
-            display: flex;
-            font-family: "Montserrat-Medium", sans-serif;
+            display: none;
 
-            margin: 0 0 9px;
+            @include screenSize(large) {
+                @include Flex($c-g: 10px);
+            }
+
+            font-family: "Montserrat-Medium",
+            sans-serif;
 
             li {
-                margin: 0 5px;
-
                 a {
                     color: $clr_grey_text;
                     font-size: 12px;
@@ -30,8 +52,97 @@ header {
             }
         }
 
+        .mobMenu {
+            @include screenSize(large) {
+                display: none;
+            }
+
+            .toggleBtn {
+                position: relative;
+                width: 34px;
+                height: 20px;
+
+                span {
+                    position: absolute;
+                    display: block;
+                    background-color: $clr_primary;
+                    width: 100%;
+                    height: 2px;
+                    transition: all 0.3s;
+
+                    &:first-child {
+                        top: 0;
+                    }
+
+                    &:nth-child(2) {
+                        top: 50%;
+                    }
+
+                    &:last-child {
+                        top: 100%;
+                    }
+                }
+
+                &.active {
+                    span {
+                        &:first-child {
+                            top: 50%;
+                            transform: rotate(-135deg);
+                        }
+
+                        &:nth-child(2) {
+                            opacity: 0;
+                        }
+
+                        &:last-child {
+                            top: 50%;
+                            transform: rotate(135deg);
+                        }
+                    }
+                }
+            }
+
+            .navbar {
+                border-top: 1px solid $clr_border;
+                position: absolute;
+                transform: translateX(-100%);
+                left: 0;
+                top: 100%;
+                background-color: #fff;
+                padding: 20px 15px;
+                width: 290px;
+                height: 100vh;
+                overflow: scroll;
+                transition: all 0.3s;
+                font-family: "Montserrat-SemiBold", sans-serif;
+
+                &.active {
+                    transform: translateX(0);
+                }
+
+                ul {
+                    text-align: center;
+
+                    li {
+                        a {
+                            display: block;
+                            padding: 13px 0;
+                            color: $clr_primary;
+                        }
+
+                        border-bottom: 1px solid $clr_border;
+                    }
+
+                }
+            }
+        }
+
         .logo {
-            height: auto;
+            @extend %logo;
+
+            img {
+                @extend %img;
+            }
         }
     }
 
@@ -43,7 +154,7 @@ header {
         border-top: 1px solid $clr_border;
         border-bottom: 1px solid $clr_border;
 
-        @include screenSize(desktop) {
+        @include screenSize(large) {
             @include Flex($a-i: center, $j-c: space-between);
         }
 
@@ -57,12 +168,35 @@ header {
         }
 
         .searchBox {
+            position: relative;
             position: absolute;
             height: 100%;
-            right: 20px;
-            width: 0;
+            right: 0;
+            width: 100%;
+            visibility: hidden;
+            opacity: 0;
             top: 0;
             background-color: aqua;
+            overflow: hidden;
+            transition: all 0.2s;
+
+            &::before {
+                content: "\e815";
+                font-family: 'fontello';
+                opacity: .5;
+                position: absolute;
+                display: inline-block;
+                font-size: 18px;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 9999;
+            }
+
+            &.active {
+                opacity: 1;
+                visibility: visible;
+            }
 
             input {
                 position: relative;
@@ -70,19 +204,34 @@ header {
                 height: 100%;
                 border: none;
                 outline: none;
-                // padding: 18px 30px;
+                padding: 18px 30px;
+            }
 
-                &::before {
-                    content: "\e804";
-                    position: absolute;
-                    font-family: 'fontello';
+            .cancelBtn {
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 30px;
+                height: 30px;
+                border: 1px solid $clr_primary;
+                @include Flex($a-i: center, $j-c: center);
+                cursor: pointer;
+
+                i {
                     font-size: 18px;
-                    left: 0;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    z-index: 15;
                 }
             }
+        }
+
+        .searchBtn {
+            cursor: pointer;
+
+            i {
+                font-size: 18px;
+            }
+
+            right: 0;
         }
     }
 }

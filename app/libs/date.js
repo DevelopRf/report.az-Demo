@@ -10,7 +10,7 @@ export const convertDateUTC = (date)=>{
     ]
 
     const d = new Date(date)
-    const day = d.getUTCDay()
+    const day = d.getUTCDate()
     const month = months[d.getUTCMonth()]
     const year = d.getUTCFullYear()
 
