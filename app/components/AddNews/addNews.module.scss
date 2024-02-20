@@ -4,22 +4,124 @@
 
 .addNews {
     @extend %section;
+
     .title {
         h2 {
             margin: 0 0 20px;
             font-family: "Montserrat-SemiBold", sans-serif;
-            @include Font($f-s:20px, $l-s: 1px);
+            @include Font($f-s: 20px, $l-s: 1px);
         }
     }
 
     .formContent {
+        input[type=text] {
+            display: inline-block;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid $clr_border;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        select {
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid $clr_border;
+            outline: none;
+            cursor: pointer;
+            &:not(:last-child){
+                margin: 0 10px 0 0;
+            }
+        }
+
+        .checkBox {
+            user-select: none;
+            position: relative;
+            padding: 0 0 0 25px;
+            margin: 0 25px 0 0;
+            cursor: pointer;
+
+            input {
+                appearance: none;
+
+                &:checked {
+                    &~span {
+                        opacity: 1;
+
+                        &::after {
+                            display: block;
+                        }
+                    }
+                }
+            }
+
+            span {
+                position: relative;
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 20px;
+                height: 20px;
+                background-color: $clr_primary;
+                opacity: .3;
+
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    width: 5px;
+                    height: 9px;
+                    border: 1px solid #fff;
+                    border-width: 0 3px 3px 0;
+                    transform: translate(-50%, -50%) rotate(45deg);
+                    display: none;
+                }
+            }
+
+            &:hover {
+                input {
+                    span {
+                        background-color: $clr_primary;
+                    }
+                }
+            }
+        }
+
+        .file {
+            font-size: 14px;
+            display: inline-block;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: $clr_primary;
+            color: #fff;
+            cursor: pointer;
+
+            margin: 0 10px 0 0;
+
+        }
+
         textarea {
             width: 100%;
             resize: none;
-            border: 1px solid #3535354f;
+            border: 1px solid $clr_border;
             outline: none;
             padding: 10px;
             margin: 15px 0;
+            border-radius: 10px;
+        }
+
+        .btn {
+            text-align: right;
+
+            button {
+                padding: 8px 14px;
+                border: 1px solid $clr_primary;
+                border-radius: 10px;
+                background-color: $clr_primary;
+                color: #fff;
+            }
         }
     }
 }

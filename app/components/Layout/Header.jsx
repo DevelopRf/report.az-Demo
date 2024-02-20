@@ -1,15 +1,17 @@
 'use client'
 import { useContext, useState } from "react"
+import { useRouter } from "next/navigation"
 import { HookContext } from "@/app/Hooks/Hook"
 import styles from "./Header.module.scss"
 import Link from "next/link"
 import Image from "next/image"
+import "../../styles/fontello/css/fontello.css"
 
 const Header = ({ news }) => {
 
-    const { toggle, setToggle } = useContext(HookContext)
+    const { toggle, setToggle, setSearchData } = useContext(HookContext)
     const [searchCancel, setSearchCancel] = useState(false)
-
+    const router = useRouter()
     const handleChange = () => {
         setToggle(!toggle)
     }
@@ -20,6 +22,20 @@ const Header = ({ news }) => {
 
     const cancelBtn = () => {
         setSearchCancel(false)
+    }
+
+    const searchValue = (e) => {
+        setSearchData(e.target.value.toLowerCase())
+    }
+
+
+    const handleSearch = (e) => {
+        if (e.key === 'Enter') {
+            /* return (
+                setTerm(e.target.value)
+            ) */
+            router.push('/search')
+        }
     }
 
     return (
@@ -86,12 +102,12 @@ const Header = ({ news }) => {
                                     <li><Link href="/analitika">Analitika</Link></li>
                                     <li><Link href="/multimedia">Multimedia</Link></li>
                                 </ul>
-                                <form className={`${styles.searchBox} ${searchCancel ? styles.active : ""}`}>
-                                    <input type="text" placeholder="Açar sözü daxil edin" />
+                                <div className={`${styles.searchBox} ${searchCancel ? styles.active : ""}`}>
+                                    <input type="text" placeholder="Açar sözü daxil edin" onKeyDown={handleSearch} onChange={searchValue} />
                                     <div className={styles.cancelBtn} onClick={cancelBtn}>
                                         <i className="icon-cancel"></i>
                                     </div>
-                                </form>
+                                </div>
                                 <div className={styles.searchBtn} onClick={searchBtn}>
                                     <i className="icon-search"></i>
                                 </div>

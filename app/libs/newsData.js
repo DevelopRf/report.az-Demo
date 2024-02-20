@@ -50,6 +50,20 @@ export const getSingleCategory = async (cat) => {
     }
 }
 
+export const getSearch = async (item) => {
+    const res = await fetch(`${url}?title=${item}`)
+    try {
+        if (!res.ok) {
+            throw new Error(`Məlumat əldə edilə bilmədi. Status: ${res.status}`)
+        }
+        const data = await res.json()
+        return data
+    } catch (error) {
+        console.error('Xəta baş verdi.', error)
+        throw error
+    }
+}
+
 export const getSingleSubCategory = async (cat) => {
     const res = await fetch(`${url}?subCatUrl=${cat}`)
     try {

@@ -22,6 +22,10 @@
                 border-color: #000;
                 @include Font($f-s: 12px, $l-s: 2px);
             }
+
+            &.empty {
+                display: none;
+            }
         }
 
         .date {
@@ -33,11 +37,14 @@
 
     .content {
         font-family: "Montserrat-Medium", sans-serif;
-        p{
+
+        p {
             @include Font($l-h: 26px, $l-s: .6px);
         }
+
         .image {
             margin: 0 0 25px;
+
             img {
                 @extend %img;
             }

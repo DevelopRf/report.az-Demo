@@ -1,10 +1,8 @@
 import styles from "./ActualNews.module.scss"
 import Image from "next/image"
-import localFont from "next/font/local"
 import Link from "next/link"
 import { convertDateUTC, convertTimeUTC } from "@/app/libs/date"
 
-const MontserratMedium = localFont({ src: "../../fonts/Montserrat-Medium.woff2" })
 const ActualNews = ({ news }) => {
     
     return (

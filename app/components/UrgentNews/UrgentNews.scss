@@ -10,7 +10,8 @@
     @include Flex($a-i: center);
     padding: 10px;
     border: 1px solid $clr_border;
-    @include screenSize(mobil){
+
+    @include screenSize(mobil) {
       column-gap: 14px;
     }
 
@@ -48,18 +49,21 @@
       @include Flex($f-d: column);
       position: relative;
       height: max-content;
+
       @include screenSize(mobil) {
         overflow: hidden;
         padding: 0 74px 0 0;
       }
-      
+
       .mySwiper {
         display: none;
+
         @include screenSize(mobil) {
           display: block;
         }
-        
+
         width: 100%;
+
         .swiper-slide {
           @include Flex($f-w: wrap);
           font-family: "Montserrat-SemiBold", sans-serif;
@@ -80,12 +84,16 @@
 
       .scrollingText {
         display: block;
-        @include screenSize(mobil){
+
+        @include screenSize(mobil) {
           display: none;
         }
-        font-family: "Montserrat-SemiBold", sans-serif;
+
+        font-family: "Montserrat-SemiBold",
+        sans-serif;
         @include Flex($c-g: 100px, $f-f: row);
         width: 100%;
+
         .newsItem {
           @include Flex($c-g: 20px, $a-i: center);
 
@@ -95,7 +103,8 @@
               font-size: 12px;
             }
           }
-          .date{
+
+          .date {
             font-size: 10px;
             color: $clr_grey_text;
           }
@@ -104,8 +113,10 @@
       }
 
       .navigator {
-        
+
         @extend %navigator;
+        top: 50%;
+        transform: translateY(-50%);
       }
     }
   }

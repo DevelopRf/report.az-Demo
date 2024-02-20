@@ -12,13 +12,13 @@ const SingleNews = ({ singleNews, latestNews }) => {
             <div className="container">
                 <div className="row">
                     <div className="col-8">
-                        <h2>{singleNews.title}</h2>
+                        <h1>{singleNews.title}</h1>
                         <div className={styles.catDate}>
-                            <div className={styles.category}>
+                            <div className={`${styles.category} ${singleNews.sub_category === "" && styles.empty}`}>
                                 <Link href={`/${singleNews.catUrl}/${singleNews.subCatUrl}`}>{singleNews.sub_category}</Link>
                             </div>
                             <div className={styles.date}>
-                            <span><i className="icon-calendar-empty"></i>{convertDateUTC(singleNews.date)} <span>&#x2B1D;</span> {convertTimeUTC(singleNews.date)}</span>
+                                <span><i className="icon-calendar-empty"></i>{convertDateUTC(singleNews.date)} <span>&#x2B1D;</span> {convertTimeUTC(singleNews.date)}</span>
                             </div>
                         </div>
                         <div className={styles.content}>
@@ -34,9 +34,6 @@ const SingleNews = ({ singleNews, latestNews }) => {
                     </div>
                     <div className="col-4">
                         <LatestNews news={latestNews} />
-                        {
-                            console.log(latestNews)
-                        }
                     </div>
                 </div>
             </div>

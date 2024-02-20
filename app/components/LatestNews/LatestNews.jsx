@@ -25,10 +25,10 @@ const LatestNews = ({ news }) => {
                                 </div>
                                 <div className={styles.info}>
                                     <div className={styles.newsTitle}>
-                                        <Link href={`/${item.catUrl}/${item.subCatUrl}/${item.id}`}>{item.photo && <span className="type">FOTO</span>}{item.video && <span className="type">VİDEO</span>}{item.title}{item.paid_info && <span className="iconLock"></span>}</Link>
+                                        <Link href={`/${item.subCatUrl !== "" ? item.subCatUrl : item.catUrl}/${item.id}`}>{item.photo && <span className="type">FOTO</span>}{item.video && <span className="type">VİDEO</span>}{item.title}{item.paid_info && <span className="iconLock"></span>}</Link>
                                     </div>
                                     <div className={styles.category}>
-                                        <Link href={`/${item.catUrl}/${item.subCatUrl}`}>{item.sub_category !== "" ? item.sub_category : item.category}</Link>
+                                        <Link href={`/${item.subCatUrl !== "" ? item.subCatUrl : item.catUrl}`}>{item.sub_category !== "" ? item.sub_category : item.category}</Link>
                                     </div>
                                 </div>
                             </div>

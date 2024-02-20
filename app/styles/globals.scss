@@ -1,11 +1,11 @@
 @import "./partials/variables";
+@import "./partials/mixin";
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   line-height: normal;
-  
 }
 
 body {
@@ -72,16 +72,50 @@ h6 {
   }
 }
 
-.p-x {  
+.p-x {
   --bs-gutter-x: 15px;
   padding: 0 var(--bs-gutter-x) 0 var(--bs-gutter-x);
 }
 
-.row{
+.row {
   --bs-gutter-x: 15px;
-  margin-left:  calc(-1 * var(--bs-gutter-x));
+  margin-left: calc(-1 * var(--bs-gutter-x));
   margin-right: calc(-1 * var(--bs-gutter-x));
-  
+
+}
+
+.notFound {
+
+  .wrapper {
+    height: 100vh;
+
+    .box {
+      text-align: center;
+      width: 450px;
+      height: 300px;
+    }
+
+    @include Flex($a-i: center, $j-c: center);
+    user-select: none;
+
+    h1 {
+      font-family: "Montserrat-ExtraBold", sans-serif;
+      @include Font($f-s: 110px, $l-s: 10px);
+
+      @include screenSize(mobil) {
+        font-size: 180px;
+      }
+    }
+
+    h2 {
+      font-family: "Montserrat-Medium", sans-serif;
+      @include Font($f-s: 24px, $l-h: 1.2, $f-w: 500);
+
+      @include screenSize(mobil) {
+        font-size: 28px;
+      }
+    }
+  }
 }
 
 

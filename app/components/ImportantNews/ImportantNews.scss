@@ -13,6 +13,7 @@
             @extend %titleMain;
             .navigator{                
                 @extend %navigator;
+                top: -5px;
                 .prev, .next{
                     border: 1px solid $clr_primary;
                 }

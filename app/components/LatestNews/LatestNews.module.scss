@@ -20,18 +20,11 @@
         margin: 0 0 20px;
         overflow-y: scroll;
 
-        &::-webkit-scrollbar {
-            width: 6px;
+        &::-webkit-scrollbar{
+            width: 6px
         }
 
-        &::-webkit-scrollbar-thumb {
-            border-radius: 10px;
-            background-color: #8f8f8f6f;
-
-            &:hover {
-                background-color: #8f8f8fba;
-            }
-        }
+        @extend %customScroll;        
 
         .content {
             padding: 15px 10px;

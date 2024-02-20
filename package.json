@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "server": " json-server --watch db.json --port 1100",
-    "db": "npx  json-server db.json --port 1100"
+    "server": " json-server --watch db.json --port 1100"
   },
   "dependencies": {
     "bootstrap": "^5.3.2",

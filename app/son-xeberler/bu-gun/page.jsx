@@ -1,4 +1,4 @@
-import AllLatestNews from "../../components/AllLatestNews/AllLatestNews"
+import AllLatestNews from "../../components/AllNews/AllNews"
 import { getNews } from "../../libs/newsData";
 const today = async () => {
 

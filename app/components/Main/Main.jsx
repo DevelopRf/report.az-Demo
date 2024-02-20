@@ -52,28 +52,28 @@ export default function Main({ data, videoData }) {
             <section className={styles.otherCategories}>
                 <div className="container">
                     <div className="row gy-4">
-                        <div className="col-lg-4 col-md-6 d-flex flex-column">
-                            <div className={styles.title}><Link href="#"><h2>SİYASƏT</h2></Link></div>
+                        <div className="col-lg-4 col-md-6 d-flex flex-column mb-4 p-x">
+                            <div className={styles.title}><Link href="/siyaset"><h2>SİYASƏT</h2></Link></div>
                             <OtherCategories news={politic} />
                         </div>
-                        <div className="col-lg-4 col-md-6 d-flex flex-column">
-                            <div className={styles.title}><Link href="#"><h2>İQTİSADİYYAT</h2></Link></div>
+                        <div className="col-lg-4 col-md-6 d-flex flex-column mb-4 p-x">
+                            <div className={styles.title}><Link href="/iqtisadiyyat"><h2>İQTİSADİYYAT</h2></Link></div>
                             <OtherCategories news={economy} />
                         </div>
-                        <div className="col-lg-4 col-md-6 d-flex flex-column">
-                            <div className={styles.title}><Link href="#"><h2>COP 29</h2></Link></div>
+                        <div className="col-lg-4 col-md-6 d-flex flex-column mb-4 p-x">
+                            <div className={styles.title}><Link href="/cop29"><h2>COP 29</h2></Link></div>
                             <OtherCategories news={cop29} />
                         </div>
-                        <div className="col-lg-4 col-md-6 d-flex flex-column">
-                            <div className={styles.title}><Link href="#"><h2>CƏMİYYƏT</h2></Link></div>
+                        <div className="col-lg-4 col-md-6 d-flex flex-column mb-4 p-x">
+                            <div className={styles.title}><Link href="/cemiyyet"><h2>CƏMİYYƏT</h2></Link></div>
                             <OtherCategories news={society} />
                         </div>
-                        <div className="col-lg-4 col-md-6 d-flex flex-column">
-                            <div className={styles.title}><Link href="#"><h2>İDMAN</h2></Link></div>
+                        <div className="col-lg-4 col-md-6 d-flex flex-column mb-4 p-x">
+                            <div className={styles.title}><Link href="/idman"><h2>İDMAN</h2></Link></div>
                             <OtherCategories news={sport} />
                         </div>
-                        <div className="col-lg-4 col-md-6 d-flex flex-column">
-                            <div className={styles.title}><Link href="#"><h2>MƏDƏNİYYƏT</h2></Link></div>
+                        <div className="col-lg-4 col-md-6 d-flex flex-column mb-4 p-x">
+                            <div className={styles.title}><Link href="/medeniyyet"><h2>MƏDƏNİYYƏT</h2></Link></div>
                             <OtherCategories news={culture} />
                         </div>
                     </div>

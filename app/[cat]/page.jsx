@@ -1,17 +1,20 @@
-import { getSingleCategory } from "../libs/newsData"
-import SubCategories from "../components/SubCategories/SubCategories"
+import { getSingleCategory, getSingleSubCategory, getNews } from "@/app/libs/newsData"
+import SubCategories from "@/app/components/SubCategories/SubCategories"
+import NotFound from "../components/NotFound/NotFound"
 
-const categories = async ({ params: { cat } }) => {
-    const data = await getSingleCategory(cat)
-    const categories = data.map(item => item.category)
-    const categoryName = [... new Set(categories)]
+const category = async ({ params: { cat } }) => {
+    let data = ""
+    let categories = ""
+    let categoryName = ""
+    const dataNews = await getNews()
+    const dataCat = dataNews.filter(item => item.catUrl === cat)
+    const dataSubCat = dataNews.filter(item => item.subCatUrl === cat)
 
-    const subCat = data.map(item => {
+    const subCat = dataCat.map(item => {
         const id = item.id
         const subCat = item.sub_category
-        const catUrl = item.catUrl
         const subCatUrl = item.subCatUrl
-        const newData = { id, subCat, catUrl, subCatUrl }
+        const newData = { id, subCat, subCatUrl }
         return newData
     })
 
@@ -31,7 +34,22 @@ const categories = async ({ params: { cat } }) => {
 
     const subCats = removeDublicate(subCat, "subCat")
 
-    return <SubCategories news={data} categoryName={categoryName} subCats={subCats} />
+    if (dataCat.length > 0) {
+        data = await getSingleCategory(cat)
+        categories = data.map(item => item.category)
+        categoryName = [... new Set(categories)]
+        return <SubCategories news={data} categoryName={categoryName} subCats={subCats} />
+    }
+    else if (dataSubCat.length > 0) {
+        data = await getSingleSubCategory(cat)
+        categories = data.map(item => item.sub_category)
+        categoryName = [... new Set(categories)]
+        return <SubCategories news={data} categoryName={categoryName} />
+    }
+    else {
+        return <NotFound />
+    }
+
 }
 
-export default categories
+export default category

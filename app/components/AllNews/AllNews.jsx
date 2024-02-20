@@ -5,8 +5,7 @@ import styles from "./AllLatestNews.module.scss"
 import { convertDateUTC } from "@/app/libs/date"
 import { convertTimeUTC } from "@/app/libs/date"
 
-
-const AllLatestNews = ({ news }) => {
+const AllNews = ({ news }) => {
 
     return (
         <section className={styles.categories}>
@@ -65,4 +64,4 @@ const AllLatestNews = ({ news }) => {
     )
 }
 
-export default AllLatestNews
+export default AllNews

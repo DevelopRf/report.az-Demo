@@ -12,10 +12,11 @@
     flex-direction: $f-d;
 }
 
-@mixin Font ($f-s: null, $l-h: null, $l-s: null) {
+@mixin Font ($f-s: null, $l-h: null, $l-s: null, $f-w: null) {
     font-size: $f-s;
     line-height: $l-h;
     letter-spacing: $l-s;
+    font-weight: $f-w;
 }
 
 @mixin screenSize($name) {

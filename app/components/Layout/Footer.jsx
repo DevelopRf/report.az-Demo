@@ -11,7 +11,7 @@ const Footer = () => {
                         <div className="col p-x">
                             <div className={styles.wrapper}>
                                 <div className={styles.logo}>
-                                    <Image src={"https://report.az/public/images/logo-dark-az.png"} width={150} height={35} alt="report.az logo" />
+                                    <Link href={'/'}><Image src={"https://report.az/public/images/logo-dark-az.png"} width={150} height={35} alt="report.az logo" /></Link>
                                 </div>
                                 <nav className={styles.navbar}>
                                     <ul>

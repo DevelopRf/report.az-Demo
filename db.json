@@ -1041,26 +1041,6 @@
       "urgent": false,
       "important": false,
       "text": "<p><strong>Onunla üç ildir, müsahibə etmək arzusunda olsam da, bu arzum reallığa çevrilə bilmirdi. Müsahibəni adi günlərin birində yox, məhz ad günü ərəfəsində etməkdə maraqlı idim. Söhbət \"Ad günü\" filminin qəhrəmanı Mustafadan, Xalq artisti, aktyor Hacı İsmayılovdan gedir. 80 illik yubileyini qeyd edən aktyor ötən illərə çox mənalı bir ömrü sığdıra bilib. Təkcə \"Ad günü\", \"Həm ziyarət, həm ticarət\" filmlərində yaratdığı Mustafa obrazından danışmaq kifayət edir ki, onun kino tarixində yeri bəlli olsun.</strong></p><p><a href = \"/\">Report</a> Azərbaycanın Xalq artisti, tanınmış kino və teatr aktyoru, “Şöhrət” ordenli Hacı İsmayılovla doğum günü ərəfəsində götürdüyü müsahibəni təqdim edir:</p><p><strong>- Üç ildir hər ad gününüzdə sizinlə danışsaq da, müsahibəmiz heç bir formada alınmırdı. Nəhayət, dördüncü ilin tamamında, 80 yaşınız ərəfəsində sizinlə görüşə bildik...</strong></p><p>- Nəhayət... bilirsən, qızım, artıq yaş elədir ki, belə şeylərə maraq bir o qədər də yoxdur, yaş az olanda, bəli, maraqlı olursan, müsahibə də verirsən, danışırsan da, amma indi başqa işlər var.</p><p><strong>- İşləriniz necədir, 80 yaşında özünüzü necə hiss edirsiniz?</strong></p>"
-    },
-    {
-      "id": 48,
-      "title": "Hacı İsmayılov: \"Bəzi aktyorlar sənəti yox, özlərini sevirlər, nəticədə ulduz xəstəliyinə tutulurlar\" - MÜSAHİBƏ",
-      "category": "Multimedia",
-      "catUrl": "multimedia",
-      "sub_category": "",
-      "subCatUrl": "",
-      "type": "Normal",
-      "date": "2024-02-19T15:09:00.000Z",
-      "img": "https://static.report.az/photo/4cf5a75a-b4f6-3de9-9917-6cbc228f13c9_850.jpg",
-      "photo": false,
-      "photo_src": [],
-      "video": false,
-      "video_src": [],
-      "paid_info": false,
-      "slider": false,
-      "urgent": false,
-      "important": false,
-      "text": "<p><strong>Onunla üç ildir, müsahibə etmək arzusunda olsam da, bu arzum reallığa çevrilə bilmirdi. Müsahibəni adi günlərin birində yox, məhz ad günü ərəfəsində etməkdə maraqlı idim. Söhbət \"Ad günü\" filminin qəhrəmanı Mustafadan, Xalq artisti, aktyor Hacı İsmayılovdan gedir. 80 illik yubileyini qeyd edən aktyor ötən illərə çox mənalı bir ömrü sığdıra bilib. Təkcə \"Ad günü\", \"Həm ziyarət, həm ticarət\" filmlərində yaratdığı Mustafa obrazından danışmaq kifayət edir ki, onun kino tarixində yeri bəlli olsun.</strong></p><p><a href = \"/\">Report</a> Azərbaycanın Xalq artisti, tanınmış kino və teatr aktyoru, “Şöhrət” ordenli Hacı İsmayılovla doğum günü ərəfəsində götürdüyü müsahibəni təqdim edir:</p><p><strong>- Üç ildir hər ad gününüzdə sizinlə danışsaq da, müsahibəmiz heç bir formada alınmırdı. Nəhayət, dördüncü ilin tamamında, 80 yaşınız ərəfəsində sizinlə görüşə bildik...</strong></p><p>- Nəhayət... bilirsən, qızım, artıq yaş elədir ki, belə şeylərə maraq bir o qədər də yoxdur, yaş az olanda, bəli, maraqlı olursan, müsahibə də verirsən, danışırsan da, amma indi başqa işlər var.</p><p><strong>- İşləriniz necədir, 80 yaşında özünüzü necə hiss edirsiniz?</strong></p>"
     }
   ],
   "category": [
@@ -1264,15 +1244,15 @@
       "id": 29,
       "cat": "Analitika",
       "catUrl": "analitika",
-      "sub_cat": "",
-      "subCatUrl": ""
+      "sub_cat": "Analitika",
+      "subCatUrl": "analitika"
     },
     {
       "id": 30,
       "cat": "Multimedia",
-      "catUrl": "multimediya",
-      "sub_cat": "",
-      "subCatUrl": ""
+      "catUrl": "multimedia",
+      "sub_cat": "Multimedia",
+      "subCatUrl": "multimedia"
     },
     {
       "id": 31,
@@ -1310,7 +1290,7 @@
       "subCatUrl": "herbi"
     },
     {
-      "id": 34,
+      "id": 36,
       "cat": "Siyasət",
       "catUrl": "siyaset",
       "sub_cat": "Diaspor",

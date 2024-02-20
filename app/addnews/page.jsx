@@ -27,7 +27,7 @@ const addNews = async () => {
         return 0
     })
 
-    return <AddNews categories={data} data={cat} newsType={type}/>
+    return <AddNews categories={data} catData={cat} newsType={type}/>
 
 }
 
