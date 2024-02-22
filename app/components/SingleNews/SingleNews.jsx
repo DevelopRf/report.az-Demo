@@ -3,6 +3,7 @@ import styles from "./SingleNews.module.scss"
 import LatestNews from "../LatestNews/LatestNews"
 import Image from "next/image"
 import Link from "next/link"
+import { convertToJSON } from "@/app/libs/newsData"
 import { convertDateUTC, convertTimeUTC } from "@/app/libs/date"
 
 const SingleNews = ({ singleNews, latestNews }) => {
@@ -27,7 +28,7 @@ const SingleNews = ({ singleNews, latestNews }) => {
                             </div>
                             <div dangerouslySetInnerHTML={
                                 {
-                                    __html: singleNews.text
+                                    __html: convertToJSON(singleNews.text)
                                 }}>
                             </div>
                         </div>

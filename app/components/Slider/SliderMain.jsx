@@ -66,7 +66,7 @@ const SliderMain = ({ news }) => {
         {news && news.map(item => {
           return (
             <SwiperSlide key={item.id}>
-              <Image src={item.img} width={823} height={500} alt={item.title} property={true}/>
+              <Image src={item.img} width={823} height={500} alt={item.title}/>
             </SwiperSlide>
           )
         })}

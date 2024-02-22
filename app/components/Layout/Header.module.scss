@@ -2,6 +2,47 @@
 @import "../../styles/partials/extend";
 @import "../../styles/partials/mixin";
 
+.headerTop {
+    padding: 8px 0 9px;
+    background-color: $clr_primary;
+
+    .left {
+        @include Flex();
+
+        .weather {
+            @include Flex($f-sh: 0);
+
+            li {
+                a {
+                    @extend %headerTop;
+                }
+            }
+        }
+
+        .currrencies {
+            position: relative;
+
+            li {
+                
+                a {
+                    @extend %headerTop;
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+@keyframes currencyAnimation {
+    from {
+        transform: translateY(-100%);
+    }
+  
+    to {
+        transform: translateY(0);
+    }
+  }
+
 .headerBottom {
     position: relative;
     position: fixed;

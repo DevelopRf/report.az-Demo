@@ -1,6 +1,6 @@
 @import "./variables";
 
-@mixin Flex ($j-c: null, $a-i: null, $f-f: null, $c-g: null, $r-g: null, $g: null, $f-w: null, $f-d: null) {
+@mixin Flex ($j-c: null, $a-i: null, $f-f: null, $c-g: null, $r-g: null, $g: null, $f-w: null, $f-d: null, $f-sh: null) {
     display: flex;
     justify-content: $j-c;
     align-items: $a-i;
@@ -10,6 +10,7 @@
     gap: $g;
     flex-wrap: $f-w;
     flex-direction: $f-d;
+    flex-shrink: $f-sh;
 }
 
 @mixin Font ($f-s: null, $l-h: null, $l-s: null, $f-w: null) {

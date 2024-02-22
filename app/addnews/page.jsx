@@ -4,6 +4,7 @@ import AddNews from "../components/AddNews/AddNews"
 const addNews = async () => {
     const cat = await getCategories()
     const type = await getNewsType()
+    
     const removeDublicate = (array, property) => {
         const uniqueValues = new Set()
 
@@ -17,10 +18,8 @@ const addNews = async () => {
         return categories
     }
 
-
-
     const category = removeDublicate(cat, "cat")
-
+    
     const data = category.sort((a, b) => {
         if (a.cat > b.cat) return 1
         if (a.cat < b.cat) return -1

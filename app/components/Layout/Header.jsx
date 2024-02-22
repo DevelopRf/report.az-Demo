@@ -1,16 +1,49 @@
 'use client'
-import { useContext, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { useRouter } from "next/navigation"
-import { HookContext } from "@/app/Hooks/Hook"
+import { useAppContext } from "@/app/Hooks/Hook"
 import styles from "./Header.module.scss"
 import Link from "next/link"
 import Image from "next/image"
+import React from "react"
 import "../../styles/fontello/css/fontello.css"
 
-const Header = ({ news }) => {
+const Header = () => {
 
-    const { toggle, setToggle, setSearchData } = useContext(HookContext)
+    const { toggle, setToggle, setSearchData } = useAppContext()
+
     const [searchCancel, setSearchCancel] = useState(false)
+    const [currentCurrencyIndex, setCurrentCurrencyIndex] = useState(0)
+    const [currency, setCurrency] = useState()
+    const currencyRef = useRef([])
+
+    const totalCurrency = currencyRef.length
+
+    useEffect(() => {
+        currencyRef.current = Array.from({ length: totalCurrency }, (_, index) => currencyRef.current[index] || React.createRef());
+    }, [totalCurrency, currency]);
+
+    async function getCurrency() {
+        try {
+            const res = await fetch(`http://localhost:1100/currency`, {
+                next: { revalidate: 300 },
+            });
+            if (!res.ok) {
+                throw new Error(`HTTP error! Status: ${res.status}`);
+            }
+            const data = await res.json();
+            setCurrency(data);
+        } catch (error) {
+            console.error("Error fetching data:", error.message);
+        }
+    }
+
+    useEffect(() => {
+        getCurrency()
+    }, [])
+
+
+
     const router = useRouter()
     const handleChange = () => {
         setToggle(!toggle)
@@ -28,7 +61,6 @@ const Header = ({ news }) => {
         setSearchData(e.target.value.toLowerCase())
     }
 
-
     const handleSearch = (e) => {
         if (e.key === 'Enter') {
             /* return (
@@ -40,6 +72,35 @@ const Header = ({ news }) => {
 
     return (
         <header>
+            <div className={styles.headerTop}>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12 d-flex justify-between">
+                            <div className={styles.left}>
+                                <ul className={styles.weather}>
+                                    <li><Link href="#"><Image src="https://report.az/public/images/icons/weather.png" width={18} height={19} alt="weather" />Bakı 6&#9900; C</Link> <span>&#x2B1D;</span> </li>
+
+                                    <li><Link href="#">8 m/s</Link></li>
+                                </ul>
+                                <Image src="https://report.az/public/images/icons/currency.png" width={18} height={19} alt="currency" />
+                                <ul className={styles.currrencies}>
+                                    {
+                                        currency && currency.map((item, index) => {
+                                            const itemRef = React.createRef()
+                                            currencyRef.current[index] = itemRef
+
+                                            return <li ref={currencyRef.current[index]} key={item.id}><Link href="#">{`${item.name} - ${item.value}`}</Link></li>
+                                        })
+                                    }
+                                </ul>
+                            </div>
+                            <div className={styles.right}>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div className={styles.headerBottom}>
                 <div className="container p-x">
                     <div className="row">

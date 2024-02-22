@@ -1,11 +1,52 @@
 'use client'
 import Link from "next/link"
 import Image from "next/image"
-import styles from "./AllLatestNews.module.scss"
-import { convertDateUTC } from "@/app/libs/date"
-import { convertTimeUTC } from "@/app/libs/date"
+import styles from "./AllNews.module.scss"
+import { convertDateUTC, convertTimeUTC } from "@/app/libs/date"
+import { useEffect, useState } from "react"
+import "../../styles/fontello/css/fontello.css"
+import { useRouter } from "next/navigation"
+import { useAppContext } from "@/app/Hooks/Hook"
 
 const AllNews = ({ news }) => {
+    const { setUpdate, setNewsId } = useAppContext()
+    const [newsCount, setNewsCount] = useState(20)
+    const [edit, setEdit] = useState(null)
+    const router = useRouter()
+    const handleClick = (index) => {
+        if (edit === index) {
+            return setEdit(null)
+        }
+        setEdit(index)
+    }
+
+    const scroll = () => {
+        if (innerHeight + document.documentElement.scrollTop + 1 >= document.documentElement.scrollHeight) {
+            setNewsCount(newsItem => newsItem + 20)
+        }
+    }
+
+    const updateNews = (id) => {
+        setUpdate(true)
+        setNewsId(id)
+    }
+
+    const deleteNews = async (newsId) => {
+        try {
+            const res = await fetch(`http://localhost:1100/news/${newsId}`, {
+                method: "DELETE"
+            })
+            if (res.ok) {
+                router.refresh()
+            }
+        } catch (error) {
+            console.error('Xəta baş verdi', error)
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener("scroll", scroll)
+    })
 
     return (
         <section className={styles.categories}>
@@ -20,17 +61,17 @@ const AllNews = ({ news }) => {
                                 </div>
                             </div>
                             <ul className={styles.filter}>
-                                <li><Link href="/son-xeberler/today">BU GÜN</Link></li>
-                                <li><Link href="/son-xeberler/yesterday">DÜNƏN</Link></li>
-                                <li><Link href="/son-xeberler/this-week">BU HƏFTƏ</Link></li>
-                                <li><Link href="/son-xeberler/this-month">BU AY</Link></li>
-                                <li><Link href="/son-xeberler/last-week">KEÇƏN HƏFTƏ</Link></li>
-                                <li><Link href="">KEÇƏN AY</Link></li>
+                                <li><Link href="/son-xeberler/bu-gun">BU GÜN</Link></li>
+                                <li><Link href="/son-xeberler/dunen">DÜNƏN</Link></li>
+                                <li><Link href="/son-xeberler/bu-hefte">BU HƏFTƏ</Link></li>
+                                <li><Link href="/son-xeberler/bu-ay">BU AY</Link></li>
+                                <li><Link href="/son-xeberler/kecen-hefte">KEÇƏN HƏFTƏ</Link></li>
+                                <li><Link href="/son-xeberler/kecen-ay">KEÇƏN AY</Link></li>
                             </ul>
 
                             <div className={styles.contentWrapper}>
                                 {
-                                    news && news.map(item => {
+                                    news && news.slice(0, newsCount).map((item, index) => {
                                         return (
                                             <div key={item.id} className={`${styles.content} ${item.urgent && styles.urgent} ${item.important && styles.important}`}>
                                                 <div className={styles.image}>
@@ -50,6 +91,17 @@ const AllNews = ({ news }) => {
                                                         <span>{convertDateUTC(item.date)} <span>&#x2B1D;</span> {convertTimeUTC(item.date)}</span>
                                                     </div>
                                                 </div>
+                                                <ul className={`${styles.edit} ${edit === index ? styles.active : ""}`}>
+                                                    <li>
+                                                        <button onClick={() => handleClick(index)}><i className="icon-th-list"></i></button>
+                                                    </li>
+                                                    <li>
+                                                        <Link href={"/addnews"} onClick={() => updateNews(item.id)}><i className="icon-arrows-ccw"></i></Link>
+                                                    </li>
+                                                    <li>
+                                                        <button onClick={() => deleteNews(item.id)}><i className="icon-trash-empty"></i></button>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         )
                                     })

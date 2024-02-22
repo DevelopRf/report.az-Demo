@@ -1,0 +1,118 @@
+@import "../../styles/partials/variables";
+@import "../../styles/partials/extend";
+@import "../../styles/partials/mixin";
+
+.categories {
+    @extend %section;
+
+    .wrapper {
+        .title {
+            @include Flex($j-c: space-between);
+
+            h1 {
+                @extend %titleGlobal;
+            }
+
+            .addNews {
+                a {
+                    font-family: "Montserrat-SemiBold", sans-serif;
+                    display: block;
+                    padding: 10px 15px;
+                    color: $clr_primary;
+                    border: 1px solid $clr_primary;
+
+                    &:hover {
+                        background-color: $clr_primary;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+
+        .filter {
+            &::-webkit-scrollbar {
+                height: 6px;
+            }
+
+            @extend %filters;
+            @extend %customScroll;
+
+        }
+
+        .contentWrapper {
+            .content {
+                position: relative;
+                padding: 20px 14px;
+                @include Flex();
+                @extend %contentType;
+
+                .info {
+                    padding: 0 0 0 30px;
+
+                    .newsTitle {
+                        a {
+                            font-size: 18px;
+                            @extend %newsTitle;
+                        }
+                    }
+
+                    .date {
+                        @extend %date;
+                        font-size: 12px;
+                        color: $clr_grey_text;
+                    }
+
+                }
+
+                .edit {
+                    position: absolute;
+                    right: 10px;
+                    top: 10px;
+                    height: 20px;
+                    overflow: hidden;
+
+                    li {
+                        margin: 0 0 5px;
+
+                        i {
+                            font-size: 18px;
+                            color: $clr_primary;
+                        }
+
+                        button {
+                            border: none;
+                            background-color: transparent;
+                        }
+
+                        &:nth-child(1) {
+                            i {
+                                &:hover {
+                                    color: #7a7a7a;
+                                }
+                            }
+                        }
+                        &:nth-child(2) {
+                            i {
+                                &:hover {
+                                    color: #ffcc00;
+                                }
+                            }
+                        }
+
+                        &:nth-child(3) {
+                            i {
+                                &:hover {
+                                    color: $clr_second;
+                                }
+                            }
+                        }
+                    }
+
+                    &.active {
+                        height: auto;
+                    }
+                }
+            }
+        }
+    }
+}

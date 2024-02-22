@@ -1,8 +1,8 @@
 import Header from './components/Layout/Header'
 import Footer from './components/Layout/Footer'
-import { getNews } from './libs/newsData'
 import "bootstrap/dist/css/bootstrap.min.css"
 import { HookProvider } from './Hooks/Hook'
+import { getCurrency } from './libs/newsData'
 import './styles/globals.scss'
 
 export const metadata = {
@@ -11,12 +11,14 @@ export const metadata = {
 }
 
 export default async function RootLayout({ children }) {
-  const data = await getNews()
+
+  const currency = await getCurrency()
+
   return (
     <html lang="az">
       <body>
         <HookProvider>
-          <Header news={data} />
+          <Header currency={currency} />
           {children}
           <Footer />
         </HookProvider>

@@ -1,6 +1,23 @@
-import { getSingleCategory, getSingleSubCategory, getNews } from "@/app/libs/newsData"
+import { getSingleCategory, getSingleSubCategory, getNews, getCategories } from "@/app/libs/newsData"
 import SubCategories from "@/app/components/SubCategories/SubCategories"
 import NotFound from "../components/NotFound/NotFound"
+
+export async function generateMetadata({ params: { cat } }) {
+    const dataNews = await getCategories()
+    const dataCat = dataNews.find(item => item.catUrl === cat)
+    const dataSubCat = dataNews.find(item => item.subCatUrl === cat)
+
+    if (dataCat) {
+        return {
+            title: `${dataCat.cat_meta_title} | Report.az`
+        }
+    }
+    else if (dataSubCat) {
+        return {
+            title: `${dataSubCat.subcat_meta_title} | Report.az`
+        }
+    }
+}
 
 const category = async ({ params: { cat } }) => {
     let data = ""

@@ -23,7 +23,7 @@
         &::-webkit-scrollbar{
             width: 6px
         }
-
+        
         @extend %customScroll;        
 
         .content {
