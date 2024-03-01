@@ -8,15 +8,17 @@ import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
 import "./ImportantNews.scss";
 import "../../styles/fontello/css/fontello.css"
+import { useAppContext } from '@/app/Hooks/Hook';
 
 export const ImportantNews = ({ news }) => {
 
+    const { dark } = useAppContext()
     let i = 0
 
     return (
         <section className="ImportantNews">
             <div className="wrapper">
-                <div className="title">
+                <div className={`title ${dark ? "active" : ""}`}>
                     <h2>ƏN VACİB XƏBƏRLƏR</h2>
                     <div className="navigator">
                         <div className="prev"></div>

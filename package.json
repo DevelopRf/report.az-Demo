@@ -10,20 +10,21 @@
     "server": " json-server --watch db.json --port 1100"
   },
   "dependencies": {
+    "@types/react": "^18.2.60",
+    "@types/react-dom": "^18.2.19",
+    "autoprefixer": "^10.4.17",
     "bootstrap": "^5.3.2",
     "json-server": "^1.0.0-alpha.23",
     "next": "14.0.4",
-    "react": "^18",
-    "react-dom": "^18",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-icons": "^5.0.0",
     "swiper": "^11.0.5"
   },
   "devDependencies": {
-    "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
-    "postcss": "^8",
     "sass": "^1.69.7",
-    "tailwindcss": "^3.3.0"
+    "tailwindcss": "^3.4.1"
   }
 }

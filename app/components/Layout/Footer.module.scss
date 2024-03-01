@@ -7,9 +7,10 @@ footer {
 
     .footerTop {
         padding: 50px 0 35px;
+        background-color: var(--second-bg);
 
         .wrapper {
-            @include Flex($f-w: wrap, $f-d: column, $a-i: center, $r-g: 20px);
+            @include Flex($f-w: wrap, $f-d: column, $a-i: center, $r-g: 25px);
 
             @include screenSize(mobil) {
                 flex-direction: row;
@@ -18,6 +19,7 @@ footer {
 
             .logo {
                 @extend %logo;
+
                 img {
                     @extend %img;
                 }
@@ -44,7 +46,7 @@ footer {
                     @include Flex($f-w: wrap, $r-g: 6px);
 
                     a {
-                        color: $clr_primary;
+                        color: var(--color);
                         padding: 5px 10px;
                     }
 
@@ -82,9 +84,7 @@ footer {
 
             .pattern {
                 width: 100%;
-                background-image: url('../../../public/img/pattern/divider-bg-dark.svg');
                 height: 6px;
-                margin: 25px 0;
             }
 
             .copyrightWrapper {
@@ -111,10 +111,10 @@ footer {
                         &:nth-child(2),
                         &:nth-child(3) {
                             a {
-                                background-color: $clr_primary;
+                                background-color: var(--color);
 
                                 i {
-                                    color: #fff;
+                                    color: var(--second-color);
                                 }
                             }
                         }
@@ -127,10 +127,10 @@ footer {
                         &:nth-child(9),
                         &:nth-child(10) {
                             a {
-                                background-color: $clr_second_social;
+                                background-color: var(--second-btn-bg);
 
                                 i {
-                                    color: $clr_primary;
+                                    color: var(--color);
                                 }
                             }
                         }
@@ -159,7 +159,8 @@ footer {
         p {
             font-family: "Montserrat-Medium", sans-serif;
             @include Font($f-s: 12px, $l-h: 18px);
-            color: $clr_grey_text ;
+            color: var(--color);
+            opacity: .6;
         }
     }
 }

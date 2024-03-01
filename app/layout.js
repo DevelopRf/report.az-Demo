@@ -16,13 +16,13 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="az">
-      <body>
-        <HookProvider>
+      <HookProvider>
+        <body>
           <Header currency={currency} />
           {children}
           <Footer />
-        </HookProvider>
-      </body>
+        </body>
+      </HookProvider>
     </html>
   )
 }

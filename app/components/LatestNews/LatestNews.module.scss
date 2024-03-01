@@ -34,7 +34,8 @@
             @extend %contentType;
 
             .time {
-                color: $clr_grey_text;
+                color: var(--color);
+                opacity: .3;
 
                 span {
                     display: inline-block;
@@ -69,13 +70,13 @@
             font-size: 13px;
             padding: 18px 25px;
             display: block;
-            color: $clr_primary;
+            color: var(--color);
             position: relative;
-            background-color: #fbfbfb;
+            background-color: var(--third-btn-bg);
             transition: all 0.2s;
 
             &:hover {
-                background-color: #f6f6f6;
+                background-color: var(--btn-hover);
             }
 
             &::after {

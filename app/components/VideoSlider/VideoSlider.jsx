@@ -6,16 +6,18 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
+import { useAppContext } from "@/app/Hooks/Hook";
 
 import { EffectFade, Pagination, Autoplay } from 'swiper/modules';
 
 const MontserratExtraBold = localFont({ src: '../../fonts/Montserrat-ExtraBold.woff2' })
 
 const VideoSlider = ({ videoNews }) => {
+    const { dark } = useAppContext()
 
     return (
         <div className="videoNews">
-            <div className="title">
+            <div className={`title ${dark ? "active" : ""}`}>
                 <h2>VİDEO XƏBƏRLƏR</h2>
             </div>
             <div className="wrapper">

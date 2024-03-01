@@ -1,5 +1,5 @@
 'use client'
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useState, useEffect, useRef } from "react"
 
 export const HookContext = createContext()
 
@@ -19,8 +19,24 @@ export const HookProvider = ({ children }) => {
     const [important, sertImportant] = useState()
     const [paid, setPaid] = useState()
     const [text, setText] = useState("")
+    const [dark, setDark] = useState(false)
+    const [author, setAuthor] = useState({})
 
-    const sharedState = { toggle, setToggle, term, setTerm, update, setUpdate, searchData, setSearchData, newsId, setNewsId, title, SetTitle, cat, setCat, image, setImage, subCat, setSubCat, type, setType, slide, SetSlide, urgent, setUrgent, important, sertImportant, paid, setPaid, text, setText}
+
+
+    useEffect(() => {
+        const theme = window.localStorage.getItem("theme")
+        if (theme === "dark Mode") {
+            document.body.classList.add("active")
+            setDark(true)
+        }
+        else {
+            document.body.classList.remove("active")
+            setDark(false)
+        }
+    }, [dark])
+
+    const sharedState = { toggle, setToggle, term, setTerm, update, setUpdate, searchData, setSearchData, newsId, setNewsId, title, SetTitle, cat, setCat, image, setImage, subCat, setSubCat, type, setType, slide, SetSlide, urgent, setUrgent, important, sertImportant, paid, setPaid, text, setText, dark, setDark, author, setAuthor }
 
 
     return (

@@ -1,4 +1,5 @@
 @import "./partials/variables";
+@import "./partials/extend";
 @import "./partials/mixin";
 
 * {
@@ -8,9 +9,46 @@
   line-height: normal;
 }
 
+:root {
+  --hd-top: #353535;
+  --border-color: rgba(53, 53, 53, 0.3);
+  --second-border-color: #eaeaea;
+  --btn-bg: #fefefe;
+  --important: #f2f2f2;
+  --second-btn-bg: #0000000d;
+  --second-color: #f2f2f2;
+  --second-bg: #fbfbfb;
+  --third-bg: #fbfbfb;
+  --fourth-btn-bg: #f6f6f6;
+  --btn-hover: #f6f6f6;
+}
+
 body {
-  color: $clr_primary;
+
   position: relative;
+  --bs-body-font-family: "Montserrat-Medium";
+  --bs-body-color: #fefefe;
+  --color: #353535;
+
+  background-color: var(--bs-body-color);
+  color: var(--color);
+
+  &.active {
+    --bs-body-color: #0f0f0f;
+    --color: #fefefe;
+    --hd-top: #ffffff1a;
+    --border-color: rgb(254, 254, 254, 0.3);
+    --second-border-color: rgba(234, 234, 234, .2);
+    --btn-bg: #1a1a1a;
+    --important: #1a1a1a;
+    --second-btn-bg: #ffffff1a;
+    --second-color: #353535;
+    --second-bg: #ffffff0d;
+    --third-btn-bg: #353535;
+    --fourth-btn-bg: #fbfbfb33;
+    --btn-hover: #303030;
+  }
+
 
   .overlay {
     display: none;
@@ -145,4 +183,29 @@ h6 {
   src: url('../fonts/Montserrat-ExtraBold.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
+}
+
+
+.currencies {
+  position: relative;
+  overflow: hidden;
+
+  li {
+
+    a {
+      @extend %headerTop;
+      display: block;
+      padding: 0 0 0 5px;
+    }
+  }
+}
+
+@keyframes currencyAnimation {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
 }

@@ -3,7 +3,7 @@ export function timeformat(time) {
     return time
 }
 
-export const convertDateUTC = (date)=>{
+export const convertDateUTC = (date) => {
     const months = [
         "Yanvar", "Fevral", "Mart", "Aprel", "May", "İyun",
         "İyul", "Avqust", "Sentyabr", "Oktyabr", "Noyabr", "Dekabr"

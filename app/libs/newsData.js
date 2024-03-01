@@ -13,10 +13,9 @@ export const getNews = async () => {
             throw new Error(`Məlumatlar əldə edilə bilmədi. Status: ${res.status}`)
         }
         const data = await res.json()
-        data.sort((a, b) => {
+       return data.sort((a, b) => {
             return new Date(b.date) - new Date(a.date)
         })
-        return data
     } catch (error) {
         console.error("Xəta baş verdi:", error)
         throw error
@@ -46,7 +45,9 @@ export const getSingleCategory = async (cat) => {
         }
         const data = await res.json()
 
-        return data
+        return data.sort((a, b) => {
+            return (new Date(b.date) - new Date(a.date))
+        })
     } catch (error) {
         console.error('Xəta baş verdi', error)
         throw error
@@ -60,7 +61,9 @@ export const getSearch = async (item) => {
             throw new Error(`Məlumat əldə edilə bilmədi. Status: ${res.status}`)
         }
         const data = await res.json()
-        return data
+        return data.sort((a, b) => {
+            return (new Date(b.date) - new Date(a.date))
+        })
     } catch (error) {
         console.error('Xəta baş verdi.', error)
         throw error
@@ -140,8 +143,9 @@ export function convertToJSON(text) {
         /"report.az"/g,
         `<a href=\"/\">“report.az”</a>`
     );
-    formattedText = formattedText.replace(/\*(.*?)\*/g, "<strong>$1</strong>");
-    formattedText = formattedText.replace(/\_(.*?)\_/g, "<em>$1</em>");
+    formattedText = formattedText.replace(/\*b(.*?)\*b/g, "<strong>$1</strong>");
+    formattedText = formattedText.replace(/\*i(.*?)\*i/g, "<em>$1</em>");
+    formattedText = formattedText.replace(/\*bi(.*?)\*bi/g, "<strong><em>$1</em></strong>");
     return formattedText;
 }
 
@@ -181,3 +185,34 @@ export const getCurrency = async () => {
         console.error("Xəta baş verdi", error);
     }
 }
+
+export const convertChars = (txt) => {
+    const chars = {
+        Ç: "C",
+        ç: "c",
+        Ə: "E",
+        ə: "e",
+        Ö: "O",
+        ö: "o",
+        Ü: "U",
+        ü: "u",
+        Ğ: "G",
+        ğ: "g",
+        Ş: "S",
+        ş: "s",
+        İ: "I",
+        ı: "i"
+    }
+
+    const slug = txt
+        .replace(/[Ç,ç,Ə,ə,Ö,ö,Ü,ü,Ğ,ğ,Ş,ş,İ,ı]/g, (char) => chars[char] || char)
+        .replace(/[^\w\s-]/g, "")
+        .replace(/\s+/g, "-")
+        .replace(/--+/g, "-")
+        .replace(/^-+/g, "")
+        .replace(/-+$/g, "")
+        .toLowerCase()
+
+    return slug
+}
+

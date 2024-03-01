@@ -33,9 +33,5 @@
    padding: 45px 0 0;
     .title {
         @extend %titleMain;
-
-        a {
-            color: $clr_primary;
-        }
     }
 }

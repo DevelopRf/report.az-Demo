@@ -46,7 +46,6 @@
                     padding: 50px;
                     @include Flex($f-f: column, $j-c: flex-end);
 
-
                     &::after {
                         content: "";
                         position: absolute;
@@ -91,8 +90,9 @@
 
                     .date {
                         @extend %date;
+                        color: #fff;
                         z-index: 6;
-                        color: $clr_white_text;
+                        opacity: .5;
                         font-size: 10px;
                     }
                 }
@@ -128,7 +128,6 @@
                     .date {
                         @extend %date;
                         font-size: 10px;
-                        color: $clr_grey_text;
                     }
                 }
             }

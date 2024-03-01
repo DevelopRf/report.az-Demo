@@ -11,8 +11,6 @@ export default async function Home() {
   const videoLink = await getVideoLink()
 
   return (
-    <HookProvider>
-      <Main data={data} videoData={videoLink}/>
-    </HookProvider>
+      <Main data={data} videoData={videoLink} />
   )
 }

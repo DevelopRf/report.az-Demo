@@ -4,6 +4,94 @@
 
 .categories {
     @extend %section;
+    position: relative;
+
+    .overlay {
+        position: fixed;
+        display: none;
+        z-index: 10;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-color: #1a1a1a6f;
+
+        &.active {
+            display: block;
+        }
+
+        .modal {
+            width: 450px;
+            padding: 15px 20px;
+            border-radius: 10px;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgb(254, 254, 254);
+
+            .close {
+                position: absolute;
+                width: 25px;
+                height: 25px;
+                top: 15px;
+                right: 15px;
+                cursor: pointer;
+
+                i {
+                    color: $clr_second;
+                    font-size: 14px;
+                }
+            }
+
+            .title {
+                padding: 15px;
+
+                h2 {
+                    @include Font($f-s: 18px, $l-s: .5);
+                }
+
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            form {
+                border: 1px solid var(--border-color);
+                padding: 30px;
+                border-radius: 5px;
+
+                input {
+                    width: 100%;
+                    padding: 10px;
+                    margin: 0 0 10px;
+                    border: 1px solid var(--second-border-color);
+                    border-radius: 5px;
+                    outline: none;
+                }
+
+                span {
+                    color: $clr_second;
+                    font-size: 12px;
+                }
+
+                button {
+                    width: 100%;
+                    padding: 10px;
+                    margin: 30px 0 0;
+                    border: 1px solid var(--second-border-color);
+                    background-color: var(--btn-bg);
+                    color: var(--color);
+                    border-radius: 5px;
+                    transition: all .3s;
+
+                    &:hover {
+                        background-color: var(--color);
+                        color: var(--btn-bg);
+                    }
+                }
+            }
+        }
+    }
 
     .wrapper {
         .title {
@@ -14,16 +102,17 @@
             }
 
             .addNews {
-                a {
+                button {
                     font-family: "Montserrat-SemiBold", sans-serif;
                     display: block;
                     padding: 10px 15px;
-                    color: $clr_primary;
-                    border: 1px solid $clr_primary;
+                    border: 1px solid #1a1a1a;
+                    color: var(--color);
+                    background-color: var(--btn-bg);
 
                     &:hover {
-                        background-color: $clr_primary;
-                        color: #fff;
+                        background-color: var(--color);
+                        color: var(--btn-bg);
                     }
                 }
             }
@@ -59,9 +148,7 @@
                     .date {
                         @extend %date;
                         font-size: 12px;
-                        color: $clr_grey_text;
                     }
-
                 }
 
                 .edit {
@@ -76,7 +163,8 @@
 
                         i {
                             font-size: 18px;
-                            color: $clr_primary;
+                            color: var(--color);
+                            opacity: 0.5;
                         }
 
                         button {
@@ -87,10 +175,11 @@
                         &:nth-child(1) {
                             i {
                                 &:hover {
-                                    color: #7a7a7a;
+                                    opacity: 0.8;
                                 }
                             }
                         }
+
                         &:nth-child(2) {
                             i {
                                 &:hover {

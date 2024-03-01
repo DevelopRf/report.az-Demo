@@ -4,28 +4,100 @@
 
 .headerTop {
     padding: 8px 0 9px;
-    background-color: $clr_primary;
+    background-color: var(--hd-top);
 
     .left {
-        @include Flex();
+        @include Flex($a-i: center);
 
         .weather {
-            @include Flex($f-sh: 0);
+            @include Flex($f-sh: 0, $a-i: center, $c-g: 7px);
+            padding: 0 15px 0 0;
+            margin: 0 15px 0 0;
+            position: relative;
+
+            &::after {
+                @extend %line;
+            }
 
             li {
                 a {
                     @extend %headerTop;
+                    display: block;
+
+                }
+
+                &:nth-child(2) {
+                    padding: 0 7px 0 0;
+                    position: relative;
+
+                    &::after {
+                        position: absolute;
+                        content: "";
+                        display: inline-block;
+                        width: 2px;
+                        height: 2px;
+                        right: 0;
+                        top: 50%;
+                        background-color: $clr_second_important;
+                    }
                 }
             }
         }
+    }
 
-        .currrencies {
+    .right {
+        @include Flex($c-g: 15px);
+
+        .staticLink {
+            a {
+                @extend %headerTop;
+            }
+        }
+
+        .social {
+            @include Flex($c-g: 10px);
+            padding: 0 15px;
             position: relative;
 
-            li {
-                
-                a {
-                    @extend %headerTop;
+            a {
+                color: $clr_second_important;
+
+                i {
+                    font-size: 16px;
+                }
+            }
+
+            &::after {
+                @extend %line;
+            }
+        }
+
+        .theme {
+            position: relative;
+            width: 22px;
+
+            a {
+                color: $clr_back_important;
+            }
+
+            .dark {
+                position: absolute;
+                right: 0;
+                display: block;
+            }
+
+            .light {
+                position: absolute;
+                right: 0;
+                display: none;
+            }
+
+            &.active {
+                .dark {
+                    display: none;
+                }
+
+                .light {
                     display: block;
                 }
             }
@@ -33,22 +105,14 @@
     }
 }
 
-@keyframes currencyAnimation {
-    from {
-        transform: translateY(-100%);
-    }
-  
-    to {
-        transform: translateY(0);
-    }
-  }
+
 
 .headerBottom {
     position: relative;
     position: fixed;
     z-index: 9999999;
-    background-color: #fff;
-    border-bottom: 1px solid $clr_border;
+    background-color: var(--bs-body-color);
+    border-bottom: 1px solid var(--border-color);
     top: 0;
     width: 100%;
 
@@ -81,13 +145,15 @@
                 a {
                     color: $clr_grey_text;
                     font-size: 12px;
+                    color: var(--color);
+                    opacity: .3;
 
                     &:hover {
-                        color: $clr_primary;
+                        opacity: 1;
                     }
 
                     &.active {
-                        color: $clr_primary;
+                        opacity: 1;
                     }
                 }
             }
@@ -106,7 +172,7 @@
                 span {
                     position: absolute;
                     display: block;
-                    background-color: $clr_primary;
+                    background-color: var(--color);
                     width: 100%;
                     height: 2px;
                     transition: all 0.3s;
@@ -144,7 +210,7 @@
             }
 
             .navbar {
-                border-top: 1px solid $clr_border;
+                border-top: 1px solid var(--border-color);
                 position: absolute;
                 transform: translateX(-100%);
                 left: 0;
@@ -168,10 +234,10 @@
                         a {
                             display: block;
                             padding: 13px 0;
-                            color: $clr_primary;
+                            color: var(--color);
                         }
 
-                        border-bottom: 1px solid $clr_border;
+                        border-bottom: 1px solid var(--border-color);
                     }
 
                 }
@@ -192,8 +258,8 @@
         font-family: "Montserrat-SemiBold", sans-serif;
         position: relative;
         padding: 18px 0;
-        border-top: 1px solid $clr_border;
-        border-bottom: 1px solid $clr_border;
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
 
         @include screenSize(large) {
             @include Flex($a-i: center, $j-c: space-between);
@@ -204,7 +270,7 @@
             @include Flex($j-c: space-between);
 
             a {
-                color: #000;
+                color: var(--color);
             }
         }
 
@@ -255,7 +321,7 @@
                 transform: translateY(-50%);
                 width: 30px;
                 height: 30px;
-                border: 1px solid $clr_primary;
+                border: 1px solid var(--color);
                 @include Flex($a-i: center, $j-c: center);
                 cursor: pointer;
 

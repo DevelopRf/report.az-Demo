@@ -6,6 +6,7 @@
         font-family: "Montserrat-ExtraBold", sans-serif;
         @include Font($f-s: 20px, $l-s: 1px);
         text-transform: uppercase;
+        color: var(--color);
     }
 
     position: relative;
@@ -21,6 +22,19 @@
         width: 100%;
         height: 6px;
         background-image: url('../../../public/img/pattern/divider-bg-dark.svg');
+    }
+
+    &.active {
+        &::after {
+            content: "";
+            display: inline-block;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 6px;
+            background-image: url('../../../public/img/pattern/divider-bg-light.svg');
+        }
     }
 }
 
@@ -49,7 +63,8 @@
 
 %date {
     font-family: "Montserrat-SemiBold", sans-serif;
-
+    opacity: .3;
+    color: var(--color);
     span {
         span {
             margin: 0 5px 0;
@@ -59,10 +74,10 @@
 
 %contentType {
     font-family: "Montserrat-Medium", sans-serif;
-    border-bottom: 1px solid $clr_border;
+    border-bottom: 1px solid var(--border-color);
 
     &.important {
-        background-color: $clr_back_important;
+        background-color: var(--important);
 
         .info {
             .newsTitle {
@@ -72,7 +87,7 @@
     }
 
     &.urgent {
-        background-color: $clr_back_important;
+        background-color: var(--important);
 
         .info {
             .newsTitle {
@@ -88,7 +103,7 @@
 
 %newsTitle {
     display: block;
-    color: $clr_primary;
+    color: var(--color);
 }
 
 %infoSmallCard {
@@ -142,14 +157,15 @@
             height: 50px;
             @include Font($f-s: 14px, $l-s: 1px);
             @include Flex($j-c: center, $a-i: center);
-            border: 1px solid #a4a4a4;
-            color: $clr_primary;
+            border: 1px solid #1a1a1a;
+            color: var(--color);
+            background-color: var(--btn-bg);
             transition: all 0.2s;
             text-wrap: nowrap;
 
             &:hover {
-                background-color: $clr_primary;
-                color: #fff;
+                background-color: var(--color);
+                color: var(--btn-bg);
             }
         }
     }
@@ -166,17 +182,20 @@
     right: 0;
     z-index: 5;
 
-    .prev {
+    .prev,
+    .next {
         width: 32px;
         height: 32px;
-        background-color: #f6f6f679;
         position: relative;
         cursor: pointer;
+        opacity: .6;
+
+        &:hover {
+            opacity: 1;
+        }
 
         &::after {
-            font-family: "fontello";
-            content: "\f104";
-            color: $clr_grey_text;
+            color: var(--color);
             font-size: 20px;
             position: absolute;
             left: 50%;
@@ -185,22 +204,17 @@
         }
     }
 
-    .next {
-        width: 32px;
-        height: 32px;
-        background-color: #f6f6f679;
-        position: relative;
-        cursor: pointer;
+    .prev {
+        &::after {
+            font-family: "fontello";
+            content: "\f104";
+        }
+    }
 
+    .next {
         &::after {
             font-family: "fontello";
             content: "\f105";
-            color: $clr_grey_text;
-            font-size: 20px;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
         }
     }
 }
@@ -209,7 +223,8 @@
     a {
         font-size: 12px;
         text-transform: uppercase;
-        color: $clr_grey_text;
+        color: var(--color);
+        opacity: .3;
     }
 }
 
@@ -238,4 +253,15 @@
     font-family: "Montserrat-Medium", sans-serif;
     color: $clr_second_important;
     font-size: 12px;
+}
+
+%line {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    width: 1px;
+    background-color: rgb(255, 255, 255, .2);
+    right: 0;
+    top: -8px;
+    bottom: -9px;
 }

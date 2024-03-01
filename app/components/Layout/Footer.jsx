@@ -1,8 +1,12 @@
+'use client'
 import styles from "./Footer.module.scss"
 import Image from "next/image"
 import Link from "next/link"
+import { useAppContext } from "@/app/Hooks/Hook"
 
 const Footer = () => {
+    const { dark } = useAppContext()
+
     return (
         <footer>
             <div className={styles.footerTop}>
@@ -11,7 +15,7 @@ const Footer = () => {
                         <div className="col p-x">
                             <div className={styles.wrapper}>
                                 <div className={styles.logo}>
-                                    <Link href={'/'}><Image src={"https://report.az/public/images/logo-dark-az.png"} width={150} height={35} alt="report.az logo" /></Link>
+                                    <Link href={'/'}><Image src={dark ? "https://report.az/public/images/logo-light-az.png" : "https://report.az/public/images/logo-dark-az.png"} width={150} height={35} alt="report.az logo" /></Link>
                                 </div>
                                 <nav className={styles.navbar}>
                                     <ul>
@@ -32,7 +36,7 @@ const Footer = () => {
                                         <li><Link href="/multimedia">Multimedia</Link></li>
                                     </ul>
                                 </nav>
-                                <div className={styles.pattern}>
+                                <div className={styles.pattern} style={dark ? {backgroundImage: 'url(https://report.az/public/images/divider-bg-light.svg)'}: {backgroundImage: 'url(https://report.az/public/images/divider-bg-dark.svg)'}}>
 
                                 </div>
                                 <div className={styles.copyrightWrapper}>
@@ -60,7 +64,7 @@ const Footer = () => {
             <div className={styles.footerBottom}>
                 <div className="container">
                     <div className="row">
-                        <div className="col">
+                        <div className="col p-x">
                             <p>"Report" müstəqil informasiya agentliyi sayt və gündəlik bülletenlər vasitəsi ilə Azərbaycan, rus və ingilis dillərində siyasət, iqtisadiyyat, cəmiyyət, idman, mədəniyyət sahələri üzrə ölkədə və dünyada baş verən ən vacib hadisələri öz oxucularına operativ şəkildə çatdırır. O cümlədən, saytın “Analitika” bölməsində Azərbaycanda və dünyada gedən proseslərlə bağlı analitik materiallar təqdim edilir.</p>
                         </div>
                     </div>

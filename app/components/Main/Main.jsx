@@ -1,3 +1,5 @@
+'use client'
+
 import styles from "./Main.module.scss"
 import Link from 'next/link';
 import localFont from "next/font/local"
@@ -8,10 +10,14 @@ import { UrgentNews } from "../UrgentNews/UrgentNews";
 import ActualNews from "../ActualNews/ActualNews";
 import { ImportantNews } from "../ImportantNews/ImportantNews";
 import OtherCategories from "../OtherCategories/OtherCategories";
+import { useAppContext } from "@/app/Hooks/Hook";
+import { useEffect, useState, useMemo } from "react";
 const montserratBold = localFont({ src: '../../fonts/Montserrat-Bold.woff2' })
 
-export default function Main({ data, videoData }) {
-    
+const Main = ({ data, videoData }) => {
+    const { dark } = useAppContext()
+
+
     const slider = data.filter(item => item.slider)
     const urgentNews = data.filter(item => item.urgent)
     const importantNews = data.filter(item => item.important)
@@ -29,7 +35,7 @@ export default function Main({ data, videoData }) {
             <section className={styles.mainSection}>
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-8">
+                        <div className="col-lg-8 p-x">
                             <SliderMain news={slider} />
                             <div className={styles.filterLink}>
                                 <div className={`${styles.btn} ${montserratBold.className}`}>
@@ -40,7 +46,7 @@ export default function Main({ data, videoData }) {
                             <ActualNews news={filterActual} />
                             <ImportantNews news={importantNews} />
                         </div>
-                        <div className="col-lg-4">
+                        <div className="col-lg-4 p-x">
                             <div className={styles.sideBar}>
                                 <VideoSlider videoNews={videoData} />
                                 <LatestNews news={data} />
@@ -51,29 +57,29 @@ export default function Main({ data, videoData }) {
             </section>
             <section className={styles.otherCategories}>
                 <div className="container">
-                    <div className="row gy-4">
+                    <div className="row gy-4 p-x">
                         <div className="col-lg-4 col-md-6 d-flex flex-column mb-4 p-x">
-                            <div className={styles.title}><Link href="/siyaset"><h2>SİYASƏT</h2></Link></div>
+                            <div className={`${styles.title} ${dark ? styles.active : ""}`}><Link href="/siyaset"><h2>SİYASƏT</h2></Link></div>
                             <OtherCategories news={politic} />
                         </div>
                         <div className="col-lg-4 col-md-6 d-flex flex-column mb-4 p-x">
-                            <div className={styles.title}><Link href="/iqtisadiyyat"><h2>İQTİSADİYYAT</h2></Link></div>
+                            <div className={`${styles.title} ${dark ? styles.active : ""}`}><Link href="/iqtisadiyyat"><h2>İQTİSADİYYAT</h2></Link></div>
                             <OtherCategories news={economy} />
                         </div>
                         <div className="col-lg-4 col-md-6 d-flex flex-column mb-4 p-x">
-                            <div className={styles.title}><Link href="/cop29"><h2>COP 29</h2></Link></div>
+                            <div className={`${styles.title} ${dark ? styles.active : ""}`}><Link href="/cop29"><h2>COP 29</h2></Link></div>
                             <OtherCategories news={cop29} />
                         </div>
                         <div className="col-lg-4 col-md-6 d-flex flex-column mb-4 p-x">
-                            <div className={styles.title}><Link href="/cemiyyet"><h2>CƏMİYYƏT</h2></Link></div>
+                            <div className={`${styles.title} ${dark ? styles.active : ""}`}><Link href="/cemiyyet"><h2>CƏMİYYƏT</h2></Link></div>
                             <OtherCategories news={society} />
                         </div>
                         <div className="col-lg-4 col-md-6 d-flex flex-column mb-4 p-x">
-                            <div className={styles.title}><Link href="/idman"><h2>İDMAN</h2></Link></div>
+                            <div className={`${styles.title} ${dark ? styles.active : ""}`}><Link href="/idman"><h2>İDMAN</h2></Link></div>
                             <OtherCategories news={sport} />
                         </div>
                         <div className="col-lg-4 col-md-6 d-flex flex-column mb-4 p-x">
-                            <div className={styles.title}><Link href="/medeniyyet"><h2>MƏDƏNİYYƏT</h2></Link></div>
+                            <div className={`${styles.title} ${dark ? styles.active : ""}`}><Link href="/medeniyyet"><h2>MƏDƏNİYYƏT</h2></Link></div>
                             <OtherCategories news={culture} />
                         </div>
                     </div>
@@ -82,3 +88,5 @@ export default function Main({ data, videoData }) {
         </main>
     )
 }
+
+export default Main

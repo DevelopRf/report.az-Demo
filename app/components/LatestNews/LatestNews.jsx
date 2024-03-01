@@ -3,15 +3,16 @@ import styles from "./LatestNews.module.scss"
 import localFont from "next/font/local"
 import { convertTimeUTC } from "@/app/libs/date"
 import "../../styles/fontello/css/fontello.css"
+import { useAppContext } from "@/app/Hooks/Hook"
 
 const MontserratExtraBold = localFont({ src: '../../fonts/Montserrat-ExtraBold.woff2' })
 const MontserratMedium = localFont({ src: '../../fonts/Montserrat-Medium.woff2' })
 
 const LatestNews = ({ news }) => {
-
+const {dark} = useAppContext()
     return (
         <div className={styles.wrapper}>
-            <div className={`${styles.title} ${MontserratExtraBold.className}`}>
+            <div className={`${styles.title} ${dark ? styles.active : ""} ${MontserratExtraBold.className}`}>
                 <h2><Link href="/son-xeberler">Son xəbərlər</Link></h2>
             </div>
             <div className={`${styles.contentWrapper} ${MontserratMedium.className}`}>
