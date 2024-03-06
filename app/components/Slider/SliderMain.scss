@@ -63,10 +63,11 @@
 
         .mySwiper {
             display: none;
-            @include screenSize(tablet)
-            {
+
+            @include screenSize(tablet) {
                 display: block;
             }
+
             height: 120px;
             box-sizing: border-box;
             padding: 10px 0;

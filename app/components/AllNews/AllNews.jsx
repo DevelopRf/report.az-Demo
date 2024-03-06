@@ -8,17 +8,18 @@ import "../../styles/fontello/css/fontello.css"
 import { useRouter } from "next/navigation"
 import { useAppContext } from "@/app/Hooks/Hook"
 
-const AllNews = ({ news }) => {
-    const { setUpdate, setNewsId, author, setAuthor } = useAppContext()
+const AllNews = ({ news, userInfo, searchNews }) => {
+    const { setUpdate, setNewsId, searchValue } = useAppContext()
     const [newsCount, setNewsCount] = useState(20)
     const [edit, setEdit] = useState(null)
     const router = useRouter()
-    const refEdit = useRef()
     const username = useRef()
     const password = useRef()
-    const [userData, setUserData] = useState(null)
     const message = useRef()
     const [modal, setModal] = useState(false)
+    const [searchData, setSearchData] = useState(null)
+    const [login, setLogin] = useState(false)
+    const [btnLogin, setBtnLogin] = useState(false)
 
 
     const handleClick = (index) => {
@@ -39,33 +40,31 @@ const AllNews = ({ news }) => {
         setNewsId(id)
     }
 
-    useEffect(() => {
-        const login = async () => {
-            const user = await fetch("http://localhost:1100/users")
-            try {
-                if (!user.ok) {
-                    throw new Error(`Məlumat əldə edilə bilmədi. Status: ${user.status}`)
-                }
-                const data = await user.json()
-                setUserData(data)
-            } catch (error) {
-                console.error("Xəta baş verdi", error)
-                throw error
-            }
-        }
-        login()
-    }, [])
+
 
     const userControl = () => {
-        const user = userData && userData.find(item => item.user_name === username.current.value && item.password === password.current.value)
-        user ? setAuthor({name: user.author_name, image: user.author_img}) || router.push("/addnews") : message.current.innerText = "İstifadəçi adı və ya parol yalnışdır!"
-        username.current.value = ""
-        password.current.value = ""
+        if (!username.current.value || !password.current.value) {
+            message.current.innerText = "Boş bölmələri doldurun!"
+        }
+
+        else {
+            const user = userInfo && userInfo.find(item => item.user_name === username.current.value && item.password === password.current.value)
+            user ? sessionStorage.setItem("usr", user.id) || (!btnLogin ? router.push("/addnews") : setModal(false)) : message.current.innerText = "İstifadəçi adı və ya parol yalnışdır!"
+            username.current.value = ""
+            password.current.value = ""
+
+        }
     }
 
-    useEffect(()=>{
-        console.log(author.name);
-    }, [author])
+    useEffect(() => {
+        !modal && setLogin(true)
+    }, [modal])
+
+    const inputEnter = (e) => {
+        if (e.key === "Enter") {
+            userControl()
+        }
+    }
 
     const deleteNews = (newsId) => {
         const deleteWarning = window.confirm("Xəbər silinəcək. Əminsiniz?")
@@ -79,9 +78,20 @@ const AllNews = ({ news }) => {
         else return
     }
 
+
     useEffect(() => {
         window.addEventListener("scroll", scroll)
     }, [])
+
+    useEffect(() => {
+        const user = sessionStorage.getItem("usr")
+        user ? setLogin(true) : setLogin(false)
+    }, [searchData, login])
+
+    useEffect(() => {
+        const filterSearch = searchNews && searchNews.filter(item => item.title.toLowerCase().includes(searchValue))
+        searchNews ? setSearchData(filterSearch) : setSearchData(news)
+    }, [searchValue])
 
     return (
         <section className={styles.categories}>
@@ -95,8 +105,8 @@ const AllNews = ({ news }) => {
                             <h2>Portala Giriş</h2>
                         </div>
                         <form>
-                            <input type="text" name="login" placeholder="İstifadəçi adı" ref={username} />
-                            <input type="password" name="password" placeholder="password" ref={password} />
+                            <input type="text" name="login" placeholder="İstifadəçi adı" ref={username} onInput={() => { message.current.innerText = "" }} onKeyDown={inputEnter} />
+                            <input type="password" name="password" placeholder="password" ref={password} onInput={() => { message.current.innerText = "" }} onKeyDown={inputEnter} />
                             <span ref={message}></span>
                             <button type="button" onClick={userControl}>Daxil ol</button>
                         </form>
@@ -108,7 +118,8 @@ const AllNews = ({ news }) => {
                             <div className={styles.title}>
                                 <h1>Son xəbərlər</h1>
                                 <div className={styles.addNews}>
-                                    <button onClick={() => setModal(true)}>Xəbər əlavə et</button>
+                                    <button onClick={() => { !login ? setModal(true) : router.push("/addnews") || setUpdate(false) }}>Xəbər əlavə et</button>
+                                    <button className={login ? styles.active : ""} onClick={() => { setModal(true); setBtnLogin(true) }}>Giriş</button>
                                 </div>
                             </div>
                             <ul className={styles.filter}>
@@ -122,11 +133,11 @@ const AllNews = ({ news }) => {
 
                             <div className={styles.contentWrapper}>
                                 {
-                                    news && news.slice(0, newsCount).map((item, index) => {
+                                    searchData && searchData.slice(0, newsCount).map((item, index) => {
                                         return (
                                             <div key={item.id} className={`${styles.content} ${item.urgent && styles.urgent} ${item.important && styles.important}`}>
                                                 <div className={styles.image}>
-                                                    <Link href={`/${item.subCatUrl !== "" ? item.subCatUrl : item.catUrl}/${item.id}`}>
+                                                    <Link href={`//${item.subCatUrl ? item.subCatUrl : item.catUrl}/${item.id}`}>
                                                         <Image src={item.img}
                                                             width={180}
                                                             height={106}
@@ -136,13 +147,13 @@ const AllNews = ({ news }) => {
                                                 </div>
                                                 <div className={styles.info}>
                                                     <div className={styles.newsTitle}>
-                                                        <Link href={`/${item.subCatUrl !== "" ? item.subCatUrl : item.catUrl}/${item.id}`}>{item.photo && <span className="type">FOTO</span>}{item.video && <span className="type">VİDEO</span>}{item.title}{item.paid_info && <span className="iconLock"></span>}</Link>
+                                                        <Link href={`/${item.subCatUrl ? item.subCatUrl : item.catUrl}/${item.id}`}>{item.photo && <span className="type">FOTO</span>}{item.video && <span className="type">VİDEO</span>}{item.title}{item.paid_info && <span className="iconLock"></span>}</Link>
                                                     </div>
                                                     <div className={styles.date}>
                                                         <span>{convertDateUTC(item.date)} <span>&#x2B1D;</span> {convertTimeUTC(item.date)}</span>
                                                     </div>
                                                 </div>
-                                                <ul className={`${styles.edit} ${edit === index ? styles.active : ""}`} ref={refEdit}>
+                                                <ul className={`${styles.edit} ${edit === index ? styles.active : ""} ${!login ? styles.userNo : ""}`}>
                                                     <li>
                                                         <button onClick={() => handleClick(index)}><i className="icon-th-list"></i></button>
                                                     </li>

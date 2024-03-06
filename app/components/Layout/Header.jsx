@@ -10,53 +10,26 @@ import "../../styles/fontello/css/fontello.css"
 
 const Header = () => {
 
-    const { toggle, setToggle, setSearchData, dark, setDark } = useAppContext()
+    const { toggle, setToggle, setSearchValue, dark, setDark } = useAppContext()
 
     const [searchCancel, setSearchCancel] = useState(false)
     const [currentCurrencyIndex, setCurrentCurrencyIndex] = useState(0)
     const [currency, setCurrency] = useState()
+    const [active, setActive] = useState(null)
 
-    const currencyRef = useRef([])
-    const refTheme = useRef()
-    const refDark = useRef()
-    const refLight = useRef()
+    const refSearch = useRef()
+    const refLangs = useRef()
 
-    const totalCurrency = currencyRef.length
-
-    const darkMode = ()=>{
+    const darkMode = () => {
         window.localStorage.setItem("theme", "dark Mode")
         document.body.classList.add("active");
         setDark(true);
     }
-    const lightMode = ()=>{
+    const lightMode = () => {
         window.localStorage.removeItem("theme", "dark Mode")
         document.body.classList.remove("active");
         setDark(false);
     }
-
-    /*     useEffect(() => {
-    
-    
-            if (localStorage.getItem("theme")) {
-                document.body.classList.add("active")
-                setDark(true)
-            }
-            else {
-                document.body.classList.remove("active")
-                setDark(false)
-            }
-            console.log(dark);
-        }, [dark]) */
-
-    /*         useEffect(() => {
-        
-                if (localStorage.getItem("darkMode")) {
-                    document.body.classList.add("active")
-                }
-                else {
-                    document.body.classList.remove("active")
-                }
-            }, []) */
 
     async function getCurrency() {
         try {
@@ -73,52 +46,74 @@ const Header = () => {
 
     useEffect(() => {
         getCurrency()
+        setActive(0)
     }, [])
+
     useEffect(() => {
-        const valutes = document.querySelectorAll(".currencies li");
-        valutes.forEach((el, index) => {
-            el.style.display = index === currentCurrencyIndex ? "block" : "none";
+        const currencies = document.querySelectorAll(".currencies li");
+        currencies.forEach((el) => {
+            el.style.display = "none";
         });
     }, [currency]);
+
     useEffect(() => {
-        const valutes = document.querySelectorAll(".currencies li");
-        const totalValutes = valutes.length;
+        const currencies = document.querySelectorAll(".currencies li");
+        const totalCurrencies = currencies.length;
 
         const intervalId = setInterval(() => {
-            valutes.forEach((el, index) => {
+            currencies.forEach((el, index) => {
                 const shouldBeVisible = index === currentCurrencyIndex;
                 el.style.display = shouldBeVisible ? "block" : "none";
-                el.style.animation = shouldBeVisible ? "currencyAnimation 0.8s linear" : "none";
+                el.style.animation = shouldBeVisible ? "currencyAnimation 0.5s linear" : "none";
             });
 
-            setCurrentCurrencyIndex((prevIndex) => (prevIndex + 1) % totalValutes);
+            setCurrentCurrencyIndex((prevIndex) => (prevIndex + 1) % totalCurrencies);
         }, 3000);
 
         return () => clearInterval(intervalId);
     }, [currentCurrencyIndex, currency]);
 
     const router = useRouter()
+
     const handleChange = () => {
         setToggle(!toggle)
     }
 
     const searchBtn = () => {
         setSearchCancel(true)
+        
     }
+
+    useEffect(()=>{
+       !searchCancel && console.log(refSearch.current);
+    }, [searchCancel])
 
     const cancelBtn = () => {
         setSearchCancel(false)
     }
 
-    const searchValue = (e) => {
-        setSearchData(e.target.value.toLowerCase())
-    }
-
     const handleSearch = (e) => {
         if (e.key === 'Enter') {
-            router.push('/search')
+            router.push('/xeber-axtarisi')
+            setSearchValue(e.target.value.toLowerCase())
         }
     }
+
+    const toggleLang = (index) => {
+        setActive(index)
+    }
+
+    useEffect(() => {
+        const overlay = document.querySelector("body .overlay")
+        if (toggle) {
+            overlay.classList.add("active")
+            document.body.style.overflow = "hidden"
+        }
+        else {
+            overlay.classList.remove("active")
+            document.body.style.overflow = "auto"
+        }
+    }, [toggle])
 
     return (
         <header>
@@ -135,12 +130,7 @@ const Header = () => {
                                 <Image src="https://report.az/public/images/icons/currency.png" width={19} height={19} alt="currency" />
                                 <ul className="currencies">
                                     {
-                                        currency && currency.map((item, index) => {
-                                            const itemRef = React.createRef()
-                                            currencyRef.current[index] = itemRef
-
-                                            return <li ref={currencyRef.current[index]} key={item.id}><Link href="#">{`${item.name} - ${item.value}`}</Link></li>
-                                        })
+                                        currency && currency.map(item => <li key={item.id}><Link href="#">{`${item.name} - ${item.value}`}</Link></li>)
                                     }
                                 </ul>
                             </div>
@@ -157,10 +147,10 @@ const Header = () => {
                                     <li><Link href="https://www.youtube.com/channel/UCPSpgPJwGhr5uB0Uui8Lj8g"><i className="icon-youtube-play"></i></Link></li>
                                 </ul>
                                 <div className={`${styles.theme} ${dark ? styles.active : ""}`}>
-                                    <div className={styles.dark} ref={refDark} onClick={darkMode}>
+                                    <div className={styles.dark} onClick={darkMode}>
                                         <Link href="#"><i className="icon-moon-inv"></i></Link>
                                     </div>
-                                    <div className={styles.light} ref={refLight} onClick={lightMode}>
+                                    <div className={styles.light} onClick={lightMode}>
                                         <Link href="#"><i className="icon-sun-filled"></i></Link>
                                     </div>
                                 </div>
@@ -174,15 +164,15 @@ const Header = () => {
                     <div className="row">
                         <div className="col-12 p-x">
                             <div className={styles.logoLang}>
-                                <ul className={styles.langs}>
-                                    <li>
-                                        <Link href="#">Azərbaycan</Link>
+                                <ul className={styles.langs} ref={refLangs}>
+                                    <li className={active === 0 ? styles.active : ""}>
+                                        <Link href="#" onClick={() => toggleLang(0)}>Azərbaycan</Link>
                                     </li>
-                                    <li>
-                                        <Link href="#">Русский</Link>
+                                    <li className={active === 1 ? styles.active : ""}>
+                                        <Link href="#" onClick={() => toggleLang(1)}>Русский</Link>
                                     </li>
-                                    <li>
-                                        <Link href="#">English</Link>
+                                    <li className={active === 2 ? styles.active : ""}>
+                                        <Link href="#" onClick={() => toggleLang(2)}>English</Link>
                                     </li>
                                 </ul>
                                 <div className={styles.mobMenu}>
@@ -194,7 +184,7 @@ const Header = () => {
                                     <div className={`${styles.navbar} ${toggle ? styles.active : ""}`}>
                                         <ul>
                                             <li><Link href="/">Əsas xəbərlər</Link></li>
-                                            <li><Link href="/son-xeberler">Son xəbərlər</Link></li>
+                                            <li><Link href="/son-xeberler" onClick={() => setSearchValue("")}>Son xəbərlər</Link></li>
                                             <li><Link href="/siyaset">Siyasət</Link></li>
                                             <li><Link href="/iqtisadiyyat">İqtisadiyyat</Link></li>
                                             <li><Link href="/cop29">COP29</Link></li>
@@ -232,7 +222,7 @@ const Header = () => {
                                     <li><Link href="/multimedia">Multimedia</Link></li>
                                 </ul>
                                 <div className={`${styles.searchBox} ${searchCancel ? styles.active : ""}`}>
-                                    <input type="text" placeholder="Açar sözü daxil edin" onKeyDown={handleSearch} onChange={searchValue} />
+                                    <input type="text" placeholder="Açar sözü daxil edin" onKeyDown={handleSearch}/>
                                     <div className={styles.cancelBtn} onClick={cancelBtn}>
                                         <i className="icon-cancel"></i>
                                     </div>

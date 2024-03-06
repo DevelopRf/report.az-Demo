@@ -100,13 +100,14 @@
 
             .card {
                 width: calc((100% / 2) - 10px + (10px / 2));
-                
+
                 @include screenSize(mobil) {
 
                     &:nth-child(3),
                     &:nth-child(4) {
                         display: none;
                     }
+
                     width: calc((100% / 4) - 10px + (10px / 4));
                 }
 

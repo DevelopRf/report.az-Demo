@@ -1,10 +1,11 @@
-import AllLatestNews from "../../components/AllNews/AllNews"
-import { getNews } from "../../libs/newsData"
+import AllNews from "../../components/AllNews/AllNews"
+import { getNews, getUser } from "../../libs/newsData"
 import { convertChars } from "../../libs/newsData"
 
 const filteredNews = async ({ params: { filtered } }) => {
 
     const news = await getNews()
+    const userInfo = await getUser()
 
     const d = new Date();
 
@@ -20,8 +21,6 @@ const filteredNews = async ({ params: { filtered } }) => {
 
             const yesterdayEnd = new Date(yesterday);
             yesterdayEnd.setHours(3, 59, 59, 999);
-
-            console.log(new Date("2024-02-19T15:09:00.000Z"));
 
             filteredNews = news.filter(item => {
                 const itemDate = new Date(item.date);
@@ -51,7 +50,6 @@ const filteredNews = async ({ params: { filtered } }) => {
 
             const weekEnd = new Date(weekStart)
             weekEnd.setDate(weekStart.getDate() + 6)
-            console.log(weekStart);
 
             filteredNews = news.filter(item => {
                 const itemDate = new Date(item.date)
@@ -61,20 +59,14 @@ const filteredNews = async ({ params: { filtered } }) => {
             break;
 
         case "kecen-hefte":
-            const currentDayOfWeek = d.getDay();
-
-            
             const lastWeekStart = new Date(d);
             lastWeekStart.setDate(d.getDate() - ((d.getDay() + 6) % 7) - 7);
             lastWeekStart.setHours(4, 0, 0, 0)
-            console.log(lastWeekStart);
-            
+
             const lastWeekEnd = new Date(lastWeekStart);
             lastWeekEnd.setDate(lastWeekStart.getDate() + 6);
             lastWeekEnd.setHours(3, 59, 59, 999)
 
-            console.log(lastWeekEnd);
-            
             filteredNews = news.filter(item => {
                 const itemDate = new Date(item.date);
                 return itemDate >= lastWeekStart && itemDate <= lastWeekEnd;
@@ -99,13 +91,11 @@ const filteredNews = async ({ params: { filtered } }) => {
 
             startDate.setHours(4, 0, 0, 0).toLocaleString();
 
-            
+
             const endDate = new Date(d);
-            endDate.setDate(0); // Ayın son gününe git
+            endDate.setDate(0);
             endDate.setHours(3, 59, 59, 999);
-            
-            console.log(endDate);
-            // Haberleri geçen ay içinde filtrele
+
             filteredNews = news.filter(item => {
                 const itemDate = new Date(item.date);
                 return itemDate >= startDate && itemDate <= endDate;
@@ -115,7 +105,7 @@ const filteredNews = async ({ params: { filtered } }) => {
             break;
     }
 
-    return <AllLatestNews news={filteredNews} />
+    return <AllNews news={filteredNews} userInfo={userInfo} />
 }
 
 export default filteredNews

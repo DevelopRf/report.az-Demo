@@ -15,7 +15,7 @@ import { useEffect, useState, useMemo } from "react";
 const montserratBold = localFont({ src: '../../fonts/Montserrat-Bold.woff2' })
 
 const Main = ({ data, videoData }) => {
-    const { dark } = useAppContext()
+    const { dark, toggle } = useAppContext()
 
 
     const slider = data.filter(item => item.slider)

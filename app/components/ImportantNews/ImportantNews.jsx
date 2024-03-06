@@ -44,16 +44,16 @@ export const ImportantNews = ({ news }) => {
                             news && news.map(item => {
                                 return (<SwiperSlide key={item.id}><div className="newsCard">
                                     <div className="image">
-                                        <Link href={`${item.catUrl}/${item.subCatUrl}/${item.id}`}><Image src={item.img} width={180} height={106} alt={item.title} /></Link>
+                                        <Link href={`/${item.subCatUrl ? item.subCatUrl : item.catUrl}/${item.id}`}><Image src={item.img} width={180} height={106} alt={item.title} /></Link>
                                     </div>
                                     <div className="info">
                                         <div className="number"><span>{`0${i += 1}.`}</span></div>
                                         <div className="newsTitle">
-                                            <Link href={`${item.catUrl}/${item.subCatUrl}/${item.id}`}>{item.title.length > 66 ? `${item.title.slice(0, 66)}...` : `${item.title}`}</Link>
+                                            <Link href={`/${item.subCatUrl ? item.subCatUrl : item.catUrl}/${item.id}`}>{item.title.length > 66 ? `${item.title.slice(0, 66)}...` : `${item.title}`}</Link>
                                         </div>
                                         <div>
                                             <div className="category">
-                                                <Link href={`${item.catUrl}/${item.subCatUrl}`}>{item.sub_category}</Link>
+                                                <Link href={`/${item.subCatUrl ? item.subCatUrl : item.catUrl}`}>{item.sub_category}</Link>
                                             </div>
                                             <div className="date">
                                                 <span>{convertDateUTC(item.date)} <span>&#x2B1D;</span> {convertTimeUTC(item.date)}</span>

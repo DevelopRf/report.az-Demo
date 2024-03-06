@@ -141,11 +141,20 @@ export function convertToJSON(text) {
 
     formattedText = formattedText.replace(
         /"report.az"/g,
-        `<a href=\"/\">“report.az”</a>`
+        `<a href=\"/\">report.az</a>`
+    );
+    formattedText = formattedText.replace(
+        /"report"/g,
+        `<a href=\"/\">report</a>`
+    );
+    formattedText = formattedText.replace(
+        /"Report"/g,
+        `<a href=\"/\">Report</a>`
     );
     formattedText = formattedText.replace(/\*b(.*?)\*b/g, "<strong>$1</strong>");
     formattedText = formattedText.replace(/\*i(.*?)\*i/g, "<em>$1</em>");
-    formattedText = formattedText.replace(/\*bi(.*?)\*bi/g, "<strong><em>$1</em></strong>");
+    formattedText = formattedText.replace(/\*m(.*?)\*m/g, "<strong><em>$1</em></strong>");
+
     return formattedText;
 }
 
@@ -183,6 +192,20 @@ export const getCurrency = async () => {
 
     } catch (error) {
         console.error("Xəta baş verdi", error);
+    }
+}
+
+export const getUser = async () => {
+    const user = await fetch("http://localhost:1100/users")
+    try {
+        if (!user.ok) {
+            throw new Error(`Məlumat əldə edilə bilmədi. Status: ${user.status}`)
+        }
+        const data = await user.json()
+        return data
+    } catch (error) {
+        console.error("Xəta baş verdi", error)
+        throw error
     }
 }
 

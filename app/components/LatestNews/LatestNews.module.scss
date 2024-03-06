@@ -9,9 +9,8 @@
 
     .title {
         @extend %titleMain;
-
-        a {
-            color: #000;
+        a{
+            color: var(--color);
         }
     }
 
@@ -34,7 +33,6 @@
             @extend %contentType;
 
             .time {
-                color: var(--color);
                 opacity: .3;
 
                 span {
@@ -70,9 +68,9 @@
             font-size: 13px;
             padding: 18px 25px;
             display: block;
-            color: var(--color);
             position: relative;
             background-color: var(--third-btn-bg);
+            color: var(--color);
             transition: all 0.2s;
 
             &:hover {

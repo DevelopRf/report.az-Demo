@@ -18,6 +18,7 @@ export default async function RootLayout({ children }) {
     <html lang="az">
       <HookProvider>
         <body>
+          <div className='overlay'></div>
           <Header currency={currency} />
           {children}
           <Footer />

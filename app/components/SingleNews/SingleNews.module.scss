@@ -7,21 +7,15 @@
     @extend %section;
 
     .title {
-        font-family: "Montserrat-Bold";
-        font-size: 26px;
+        h1 {
+            font-family: "Montserrat-Bold", sans-serif;
+            font-size: 26px;
+        }
     }
 
     .catDate {
         margin: 15px 0 20px;
         @include Flex($j-c: space-between);
-
-        &.empty {
-            justify-content: flex-end;
-
-            .category {
-                display: none
-            }
-        }
 
         .category {
             a {
@@ -44,6 +38,7 @@
 
         p {
             @include Font($l-h: 26px, $l-s: .6px);
+            margin: 0 0 25px;
         }
 
         .image {
@@ -51,6 +46,17 @@
 
             img {
                 @extend %img;
+            }
+        }
+
+        .gallery {
+            @include Flex($f-w: wrap, $g: 6px);
+
+            .galleryImg {
+                width: 23.2%;
+                img{
+                    @extend %img;
+                }
             }
         }
     }
@@ -98,6 +104,7 @@
 
     .shareAuthor {
         @include Flex($j-c: space-between);
+
         .shareIcons {
             @include Flex($c-g: 10px);
 
@@ -146,23 +153,12 @@
         }
 
         .author {
-            @include Flex($c-g: 7px, $a-i: center);
-
-            .image {
-                width: 38px;
-                height: 38px;
-                border-radius: 50%;
-                overflow: hidden;
-            }
-
-            .authorName {
-                font-family: "Montserrat-SemiBold", sans-serif;
-                font-size: 14px;
-                max-width: 110px;
-                a{
-                    color: var(--color);
-                }
-            }
+            @extend %author;
+            column-gap: 7px;
         }
+    }
+
+    .ad {
+        height: 395px;
     }
 }

@@ -20,8 +20,7 @@ export const convertDateUTC = (date) => {
 
 export const convertTimeUTC = (timeEntered) => {
     const d = new Date(timeEntered)
-    const hour = d.getUTCHours()
-    const minute = d.getUTCMinutes()
+    const hour = d.toLocaleTimeString()
 
-    return `${timeformat(hour)}: ${timeformat(minute)}`
+    return `${hour.slice(0, 5)}`
 }

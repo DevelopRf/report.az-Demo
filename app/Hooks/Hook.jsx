@@ -7,7 +7,7 @@ export const HookProvider = ({ children }) => {
     const [toggle, setToggle] = useState(false)
     const [term, setTerm] = useState("")
     const [update, setUpdate] = useState(false)
-    const [searchData, setSearchData] = useState({})
+    const [searchValue, setSearchValue] = useState(null)
     const [newsId, setNewsId] = useState("")
     const [title, SetTitle] = useState("")
     const [image, setImage] = useState("")
@@ -21,8 +21,7 @@ export const HookProvider = ({ children }) => {
     const [text, setText] = useState("")
     const [dark, setDark] = useState(false)
     const [author, setAuthor] = useState({})
-
-
+    const [userData, setUserData] = useState(null)
 
     useEffect(() => {
         const theme = window.localStorage.getItem("theme")
@@ -36,7 +35,7 @@ export const HookProvider = ({ children }) => {
         }
     }, [dark])
 
-    const sharedState = { toggle, setToggle, term, setTerm, update, setUpdate, searchData, setSearchData, newsId, setNewsId, title, SetTitle, cat, setCat, image, setImage, subCat, setSubCat, type, setType, slide, SetSlide, urgent, setUrgent, important, sertImportant, paid, setPaid, text, setText, dark, setDark, author, setAuthor }
+    const sharedState = { toggle, setToggle, term, setTerm, update, setUpdate, searchValue, setSearchValue, newsId, setNewsId, title, SetTitle, cat, setCat, image, setImage, subCat, setSubCat, type, setType, slide, SetSlide, urgent, setUrgent, important, sertImportant, paid, setPaid, text, setText, dark, setDark, author, setAuthor, userData, setUserData }
 
 
     return (

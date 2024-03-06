@@ -1,13 +1,14 @@
 'use client'
 import styles from "./addNews.module.scss"
-import { useEffect, useState } from "react"
+import Link from "next/link"
+import Image from "next/image"
+import { useEffect, useMemo, useState } from "react"
 import { useAppContext } from "@/app/Hooks/Hook"
 import { convertChars } from "@/app/libs/newsData"
-import { convertToJSON } from "@/app/libs/newsData"
 import { useRouter } from "next/navigation"
 import { useRef } from "react"
 
-const AddNews = ({ categories, catData, newsType }) => {
+const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
     const refTitle = useRef()
     const refImage = useRef()
     const refCat = useRef()
@@ -18,14 +19,72 @@ const AddNews = ({ categories, catData, newsType }) => {
     const refImportant = useRef()
     const refPaidInfo = useRef()
     const refText = useRef()
-    const router = useRouter();
+    const router = useRouter()
     const [data, setData] = useState(null)
     const [subCategories, setSubCategories] = useState([])
     const [catValue, setCatValue] = useState(null)
     const [status, setStatus] = useState(false)
-    const { update, newsId, author } = useAppContext()
+    const { update, newsId } = useAppContext()
+    const [message, setMessage] = useState(false)
+    const [check, setCheck] = useState(false)
+    const [dataCount, setDataCount] = useState(5 - count.length)
+    const [initialLoad, setInitialLoad] = useState(true);
+    const [disable, setDisable] = useState(false)
+    const [warning, setWarning] = useState(false)
 
+    const refs = {
+        refTitle,
+        refImage,
+        refText,
+        refCat,
+        refSubCat,
+        refType
+    }
+
+
+    const activeClass = (element) => element.classList.add(styles.active)
+
+    const removeActiveClass = (element) => element.classList.remove(styles.active)
+
+    const user = userInfo && userInfo.find(item => item.id === sessionStorage.getItem("usr"))
     const d = new Date()
+
+    const checkControl = () => {
+        setCheck(!check)
+    }
+
+    useEffect(() => {
+        if (initialLoad) {
+            return
+        }
+        const sliderCount = 5 - count.length
+        if (sliderCount > 0) {
+            refSlide.current.checked ? setDataCount(sliderCount - 1) : setDataCount(sliderCount)
+        }
+        else {
+            setDisable(true)
+        }
+
+        if (data && data.slider) {
+            !refSlide.current.checked ? setDataCount(sliderCount + 1) : setDataCount(sliderCount)
+        }
+    }, [check, data])
+
+    useEffect(() => {
+        if (!update) {
+            dataCount === 0 && setDisable(true) || setWarning(true)
+        }
+        else {
+            setDisable(false)
+            dataCount > 0 ? setWarning(false) : setWarning(true)
+        }
+    }, [disable, warning])
+
+    useEffect(() => {
+        if (initialLoad) {
+            setInitialLoad(false)
+        }
+    }, [initialLoad])
 
     useEffect(() => {
         const onload = async () => {
@@ -46,22 +105,48 @@ const AddNews = ({ categories, catData, newsType }) => {
             }
         }
         onload()
+
     }, [])
 
-
+    const exit = () => {
+        const question = window.confirm("İstifadəçi profilindən çıxış edilsin?")
+        if (question) sessionStorage.removeItem("usr")
+        else return
+    }
     const getSelectedCat = (e) => {
         setCatValue(e.target.value)
     }
 
+    const handleInput = () => {
+        Object.values(refs).forEach((ref) => {
+            const element = ref.current
+            removeActiveClass(element)
+        })
+        setMessage(false)
+    }
+
+    const handleChange = (e) => {
+        getSelectedCat(e);
+        handleInput()
+    }
+
+    const selectText = (e) => {
+        const selectedText = window.getSelection().toString().trim();
+
+        if (selectedText) {
+            console.log(selectedText);
+        }
+
+    }
 
     useEffect(() => {
-        if (data) {
+        if (data && update) {
             refTitle.current.value = data.title
             refCat.current.value = data.category
-            refSubCat.current.value = data.sub_category !=="" ? data.sub_category : "select"
+            refSubCat.current.value = data.sub_category !== "" ? data.sub_category : "all"
             refType.current.value = data.type
             refImage.current.value = data.img
-            refSlide.current.checked = data.slider
+            setCheck(data.slider)
             refUrgent.current.checked = data.urgent
             refImportant.current.checked = data.important
             refPaidInfo.current.checked = data.paid_info
@@ -75,40 +160,51 @@ const AddNews = ({ categories, catData, newsType }) => {
         subCats && subCats.length > 0 ? setStatus(false) : setStatus(true)
     }, [catValue, data])
 
-
     const submitForm = (e) => {
         e.preventDefault()
-        status && (refSubCat.current.value = "")
-        let data = { title: refTitle.current.value, category: refCat.current.value, catUrl: convertChars(refCat.current.value), sub_category: refSubCat.current.value, subCatUrl: convertChars(refSubCat.current.value), type: refType.current.value, date: d.toISOString(), img: refImage.current.value, photo: false, photo_src: [], video: false, video_src: [], paid_info: refPaidInfo.current.checked, slider: refSlide.current.checked, urgent: refUrgent.current.checked, important: refImportant.current.checked, author_name:author.name, author_img: author.image, text: refText.current.value }
-        if (!update) {
-            const addQuestion = window.confirm("Xəbər əlavə olunsun?")
-            if (addQuestion) {
-                fetch("http://localhost:1100/news", {
-                    method: 'POST',
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(data)
-                })
-                router.push("/son-xeberler")
-                    router.refresh()
-            }
-            else return
+        let data = { title: refTitle.current.value, category: refCat.current.value, catUrl: convertChars(refCat.current.value), sub_category: status ? "" : refSubCat.current.value, subCatUrl: convertChars(refSubCat.current.value), type: refType.current.value, date: d.toISOString(), img: refImage.current.value, photo: false, photo_src: [], video: false, video_src: [], paid_info: refPaidInfo.current.checked, slider: refSlide.current.checked, urgent: refUrgent.current.checked, important: refImportant.current.checked, author_name: user.author_name, author_img: user.author_img, text: refText.current.value }
+
+        if (!refTitle.current.value) activeClass(refTitle.current)
+        if (!refImage.current.value) activeClass(refImage.current)
+        if (refCat.current.value === "all") activeClass(refCat.current)
+        if (!status && refSubCat.current.value === "all") activeClass(refSubCat.current)
+        if (refType.current.value === "all") activeClass(refType.current)
+        if (!refText.current.value) activeClass(refText.current)
+
+        if (!refTitle.current.value || !refImage.current.value || refCat.current.value === "all" || !status && refSubCat.current.value === "all" || refType.current.value === "all" || !refText.current.value) {
+            setMessage(true)
         }
         else {
-            const updateWarning = window.confirm("Dəyişikliklər qeydə alınsın?")
-            if (updateWarning) {
-                fetch(`http://localhost:1100/news/${newsId}`, {
-                    method: 'PUT',
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(data)
-                })
-                router.push("/son-xeberler")
-                router.refresh()
+            if (!update) {
+                const addQuestion = window.confirm("Xəbər əlavə olunsun?")
+                if (addQuestion) {
+                    fetch("http://localhost:1100/news", {
+                        method: 'POST',
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    router.push("/son-xeberler")
+                    router.refresh()
+                }
+                else return
             }
-            else return
+            else {
+                const updateWarning = window.confirm("Dəyişikliklər qeydə alınsın?")
+                if (updateWarning) {
+                    fetch(`http://localhost:1100/news/${newsId}`, {
+                        method: 'PUT',
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    router.push("/son-xeberler")
+                    router.refresh()
+                }
+                else return
+            }
         }
     }
 
@@ -118,42 +214,59 @@ const AddNews = ({ categories, catData, newsType }) => {
         <section className={styles.addNews}>
             <div className="container">
                 <div className="row">
-                    <div className="col-12 p-x">
+                    <div className="col-10 p-x">
                         <div className={styles.title}>
                             <h2>Xəbər əlavə et</h2>
                         </div>
                     </div>
+                    <div className="col-2 p-x">
+                        <div className={styles.author}>
+                            <div className={styles.image}>
+                                <Link href="#">
+                                    <Image src={user.author_img} width={38} height={38} alt={user.author_name} />
+                                </Link>
+                            </div>
+                            <div className={styles.authorName}>
+                                <Link href="#">{user.author_name}</Link>
+                            </div>
+                            <div className={styles.exit}>
+                                <Link href="/son-xeberler" onClick={exit}><i className="icon-logout"></i></Link>
+                            </div>
+                        </div>
+
+                    </div>
                     <form className={styles.formContent} onSubmit={submitForm}>
                         <div className="row">
                             <div className="col-12 p-x gy-3">
-                                <input ref={refTitle} type="text" name="news-title" placeholder="Xəbər başlığı" />
-                                <input ref={refImage} type="text" name="photo" placeholder="Foto linki" />
+                                <input ref={refTitle} type="text" name="news-title" placeholder="Xəbər başlığı" onChange={handleInput} />
                             </div>
-                            <div className="col-6 p-x gy-3">
-                                <select name="category" id="category" ref={refCat} onChange={getSelectedCat}>
-                                    <option value="select">- Kateqoriya -</option>
+                            <div className="col-12 p-x gy-3">
+                                <input ref={refImage} type="text" name="photo" placeholder="Foto linki" onInput={handleInput} />
+                            </div>
+                            <div className="col-6 p-x gy-3 d-flex">
+                                <select name="category" id="category" ref={refCat} onChange={handleChange}>
+                                    <option value="all">- Kateqoriya -</option>
                                     {
                                         categories.map(item => <option key={item.id} value={item.cat}>{item.cat}</option>)
                                     }
                                 </select>
 
-                                <select name="sub-category" id="sub-category" ref={refSubCat} disabled={status}>
-                                    <option value="select">- Alt kateqoriya -</option>
+                                <select name="sub-category" id="sub-category" ref={refSubCat} disabled={status} onChange={handleInput}>
+                                    <option value="all">- Alt kateqoriya -</option>
                                     {
                                         subCategories.map(item => <option key={item.id} value={item.sub_cat}>{item.sub_cat}</option>)
                                     }
                                 </select>
-
-                                <select name="news-type" id="news-type" ref={refType} >
-                                    <option value="select">- Xəbər tipi -</option>
+                                <select name="news-type" id="news-type" ref={refType} onChange={handleInput}>
+                                    <option value="all">- Xəbər tipi -</option>
                                     {
                                         newsType.map(item => <option key={item.id} value={item.name}>{item.name}</option>)
                                     }
                                 </select>
                             </div>
-                            <div className="col-6 p-x gy-3 d-flex justify-content-end align-items-center">
+                            <div className="col-6 p-x gy-3 d-flex flex-wrap row-gap-2 justify-content-end align-items-center">
                                 <label htmlFor="slider" className={styles.checkBox}>Əsas slayt
-                                    <input type="checkbox" name="slider" ref={refSlide} id="slider" />
+                                    <input type="checkbox" name="slider" ref={refSlide} id="slider" disabled={disable} checked={check} onChange={checkControl} />
                                     <span></span>
                                 </label>
                                 <label htmlFor="urgent" className={styles.checkBox}>Təcili xəbər
@@ -168,13 +281,22 @@ const AddNews = ({ categories, catData, newsType }) => {
                                     <input type="checkbox" name="paid-news" ref={refPaidInfo} id="paid-news" />
                                     <span></span>
                                 </label>
+                                <p className={`${styles.count} ${warning ? styles.active : ""}`}>Maksimum yerləşdiriləcək slider sayı:<span>{dataCount}</span></p>
                             </div>
                             <div className="col-12 p-x gy-3">
-                                <textarea name="news-content" ref={refText} id="news-content" placeholder="Xəbərin məzmununu daxil edin" cols="30" rows="10"></textarea>
+                                <p className={styles.info}>Qaın yazı üçün söz və ya mətnin əvvəl və sonuna <span>&nbsp;*b&nbsp;</span> yazmaq lazımdır</p>
+                                <p className={styles.info}>Maili yazı üçün söz və ya mətnin əvvəl və sonuna <span>&nbsp;*i&nbsp;</span> yazmaq lazımdır</p>
+                                <p className={styles.info}>Yazının maili və qalın olması üçün söz və ya mətnin əvvəl və sonuna <span>&nbsp;*bi&nbsp;</span> yazmaq lazımdır</p>
+                            </div>
+                            <div className="col-12 p-x gy-3">
+                                <textarea name="news-content" ref={refText} id="news-content" onSelectCapture={selectText} placeholder="Xəbərin məzmununu daxil edin" cols="30" rows="10" onInput={handleInput}></textarea>
                             </div>
                         </div>
 
-                        <div className={styles.btn}>
+                        <div className={`${styles.btn} ${message ? styles.warning : ""}`}>
+                            {
+                                message ? <span>Boş qalan bölmələri doldurun</span> : ""
+                            }
                             <button type="submit">Əlavə et</button>
                         </div>
                     </form>

@@ -28,7 +28,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: rgb(254, 254, 254);
+            background-color: var(--important);
 
             .close {
                 position: absolute;
@@ -64,14 +64,15 @@
                     width: 100%;
                     padding: 10px;
                     margin: 0 0 10px;
-                    border: 1px solid var(--second-border-color);
+                    border: 1px solid var(--border-color);
+                    background-color: var(--btn-bg);
+                    color: var(--input-color);
                     border-radius: 5px;
                     outline: none;
                 }
 
                 span {
-                    color: $clr_second;
-                    font-size: 12px;
+                    @extend %message;
                 }
 
                 button {
@@ -104,15 +105,30 @@
             .addNews {
                 button {
                     font-family: "Montserrat-SemiBold", sans-serif;
-                    display: block;
-                    padding: 10px 15px;
-                    border: 1px solid #1a1a1a;
-                    color: var(--color);
-                    background-color: var(--btn-bg);
+                    transition: all .4s;
+                    &:nth-child(1) {
+                        padding: 10px 15px;
+                        display: block;
+                        border: 1px solid #1a1a1a;
+                        background-color: var(--btn-bg);
+                        color: var(--color);
+                        &:hover {
+                            background-color: var(--color);
+                            color: var(--btn-bg);
+                        }
+                    }
 
-                    &:hover {
-                        background-color: var(--color);
-                        color: var(--btn-bg);
+                    &:nth-child(2) {
+                        margin: 15px;
+                        background-color: transparent;
+                        border: none;
+                        color: var(--color);
+                        &:hover{
+                            opacity: .8;
+                        }
+                        &.active {
+                            display: none;
+                        }
                     }
                 }
             }
@@ -172,7 +188,9 @@
                             background-color: transparent;
                         }
 
-                        &:nth-child(1) {
+                        &:nth-child(1),
+                        &:nth-child(2),
+                        &:nth-child(3) {
                             i {
                                 &:hover {
                                     opacity: 0.8;
@@ -199,6 +217,10 @@
 
                     &.active {
                         height: auto;
+                    }
+
+                    &.userNo {
+                        display: none;
                     }
                 }
             }

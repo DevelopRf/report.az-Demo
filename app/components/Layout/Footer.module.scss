@@ -128,10 +128,7 @@ footer {
                         &:nth-child(10) {
                             a {
                                 background-color: var(--second-btn-bg);
-
-                                i {
-                                    color: var(--color);
-                                }
+                                color: var(--color);
                             }
                         }
 
@@ -159,7 +156,6 @@ footer {
         p {
             font-family: "Montserrat-Medium", sans-serif;
             @include Font($f-s: 12px, $l-h: 18px);
-            color: var(--color);
             opacity: .6;
         }
     }

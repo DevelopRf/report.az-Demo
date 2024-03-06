@@ -12,7 +12,6 @@ const SubCategories = ({ news, categoryName, subCats }) => {
 
     return (
         <main>
-            <div className={`overlay ${toggle ? `active` : ""}`}></div>
             <section className={styles.newsCategory}>
                 <div className="container p-x">
                     <div className={styles.title}><h1>{categoryName}</h1></div>

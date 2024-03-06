@@ -12,11 +12,13 @@ const SingleNews = ({ singleNews, latestNews }) => {
         <section className={styles.newsContent}>
             <div className="container">
                 <div className="row">
-                    <div className="col-8">
-                        <h1>{singleNews.title}</h1>
+                    <div className="col-8 p-x">
+                        <div className={styles.title}>
+                            <h1>{singleNews.title}</h1>
+                        </div>
                         <div className={`${styles.catDate} ${singleNews.sub_category === "" && styles.empty}`}>
                             <div className={styles.category}>
-                                <Link href={`/${singleNews.catUrl}/${singleNews.subCatUrl}`}>{singleNews.sub_category}</Link>
+                                <Link href={`/${singleNews.subCatUrl}`}>{singleNews.sub_category ? singleNews.sub_category : singleNews.category}</Link>
                             </div>
                             <div className={styles.date}>
                                 <span><i className="icon-calendar-empty"></i>{convertDateUTC(singleNews.date)} <span>&#x2B1D;</span> {convertTimeUTC(singleNews.date)}</span>
@@ -31,6 +33,19 @@ const SingleNews = ({ singleNews, latestNews }) => {
                                     __html: convertToJSON(singleNews.text)
                                 }}>
                             </div>
+                            {
+                                singleNews.photo ?
+                                    <div className={styles.gallery}>
+                                        {
+                                            singleNews.photo_src.map((item, index) => (
+                                                <div className={styles.galleryImg} key={index}>
+                                                    <Image src={item} width={185} height={123} alt={`${singleNews.title} galeries`} />
+                                                </div>
+                                            ))
+                                        }
+                                    </div>
+                                    : ""
+                            }
                         </div>
                         <div className={styles.contact}>
                             <div className={styles.icon}>
@@ -63,7 +78,8 @@ const SingleNews = ({ singleNews, latestNews }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-4">
+                    <div className="col-4 p-x">
+                        <div className={styles.ad}></div>
                         <LatestNews news={latestNews} />
                     </div>
                 </div>

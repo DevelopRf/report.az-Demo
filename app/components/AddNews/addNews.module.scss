@@ -13,34 +13,54 @@
         }
     }
 
+    .author {
+        @extend %author;
+        justify-content: space-between;
+
+        .exit {
+            a {
+                color: var(--color);
+            }
+        }
+    }
+
     .formContent {
-        input[type=text] {
-            display: inline-block;
-            width: 100%;
+
+        input[type=text],
+        select,
+        textarea {
+
             padding: 10px;
-            border: 1px solid $clr_border;
-            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            background-color: var(--btn-bg);
+            color: var(--input-color);
+            border-radius: 6px;
             outline: none;
         }
 
+        input[type=text] {
+            display: inline-block;
+            width: 100%;
+
+            &.active {
+                border-color: $clr_second;
+            }
+        }
+
         select {
-            padding: 10px;
-            border-radius: 10px;
-            border: 1px solid $clr_border;
-            outline: none;
             cursor: pointer;
 
-            &:not(:last-child) {
-                margin: 0 10px 0 0;
+            &.active {
+                border-color: $clr_second;
             }
         }
 
         .checkBox {
             user-select: none;
             position: relative;
+            cursor: pointer;
             padding: 0 0 0 25px;
             margin: 0 25px 0 0;
-            cursor: pointer;
 
             input {
                 appearance: none;
@@ -87,26 +107,63 @@
             }
         }
 
+        .count {
+
+            padding: 0 0 0 35px;
+
+            span {
+                color: $clr_third;
+                margin: 0 26px 0 10px;
+            }
+
+            &.active {
+                span {
+                    color: $clr_second;
+                }
+            }
+        }
+
+        .info {
+            line-height: 26px;
+            span {
+                color: $clr_third;
+                padding: 0 5px 0;
+                margin: 0 5px 0;
+                background-color: var(--color);
+                color: var(--second-color);
+            }
+        }
+
         textarea {
             width: 100%;
             resize: none;
-            border: 1px solid $clr_border;
-            outline: none;
-            padding: 10px;
             margin: 15px 0;
-            border-radius: 10px;
+
+            &.active {
+                border-color: $clr_second;
+            }
         }
 
         .btn {
-            text-align: right;
+            @include Flex($j-c: flex-end, $a-i: center);
+
+            &.warning {
+                justify-content: space-between;
+            }
+
+            span {
+                display: block;
+                @extend %message;
+            }
 
             button {
-                padding: 8px 14px;
+                padding: 8px 20px;
                 border: 1px solid var(--bs-body-color);
                 border-radius: 10px;
-                background-color: var(--color);
-                color: var(--btn-bg);
-                &:hover{
+                background-color: #232323;
+                color: #f2f2f2;
+
+                &:hover {
                     opacity: .9;
                 }
             }
