@@ -21,6 +21,7 @@ export const HookProvider = ({ children }) => {
     const [text, setText] = useState("")
     const [dark, setDark] = useState(false)
     const [author, setAuthor] = useState({})
+    const [login, setLogin] = useState(false)
     const [userData, setUserData] = useState(null)
 
     useEffect(() => {
@@ -35,7 +36,7 @@ export const HookProvider = ({ children }) => {
         }
     }, [dark])
 
-    const sharedState = { toggle, setToggle, term, setTerm, update, setUpdate, searchValue, setSearchValue, newsId, setNewsId, title, SetTitle, cat, setCat, image, setImage, subCat, setSubCat, type, setType, slide, SetSlide, urgent, setUrgent, important, sertImportant, paid, setPaid, text, setText, dark, setDark, author, setAuthor, userData, setUserData }
+    const sharedState = { toggle, setToggle, term, setTerm, update, setUpdate, searchValue, setSearchValue, newsId, setNewsId, title, SetTitle, cat, setCat, image, setImage, subCat, setSubCat, type, setType, slide, SetSlide, urgent, setUrgent, important, sertImportant, paid, setPaid, text, setText, dark, setDark, author, setAuthor, userData, setUserData, login, setLogin }
 
 
     return (

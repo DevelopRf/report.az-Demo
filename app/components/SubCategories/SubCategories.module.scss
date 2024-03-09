@@ -4,9 +4,7 @@
     @extend %section;
 
     .title {
-        h1 {
-            @extend %titleGlobal;
-        }
+        @extend %titleGlobal;
     }
 
     .filter {
@@ -19,11 +17,24 @@
     }
 
     .card {
+        position: relative;
+
         .image {
             height: 205px;
+            position: relative;
 
             img {
                 @extend %img;
+            }
+
+            .overlay {
+                position: absolute;
+                inset: 0;
+                background-color: #1e1e1e59;
+
+                &.active {
+                    display: none;
+                }
             }
         }
 
@@ -39,7 +50,63 @@
             .date {
                 @extend %date;
                 font-size: 12px;
-                color: $clr_grey_text;
+            }
+        }
+
+        .edit {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            height: 20px;
+            overflow: hidden;
+
+            li {
+                margin: 0 0 5px;
+
+                i {
+                    font-size: 18px;
+                    color: #fff;
+                    opacity: 0.5;
+                }
+
+                button {
+                    border: none;
+                    background-color: transparent;
+                }
+
+                &:nth-child(1),
+                &:nth-child(2),
+                &:nth-child(3) {
+                    i {
+                        &:hover {
+                            opacity: 0.8;
+                        }
+                    }
+                }
+
+                &:nth-child(2) {
+                    i {
+                        &:hover {
+                            color: #ffcc00;
+                        }
+                    }
+                }
+
+                &:nth-child(3) {
+                    i {
+                        &:hover {
+                            color: $clr_second;
+                        }
+                    }
+                }
+            }
+
+            &.active {
+                height: auto;
+            }
+
+            &.notUser {
+                display: none;
             }
         }
     }

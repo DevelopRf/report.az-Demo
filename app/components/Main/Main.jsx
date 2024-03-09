@@ -11,11 +11,10 @@ import ActualNews from "../ActualNews/ActualNews";
 import { ImportantNews } from "../ImportantNews/ImportantNews";
 import OtherCategories from "../OtherCategories/OtherCategories";
 import { useAppContext } from "@/app/Hooks/Hook";
-import { useEffect, useState, useMemo } from "react";
 const montserratBold = localFont({ src: '../../fonts/Montserrat-Bold.woff2' })
 
 const Main = ({ data, videoData }) => {
-    const { dark, toggle } = useAppContext()
+    const { dark } = useAppContext()
 
 
     const slider = data.filter(item => item.slider)

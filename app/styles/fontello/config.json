@@ -185,6 +185,18 @@
       "css": "underline",
       "code": 61645,
       "src": "fontawesome"
+    },
+    {
+      "uid": "440e148d0e21100118eae7036bcd2067",
+      "css": "up-open",
+      "code": 61445,
+      "src": "mfglabs"
+    },
+    {
+      "uid": "bbd66ef66bb8fa9edde54d9a90b89150",
+      "css": "user",
+      "code": 59404,
+      "src": "entypo"
     }
   ]
 }

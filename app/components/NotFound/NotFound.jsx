@@ -14,7 +14,7 @@ const NotFound = () =>{
     }
 
     return (
-        <section className="notFound">
+        <div className="notFound">
             <div className="container" onMouseMove={move} ref={boxelement}>
                 <div className="row">
                     <div className="col-12">
@@ -27,7 +27,7 @@ const NotFound = () =>{
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     )
 }
 

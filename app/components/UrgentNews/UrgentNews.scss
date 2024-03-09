@@ -11,7 +11,7 @@
     padding: 10px;
     border: 1px solid var(--second-border-color);
 
-    @include screenSize(mobil) {
+    @include screenSize(mini-tablet) {
       column-gap: 14px;
     }
 
@@ -33,7 +33,7 @@
       h3 {
         display: none;
 
-        @include screenSize(mobil) {
+        @include screenSize(mini-tablet) {
           display: block;
         }
 
@@ -50,7 +50,7 @@
       position: relative;
       height: max-content;
 
-      @include screenSize(mobil) {
+      @include screenSize(mini-tablet) {
         overflow: hidden;
         padding: 0 74px 0 0;
       }
@@ -58,7 +58,7 @@
       .mySwiper {
         display: none;
 
-        @include screenSize(mobil) {
+        @include screenSize(mini-tablet) {
           display: block;
         }
 
@@ -85,7 +85,7 @@
       .scrollingText {
         display: block;
 
-        @include screenSize(mobil) {
+        @include screenSize(mini-tablet) {
           display: none;
         }
 
@@ -106,7 +106,7 @@
 
           .date {
             font-size: 10px;
-            color: $clr_grey_text;
+            @extend %date;
           }
         }
 
@@ -115,6 +115,10 @@
       .navigator {
 
         @extend %navigator;
+
+        @include screenSize(mini-tablet) {
+          @include Flex($c-g: 10px);
+      }
 
         .next,
         .prev {

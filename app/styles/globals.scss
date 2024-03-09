@@ -22,6 +22,7 @@
   --fourth-btn-bg: #f6f6f6;
   --btn-hover: #f6f6f6;
   --input-color: #353535;
+  --count-color: #008800;
 }
 
 body {
@@ -29,10 +30,14 @@ body {
   position: relative;
   --bs-body-color: #fefefe;
   --color: #353535;
-  --bs-link-decoration: none;
 
   background-color: var(--bs-body-color);
   color: var(--color);
+
+  ::selection {
+    background-color: var(--color);
+    color: var(--btn-bg);
+  }
 
   &.active {
     --bs-body-color: #0f0f0f;
@@ -49,22 +54,7 @@ body {
     --fourth-btn-bg: #fbfbfb33;
     --btn-hover: #303030;
     --input-color: #fbfbfb91;
-  }
-
-
-  .overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background-color: #0000007c;
-    z-index: 9999;
-
-    &.active {
-      display: block;
-      @include screenSize(large) {
-        display: none;
-      }
-    }
+    --count-color: #00ff00;
   }
 }
 
@@ -79,7 +69,7 @@ ul {
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 h1,
@@ -125,6 +115,12 @@ h6 {
   margin-left: calc(-1 * var(--bs-gutter-x));
   margin-right: calc(-1 * var(--bs-gutter-x));
 
+}
+
+.loading {
+  @include Flex ($j-c: center, $a-i: center);
+  height: 100vh;
+  margin: 0 auto;
 }
 
 .notFound {

@@ -6,34 +6,142 @@ import styles from "./Header.module.scss"
 import Link from "next/link"
 import Image from "next/image"
 import React from "react"
+import { url } from "@/app/libs/newsData"
 import "../../styles/fontello/css/fontello.css"
 
-const Header = () => {
+const Header = ({ userInfo }) => {
 
-    const { toggle, setToggle, setSearchValue, dark, setDark } = useAppContext()
+    const { toggle, setToggle, setSearchValue, dark, setDark, login, setLogin } = useAppContext()
 
     const [searchCancel, setSearchCancel] = useState(false)
     const [currentCurrencyIndex, setCurrentCurrencyIndex] = useState(0)
     const [currency, setCurrency] = useState()
     const [active, setActive] = useState(null)
-
+    const refmobSearch = useRef()
     const refSearch = useRef()
     const refLangs = useRef()
+    const logUsername = useRef()
+    const regisUsername = useRef()
+    const logPassword = useRef()
+    const regisPassword = useRef()
+    const logMessage = useRef()
+    const regisMessage = useRef()
+    const firstLastName = useRef()
+    const image = useRef()
+    const [btnLogin, setBtnLogin] = useState(false)
+    const [btnRegis, setBtnRegis] = useState(false)
+    const [successful, setSuccessful] = useState(false)
+    const [modalLogin, setModalLLogin] = useState(false)
+    const [scrolling, setScrolling] = useState(0)
+    const [visibleGoUp, setVisibleGoUp] = useState(false)
+
+    const refs = {
+        logUsername,
+        logPassword,
+        regisUsername,
+        regisPassword,
+        firstLastName,
+        image
+    }
+
+    const addActiveClass = (el) => el.classList.add(styles.active)
+    const removeActiveClass = (el) => el.classList.remove(styles.active)
+
+    const user = sessionStorage.getItem("usr") !== null && userInfo && userInfo.find(item => item.id === sessionStorage.getItem("usr"))
 
     const darkMode = () => {
         window.localStorage.setItem("theme", "dark Mode")
         document.body.classList.add("active");
         setDark(true);
     }
+
     const lightMode = () => {
         window.localStorage.removeItem("theme", "dark Mode")
         document.body.classList.remove("active");
         setDark(false);
     }
 
+    useEffect(() => {
+        const user = sessionStorage.getItem("usr")
+        user ? setLogin(true) : setLogin(false)
+        handleInput()
+        Object.values(refs).forEach(ref => {
+            const element = ref.current
+            element.value = ""
+        })
+    }, [login, modalLogin])
+
+    const inputEnter = (e) => {
+        if (e.key === "Enter") {
+            btnLogin ? loginControl() : registerControl()
+        }
+    }
+
+    const handleInput = () => {
+        Object.values(refs).forEach(ref => {
+            const element = ref.current
+            removeActiveClass(element)
+        })
+        logMessage.current.innerText = ""
+        regisMessage.current.innerText = ""
+
+    }
+
+    const loginControl = () => {
+        !logUsername.current.value && addActiveClass(logUsername.current)
+        !logPassword.current.value && addActiveClass(logPassword.current)
+
+        if (!logUsername.current.value || !logPassword.current.value) {
+            logMessage.current.innerText = "Boş bölmələri doldurun!"
+        }
+
+        else {
+            const user = userInfo && userInfo.find(item => item.user_name === logUsername.current.value && item.password === logPassword.current.value)
+            user ? sessionStorage.setItem("usr", user.id) || setLogin(true) || setModalLLogin(false) : logMessage.current.innerText = "İstifadəçi adı və ya parol yalnışdır!"
+            logUsername.current.value = ""
+            logPassword.current.value = ""
+        }
+    }
+
+    const registerControl = () => {
+        !firstLastName.current.value && addActiveClass(firstLastName.current)
+        !image.current.value && addActiveClass(image.current)
+        !regisUsername.current.value && addActiveClass(regisUsername.current)
+        !regisPassword.current.value && addActiveClass(regisPassword.current)
+        if (!firstLastName.current.value || !image.current.value || !regisUsername.current.value || !regisPassword.current.value) {
+            regisMessage.current.innerText = "Boş bölmələri doldurun!"
+        }
+
+        else {
+            const user = userInfo && userInfo.find(item => item.user_name === regisUsername.current.value)
+
+            if (user) {
+                addActiveClass(regisUsername.current)
+                regisMessage.current.innerText = "Bu adda istifadəçi mövcüddur"
+
+            }
+            else {
+                const data = { author_name: firstLastName.current.value, author_img: image.current.value, user_name: regisUsername.current.value, password: regisPassword.current.value }
+                fetch(`${url}/users`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                })
+                setLogin(true)
+                setModalLLogin(false)
+                setSuccessful(true)
+                router.refresh()
+                firstLastName.current.value = ""
+                image.current.value = ""
+                regisUsername.current.value = ""
+                regisPassword.current.value = ""
+            }
+        }
+    }
+
     async function getCurrency() {
         try {
-            const res = await fetch(`http://localhost:1100/currency`);
+            const res = await fetch(`${url}/currency`);
             if (!res.ok) {
                 throw new Error(`HTTP error! Status: ${res.status}`);
             }
@@ -77,16 +185,12 @@ const Header = () => {
 
     const handleChange = () => {
         setToggle(!toggle)
+        refmobSearch.current.focus()
     }
 
     const searchBtn = () => {
         setSearchCancel(true)
-        
     }
-
-    useEffect(()=>{
-       !searchCancel && console.log(refSearch.current);
-    }, [searchCancel])
 
     const cancelBtn = () => {
         setSearchCancel(false)
@@ -95,28 +199,94 @@ const Header = () => {
     const handleSearch = (e) => {
         if (e.key === 'Enter') {
             router.push('/xeber-axtarisi')
-            setSearchValue(e.target.value.toLowerCase())
+            setSearchValue(e.target.value)
+            refmobSearch.current.value = ""
+            refSearch.current.value = ""
+            setSearchCancel(false)
         }
     }
+
+    useEffect(() => {
+        document.body.style.overflow = toggle ? "hidden" : "auto"
+    }, [toggle])
 
     const toggleLang = (index) => {
         setActive(index)
     }
 
-    useEffect(() => {
-        const overlay = document.querySelector("body .overlay")
-        if (toggle) {
-            overlay.classList.add("active")
-            document.body.style.overflow = "hidden"
+    const exit = () => {
+        const question = window.confirm("İstifadəçi profilindən çıxış edilsin?")
+        if (question) {
+            sessionStorage.removeItem("usr")
+            setLogin(false)
+            setBtnLogin(false)
+        }
+        else return
+    }
+
+    window.addEventListener("scroll", () => {
+        const scrollTop = document.body.scrollTop || document.documentElement.scrollTop
+        setScrolling(scrollTop)
+        if (scrollTop > 200 && scrollTop < (scrolling)) {
+            setVisibleGoUp(true)
         }
         else {
-            overlay.classList.remove("active")
-            document.body.style.overflow = "auto"
+            setVisibleGoUp(false)
         }
-    }, [toggle])
+    })
+
+    const goUp = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        })
+    }
 
     return (
-        <header>
+        <header className={styles.header}>
+            <div className={`${styles.overlay} ${modalLogin ? styles.active : ""}`} onClick={() => { setModalLLogin(false) }}>
+                <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+                    <div className={styles.close} onClick={() => { setModalLLogin(false) }}>
+                        <i className="icon-cancel"></i>
+                    </div>
+                    <div className={styles.title}>
+                        <h2>{`${btnRegis ? "Qeydiyyat bölməsi" : "Portala Giriş"}`}</h2>
+                    </div>
+                    <form className={`${styles.formLogin} ${btnRegis ? styles.active : ""}`}>
+                        <input type="text" name="login" placeholder="İstifadəçi adı" ref={logUsername} onInput={handleInput} onKeyDown={inputEnter} />
+                        <input type="password" name="password" placeholder="Parol" ref={logPassword} onInput={handleInput} onKeyDown={inputEnter} />
+
+                        <span ref={logMessage}></span>
+                        <p>Hesabınız yoxdursa <Link href="" onClick={() => { setModalLLogin(true); setBtnRegis(true); setBtnLogin(false) }}>qeydiyyat</Link>dan keçin</p>
+                        <button type="button" onClick={loginControl}>Daxil ol</button>
+                    </form>
+                    <form className={`${styles.formRegister} ${btnLogin ? styles.active : ""}`}>
+                        <input type="text" name="name-lastname" placeholder="Ad və Soyad" ref={firstLastName} onInput={handleInput} onKeyDown={inputEnter} />
+                        <input type="text" name="image" placeholder="Profil şəkli" ref={image} onInput={handleInput} onKeyDown={inputEnter} />
+                        <input type="text" name="login" placeholder="İstifadəçi adı" ref={regisUsername} onInput={handleInput} onKeyDown={inputEnter} />
+                        <input type="password" name="password" placeholder="Parol" ref={regisPassword} onInput={handleInput} onKeyDown={inputEnter} />
+                        <span ref={regisMessage}></span>
+                        <button type="button" onClick={registerControl}>Göndər</button>
+                    </form>
+                </div>
+            </div>
+            <div className={`${styles.overlayMob} ${toggle ? styles.active : ""}`} onClick={() => { setToggle(false) }}>
+            </div>
+            {
+                successful &&
+                <div className={styles.successful} onClick={() => { setSuccessful(false) }}>
+                    <div className={styles.wrapper} onClick={(e) => { e.stopPropagation() }}>
+                        <h2>Qeydiyyad uğurla tamamlandı</h2>
+                        <p>Qeydiyyatdan keçdiyiniz istifadəçi adı və parol ilə sayta giriş edə nilərsiniz</p>
+                        <div className={styles.close} onClick={() => { setSuccessful(false) }}>
+                            <i className="icon-cancel"></i>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div className={`${styles.goUp} ${visibleGoUp ? styles.active : ""}`} onClick={goUp}>
+                <span className="icon-up-open"></span>
+            </div>
             <div className={styles.headerTop}>
                 <div className="container">
                     <div className="row">
@@ -148,10 +318,10 @@ const Header = () => {
                                 </ul>
                                 <div className={`${styles.theme} ${dark ? styles.active : ""}`}>
                                     <div className={styles.dark} onClick={darkMode}>
-                                        <Link href="#"><i className="icon-moon-inv"></i></Link>
+                                        <button><i className="icon-moon-inv"></i></button>
                                     </div>
                                     <div className={styles.light} onClick={lightMode}>
-                                        <Link href="#"><i className="icon-sun-filled"></i></Link>
+                                        <button><i className="icon-sun-filled"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -182,6 +352,9 @@ const Header = () => {
                                         <span></span>
                                     </div>
                                     <div className={`${styles.navbar} ${toggle ? styles.active : ""}`}>
+                                        <div className={styles.mobSearch}>
+                                            <input type="text" placeholder="Açar sözü daxil edin" onKeyDown={handleSearch} ref={refmobSearch} />
+                                        </div>
                                         <ul>
                                             <li><Link href="/">Əsas xəbərlər</Link></li>
                                             <li><Link href="/son-xeberler" onClick={() => setSearchValue("")}>Son xəbərlər</Link></li>
@@ -195,6 +368,20 @@ const Header = () => {
                                             <li><Link href="/analitika">Analitika</Link></li>
                                             <li><Link href="/multimedia">Multimedia</Link></li>
                                         </ul>
+
+                                        <div className={styles.mobLogout}>
+                                            <div className={styles.mobExit}>
+                                                <Link href="/" onClick={exit}>Çıxış</Link>
+                                            </div>
+                                            <div className={`${styles.mobTheme} ${dark ? styles.active : ""}`}>
+                                                <div className={styles.dark} onClick={darkMode}>
+                                                    <button><i className="icon-moon-inv"></i></button>
+                                                </div>
+                                                <div className={styles.light} onClick={lightMode}>
+                                                    <button><i className="icon-sun-filled"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className={styles.logo}>
@@ -205,6 +392,19 @@ const Header = () => {
                                         height={35}
                                         alt="report.az logo"
                                     /></Link>
+                                </div>
+                                <div className={styles.bottomRight}>
+                                    <button className={login ? styles.active : ""} onClick={() => { setModalLLogin(true); setBtnLogin(true); setBtnRegis(false) }}><span className="icon-user"></span></button>
+                                    <div className={styles.author}>
+                                        <div className={`${styles.image} ${!user ? styles.active : ""}`}>
+                                            <Link href="/author">
+                                                <Image src={user.author_img} width={38} height={38} alt={user.author_name} />
+                                            </Link>
+                                        </div>
+                                    </div>
+                                    <div className={`${styles.exit} ${!login ? styles.active : ""}`}>
+                                        <Link href="/" onClick={exit}><i className="icon-logout"></i></Link>
+                                    </div>
                                 </div>
                             </div>
                             <nav className={styles.menu}>
@@ -222,7 +422,7 @@ const Header = () => {
                                     <li><Link href="/multimedia">Multimedia</Link></li>
                                 </ul>
                                 <div className={`${styles.searchBox} ${searchCancel ? styles.active : ""}`}>
-                                    <input type="text" placeholder="Açar sözü daxil edin" onKeyDown={handleSearch}/>
+                                    <input type="text" placeholder="Açar sözü daxil edin" onKeyDown={handleSearch} ref={refSearch} />
                                     <div className={styles.cancelBtn} onClick={cancelBtn}>
                                         <i className="icon-cancel"></i>
                                     </div>

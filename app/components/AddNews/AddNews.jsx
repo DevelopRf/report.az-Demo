@@ -9,6 +9,8 @@ import { useRouter } from "next/navigation"
 import { useRef } from "react"
 
 const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
+    const { update, newsId } = useAppContext()
+
     const refTitle = useRef()
     const refImage = useRef()
     const refCat = useRef()
@@ -24,7 +26,6 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
     const [subCategories, setSubCategories] = useState([])
     const [catValue, setCatValue] = useState(null)
     const [status, setStatus] = useState(false)
-    const { update, newsId } = useAppContext()
     const [message, setMessage] = useState(false)
     const [check, setCheck] = useState(false)
     const [dataCount, setDataCount] = useState(5 - count.length)
@@ -46,7 +47,9 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
 
     const removeActiveClass = (element) => element.classList.remove(styles.active)
 
-    const user = userInfo && userInfo.find(item => item.id === sessionStorage.getItem("usr"))
+    const user = sessionStorage.getItem("usr") !== null && userInfo && userInfo.find(item => item.id === sessionStorage.getItem("usr"))
+
+
     const d = new Date()
 
     const checkControl = () => {
@@ -72,13 +75,18 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
 
     useEffect(() => {
         if (!update) {
-            dataCount === 0 && setDisable(true) || setWarning(true)
+            dataCount === 0 ? setDisable(true) : setDisable(false)
         }
         else {
             setDisable(false)
-            dataCount > 0 ? setWarning(false) : setWarning(true)
+            console.log("false");
         }
-    }, [disable, warning])
+    }, [disable])
+
+    useEffect(() => {
+        dataCount > 0 ? setWarning(false) : setWarning(true)
+
+    }, [warning, dataCount])
 
     useEffect(() => {
         if (initialLoad) {
@@ -105,7 +113,6 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
             }
         }
         onload()
-
     }, [])
 
     const exit = () => {
@@ -130,15 +137,6 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
         handleInput()
     }
 
-    const selectText = (e) => {
-        const selectedText = window.getSelection().toString().trim();
-
-        if (selectedText) {
-            console.log(selectedText);
-        }
-
-    }
-
     useEffect(() => {
         if (data && update) {
             refTitle.current.value = data.title
@@ -152,6 +150,7 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
             refPaidInfo.current.checked = data.paid_info
             refText.current.value = data.text
         }
+        console.log(sessionStorage.getItem("usr"))
     }, [data])
 
     useEffect(() => {
@@ -162,7 +161,7 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
 
     const submitForm = (e) => {
         e.preventDefault()
-        let data = { title: refTitle.current.value, category: refCat.current.value, catUrl: convertChars(refCat.current.value), sub_category: status ? "" : refSubCat.current.value, subCatUrl: convertChars(refSubCat.current.value), type: refType.current.value, date: d.toISOString(), img: refImage.current.value, photo: false, photo_src: [], video: false, video_src: [], paid_info: refPaidInfo.current.checked, slider: refSlide.current.checked, urgent: refUrgent.current.checked, important: refImportant.current.checked, author_name: user.author_name, author_img: user.author_img, text: refText.current.value }
+        let data = { title: refTitle.current.value, category: refCat.current.value, catUrl: convertChars(refCat.current.value), sub_category: status ? "" : refSubCat.current.value, subCatUrl: convertChars(refSubCat.current.value), type: refType.current.value, date: d.toISOString(), img: refImage.current.value, photo: false, photo_src: [], video: false, video_src: [], paid_info: refPaidInfo.current.checked, slider: refSlide.current.checked, urgent: refUrgent.current.checked, important: refImportant.current.checked, user_id: user.id, text: refText.current.value }
 
         if (!refTitle.current.value) activeClass(refTitle.current)
         if (!refImage.current.value) activeClass(refImage.current)
@@ -214,93 +213,84 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
         <section className={styles.addNews}>
             <div className="container">
                 <div className="row">
-                    <div className="col-10 p-x">
+                    <div className="col-12 p-x">
                         <div className={styles.title}>
                             <h2>Xəbər əlavə et</h2>
                         </div>
                     </div>
-                    <div className="col-2 p-x">
-                        <div className={styles.author}>
-                            <div className={styles.image}>
-                                <Link href="#">
-                                    <Image src={user.author_img} width={38} height={38} alt={user.author_name} />
-                                </Link>
-                            </div>
-                            <div className={styles.authorName}>
-                                <Link href="#">{user.author_name}</Link>
-                            </div>
-                            <div className={styles.exit}>
-                                <Link href="/son-xeberler" onClick={exit}><i className="icon-logout"></i></Link>
-                            </div>
-                        </div>
-
-                    </div>
-                    <form className={styles.formContent} onSubmit={submitForm}>
-                        <div className="row">
-                            <div className="col-12 p-x gy-3">
-                                <input ref={refTitle} type="text" name="news-title" placeholder="Xəbər başlığı" onChange={handleInput} />
-                            </div>
-                            <div className="col-12 p-x gy-3">
-                                <input ref={refImage} type="text" name="photo" placeholder="Foto linki" onInput={handleInput} />
-                            </div>
-                            <div className="col-6 p-x gy-3 d-flex">
-                                <select name="category" id="category" ref={refCat} onChange={handleChange}>
-                                    <option value="all">- Kateqoriya -</option>
-                                    {
-                                        categories.map(item => <option key={item.id} value={item.cat}>{item.cat}</option>)
-                                    }
-                                </select>
-
-                                <select name="sub-category" id="sub-category" ref={refSubCat} disabled={status} onChange={handleInput}>
-                                    <option value="all">- Alt kateqoriya -</option>
-                                    {
-                                        subCategories.map(item => <option key={item.id} value={item.sub_cat}>{item.sub_cat}</option>)
-                                    }
-                                </select>
-                                <select name="news-type" id="news-type" ref={refType} onChange={handleInput}>
-                                    <option value="all">- Xəbər tipi -</option>
-                                    {
-                                        newsType.map(item => <option key={item.id} value={item.name}>{item.name}</option>)
-                                    }
-                                </select>
-                            </div>
-                            <div className="col-6 p-x gy-3 d-flex flex-wrap row-gap-2 justify-content-end align-items-center">
-                                <label htmlFor="slider" className={styles.checkBox}>Əsas slayt
-                                    <input type="checkbox" name="slider" ref={refSlide} id="slider" disabled={disable} checked={check} onChange={checkControl} />
-                                    <span></span>
-                                </label>
-                                <label htmlFor="urgent" className={styles.checkBox}>Təcili xəbər
-                                    <input type="checkbox" name="urgent" ref={refUrgent} id="urgent" />
-                                    <span></span>
-                                </label>
-                                <label htmlFor="important" className={styles.checkBox}>Vacib xəbər
-                                    <input type="checkbox" name="important" ref={refImportant} id="important" />
-                                    <span></span>
-                                </label>
-                                <label htmlFor="paid-news" className={styles.checkBox}>Ödənişli xəbər
-                                    <input type="checkbox" name="paid-news" ref={refPaidInfo} id="paid-news" />
-                                    <span></span>
-                                </label>
-                                <p className={`${styles.count} ${warning ? styles.active : ""}`}>Maksimum yerləşdiriləcək slider sayı:<span>{dataCount}</span></p>
-                            </div>
-                            <div className="col-12 p-x gy-3">
-                                <p className={styles.info}>Qaın yazı üçün söz və ya mətnin əvvəl və sonuna <span>&nbsp;*b&nbsp;</span> yazmaq lazımdır</p>
-                                <p className={styles.info}>Maili yazı üçün söz və ya mətnin əvvəl və sonuna <span>&nbsp;*i&nbsp;</span> yazmaq lazımdır</p>
-                                <p className={styles.info}>Yazının maili və qalın olması üçün söz və ya mətnin əvvəl və sonuna <span>&nbsp;*bi&nbsp;</span> yazmaq lazımdır</p>
-                            </div>
-                            <div className="col-12 p-x gy-3">
-                                <textarea name="news-content" ref={refText} id="news-content" onSelectCapture={selectText} placeholder="Xəbərin məzmununu daxil edin" cols="30" rows="10" onInput={handleInput}></textarea>
-                            </div>
-                        </div>
-
-                        <div className={`${styles.btn} ${message ? styles.warning : ""}`}>
-                            {
-                                message ? <span>Boş qalan bölmələri doldurun</span> : ""
-                            }
-                            <button type="submit">Əlavə et</button>
-                        </div>
-                    </form>
                 </div>
+
+                <form className={styles.formContent} onSubmit={submitForm}>
+
+                    <div className="row">
+                        <div className="col-12 p-x gy-4">
+                            <input ref={refTitle} type="text" name="news-title" placeholder="Xəbər başlığı" onChange={handleInput} />
+                        </div>
+                        <div className="col-12 p-x gy-4">
+                            <input ref={refImage} type="text" name="photo" placeholder="Foto linki" onInput={handleInput} />
+                        </div>
+                        <div className="col-12 col-xl-6 p-x gy-4 d-flex flex-wrap gap-3">
+                            <select name="category" id="category" ref={refCat} onChange={handleChange}>
+                                <option value="all">- Kateqoriya -</option>
+                                {
+                                    categories.map(item => <option key={item.id} value={item.cat}>{item.cat}</option>)
+                                }
+                            </select>
+
+                            <select name="sub-category" id="sub-category" ref={refSubCat} disabled={status} onChange={handleInput}>
+                                <option value="all">- Alt kateqoriya -</option>
+                                {
+                                    subCategories.map(item => <option key={item.id} value={item.sub_cat}>{item.sub_cat}</option>)
+                                }
+                            </select>
+                            <select name="news-type" id="news-type" ref={refType} onChange={handleInput}>
+                                <option value="all">- Xəbər tipi -</option>
+                                {
+                                    newsType.map(item => <option key={item.id} value={item.name}>{item.name}</option>)
+                                }
+                            </select>
+                        </div>
+                        <div className="col-12 col-xl-6 p-x gy-4 d-flex flex-wrap row-gap-2 justify-content-end align-items-center">
+                            <label htmlFor="slider" className={styles.checkBox}>Əsas slayt
+                                <input type="checkbox" name="slider" ref={refSlide} id="slider" disabled={disable} checked={check} onChange={checkControl} />
+                                <span></span>
+                            </label>
+                            <label htmlFor="urgent" className={styles.checkBox}>Təcili xəbər
+                                <input type="checkbox" name="urgent" ref={refUrgent} id="urgent" />
+                                <span></span>
+                            </label>
+                            <label htmlFor="important" className={styles.checkBox}>Vacib xəbər
+                                <input type="checkbox" name="important" ref={refImportant} id="important" />
+                                <span></span>
+                            </label>
+                            <label htmlFor="paid-news" className={styles.checkBox}>Ödənişli xəbər
+                                <input type="checkbox" name="paid-news" ref={refPaidInfo} id="paid-news" />
+                                <span></span>
+                            </label>
+                        </div>
+                        <div className="col-12 p-x gy-4">
+                        <p className={`${styles.count} ${warning ? styles.active : ""}`}>Maksimum yerləşdiriləcək slider sayı:<span>{dataCount}</span></p>
+                        </div>
+                        <div className="col-12 p-x gy-4">
+                            <div className={styles.info}>
+                            <p><span>*</span> Qaın yazı üçün söz və ya mətnin əvvəl və sonuna <span>&nbsp;*b&nbsp;</span> yazmaq lazımdır</p>
+                            <p><span>*</span> Maili yazı üçün söz və ya mətnin əvvəl və sonuna <span>&nbsp;*i&nbsp;</span> yazmaq lazımdır</p>
+                            <p><span>*</span> Yazının maili və qalın olması üçün söz və ya mətnin əvvəl və sonuna <span>&nbsp;*bi&nbsp;</span> yazmaq lazımdır</p>
+                            </div>
+                        </div>
+                        <div className="col-12 p-x gy-4">
+                            <textarea name="news-content" ref={refText} id="news-content" placeholder="Xəbərin məzmununu daxil edin" cols="30" rows="10" onInput={handleInput}></textarea>
+                        </div>
+                    </div>
+
+                    <div className={`${styles.btn} ${message ? styles.warning : ""}`}>
+                        {
+                            message ? <span>Boş qalan bölmələri doldurun</span> : ""
+                        }
+                        <button type="submit">Əlavə et</button>
+                    </div>
+                </form>
+
             </div>
         </section>
     )

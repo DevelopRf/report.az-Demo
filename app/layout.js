@@ -2,7 +2,7 @@ import Header from './components/Layout/Header'
 import Footer from './components/Layout/Footer'
 import "bootstrap/dist/css/bootstrap.min.css"
 import { HookProvider } from './Hooks/Hook'
-import { getCurrency } from './libs/newsData'
+import { getUser } from './libs/newsData'
 import './styles/globals.scss'
 
 export const metadata = {
@@ -12,14 +12,13 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
 
-  const currency = await getCurrency()
+  const userInfo = await getUser()
 
   return (
     <html lang="az">
       <HookProvider>
         <body>
-          <div className='overlay'></div>
-          <Header currency={currency} />
+          <Header userInfo={userInfo}/>
           {children}
           <Footer />
         </body>

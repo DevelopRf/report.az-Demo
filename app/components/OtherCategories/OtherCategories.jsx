@@ -7,10 +7,6 @@ import { useEffect } from "react"
 import { convertDateUTC, convertTimeUTC } from "@/app/libs/date"
 
 const OtherCategories = ({ news }) => {
-    const {dark} = useAppContext()
-    useEffect(()=>{
-console.log("isledi");
-    }, [dark])
     return (
         <div className={styles.newsCards}>
                 {

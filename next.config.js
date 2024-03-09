@@ -23,6 +23,12 @@ module.exports = {
         hostname: 'swiperjs.com',
         port: '',
         pathname: '/demos/images/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'wallpaperaccess.com',
+        port: '',
+        pathname: '/full/**'
       }
 
     ]

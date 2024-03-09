@@ -1,19 +1,15 @@
-const url = "http://localhost:1100/news"
-const urlcat = "http://localhost:1100/categories"
-const urltype = "http://localhost:1100/news_type"
-const urlvideo = "http://localhost:1100/video_slider"
-const urlcurrency = "http://localhost:1100/currency"
+export const url = "http://localhost:1100"
 import { unstable_noStore as noStore } from "next/cache";
 
 export const getNews = async () => {
     noStore();
-    const res = await fetch(url)
+    const res = await fetch(`${url}/news`)
     try {
         if (!res.ok) {
             throw new Error(`Məlumatlar əldə edilə bilmədi. Status: ${res.status}`)
         }
         const data = await res.json()
-       return data.sort((a, b) => {
+        return data.sort((a, b) => {
             return new Date(b.date) - new Date(a.date)
         })
     } catch (error) {
@@ -23,7 +19,7 @@ export const getNews = async () => {
 }
 
 export const getSingleNews = async (news_id) => {
-    const res = await fetch(`${url}/${news_id}`)
+    const res = await fetch(`${url}/news/${news_id}`)
     try {
         if (!res.ok) {
             throw new Error(`Məlumatlar əldə edilə bilmədi. Status: ${res.status}`)
@@ -38,7 +34,7 @@ export const getSingleNews = async (news_id) => {
 }
 
 export const getSingleCategory = async (cat) => {
-    const res = await fetch(`${url}?catUrl=${cat}`)
+    const res = await fetch(`${url}/news?catUrl=${cat}`)
     try {
         if (!res.ok) {
             throw new Error(`Məlumatlar əldə edilə bilmədi. Status: ${res.status}`)
@@ -54,24 +50,8 @@ export const getSingleCategory = async (cat) => {
     }
 }
 
-export const getSearch = async (item) => {
-    const res = await fetch(`${url}?title=${item}`)
-    try {
-        if (!res.ok) {
-            throw new Error(`Məlumat əldə edilə bilmədi. Status: ${res.status}`)
-        }
-        const data = await res.json()
-        return data.sort((a, b) => {
-            return (new Date(b.date) - new Date(a.date))
-        })
-    } catch (error) {
-        console.error('Xəta baş verdi.', error)
-        throw error
-    }
-}
-
 export const getSingleSubCategory = async (cat) => {
-    const res = await fetch(`${url}?subCatUrl=${cat}`)
+    const res = await fetch(`${url}/news?subCatUrl=${cat}`)
     try {
         if (!res.ok) {
             throw new Error(`Məlumatlar əldə edilə bilmədi. Status: ${res.status}`)
@@ -86,7 +66,7 @@ export const getSingleSubCategory = async (cat) => {
 }
 
 export const getCategories = async () => {
-    const res = await fetch(urlcat)
+    const res = await fetch(`${url}/categories`)
     try {
         if (!res.ok) {
             throw new Error(`Məlumat əldə edilə bilmədi. Status: ${res.status}`)
@@ -100,7 +80,7 @@ export const getCategories = async () => {
 }
 
 export const getNewsType = async () => {
-    const res = await fetch(urltype)
+    const res = await fetch(`${url}/news_type`)
     try {
         if (!res.ok) {
             throw new Error(`Məlumat əldə edilə bilmədi. Status: ${res.status}`)
@@ -119,7 +99,7 @@ export const getNewsType = async () => {
 }
 
 export const getVideoLink = async () => {
-    const res = await fetch(urlvideo)
+    const res = await fetch(`${url}/video_slider`)
     try {
         if (!res.ok) {
             throw new Error(`Məlumat əldə edilə bilmədi. Status: ${res.status}`)
@@ -178,25 +158,9 @@ export function convertFromJSON(json) {
     return plainText;
 }
 
-export const getCurrency = async () => {
-    try {
-        const res = await fetch("http://localhost:1100/currency", {
-            next: { revalidate: 800 }
-        })
-
-        if (!res.ok) {
-            throw new Error(`Məlumat əldə edilə bilmədi. Status: ${res.status}`)
-        }
-        const data = await res.json()
-        return data
-
-    } catch (error) {
-        console.error("Xəta baş verdi", error);
-    }
-}
-
 export const getUser = async () => {
-    const user = await fetch("http://localhost:1100/users")
+    noStore()
+    const user = await fetch(`${url}/users`)
     try {
         if (!user.ok) {
             throw new Error(`Məlumat əldə edilə bilmədi. Status: ${user.status}`)
@@ -238,4 +202,3 @@ export const convertChars = (txt) => {
 
     return slug
 }
-

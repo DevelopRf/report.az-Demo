@@ -10,7 +10,7 @@ const latest = async () => {
     const data = await getNews()
     const userInfo = await getUser()
     return (
-        <AllNews news={data} userInfo={userInfo} />
+        <AllNews news={data} />
     )
 }
 

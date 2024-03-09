@@ -4,7 +4,13 @@
 
 .newsCards {
     @include Flex($f-d: column, $j-c: space-between);
-   height: 100%;
+    height: 100%;
+
+    .date {
+        @extend %date;
+        font-size: 10px;
+    }
+
     .bigNewsCard {
         width: 100%;
 
@@ -19,21 +25,15 @@
 
             .newsTitle {
                 a {
-                    @extend %infoBigCard;                    
+                    @extend %infoBigCard;
                 }
-            }
-
-            .date {
-                @extend %date;
-                font-size: 10px;
-                color: $clr_grey_text;
             }
         }
     }
 
     .smallCards {
         @include Flex($j-c: space-between);
-        padding: 20px 0 0;       
+        padding: 20px 0 0;
 
         .newsCard {
             width: calc(50% - 5px);
@@ -53,12 +53,6 @@
                         @extend %infoSmallCard;
 
                     }
-                }
-
-                .date {
-                    @extend %date;
-                    font-size: 10px;
-                    color: $clr_grey_text;
                 }
             }
         }

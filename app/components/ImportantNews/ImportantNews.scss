@@ -11,10 +11,18 @@
 
         .title {
             @extend %titleMain;
-            .navigator{                
+
+            .navigator {
                 @extend %navigator;
+
+                @include screenSize(mobil) {
+                    @include Flex($c-g: 10px);
+                }
+
                 top: -5px;
-                .prev, .next{
+
+                .prev,
+                .next {
                     border: 1px solid var(--color);
                 }
             }
@@ -58,10 +66,11 @@
                                 }
                             }
 
-                            .category{
+                            .category {
                                 @extend %category;
-                                a{
-                                    &:hover{
+
+                                a {
+                                    &:hover {
                                         text-decoration: underline
                                     }
                                 }

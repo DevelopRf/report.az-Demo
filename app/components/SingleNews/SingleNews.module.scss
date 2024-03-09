@@ -7,10 +7,7 @@
     @extend %section;
 
     .title {
-        h1 {
-            font-family: "Montserrat-Bold", sans-serif;
-            font-size: 26px;
-        }
+        @extend %titleGlobal;
     }
 
     .catDate {
@@ -54,7 +51,8 @@
 
             .galleryImg {
                 width: 23.2%;
-                img{
+
+                img {
                     @extend %img;
                 }
             }
@@ -103,10 +101,10 @@
     }
 
     .shareAuthor {
-        @include Flex($j-c: space-between);
+        @include Flex($j-c: space-between, $f-w: wrap, $r-g: 8px);
 
         .shareIcons {
-            @include Flex($c-g: 10px);
+            @include Flex($c-g: 10px, $f-w: wrap);
 
             a {
                 @include Flex($j-c: center, $a-i: center);

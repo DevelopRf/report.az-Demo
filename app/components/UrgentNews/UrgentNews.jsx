@@ -35,7 +35,7 @@ export const UrgentNews = ({ news }) => {
                     >
                         {
                             news && news.map(item => {
-                                return (<SwiperSlide key={item.id}><div className="newsTitle"><Link href={`${item.catUrl}/${item.subCatUrl}/${item.id}`}>{item.photo && <span className="type">FOTO</span>}{item.video && <span className="type">VİDEO</span>}{item.title}{item.paid_info && <span className="iconLock"></span>}</Link></div>
+                                return (<SwiperSlide key={item.id}><div className="newsTitle"><Link href={`/${item.subCatUrl ? item.subCatUrl : item.catUrl}/${item.id}`}>{item.photo && <span className="type">FOTO</span>}{item.video && <span className="type">VİDEO</span>}{item.title}{item.paid_info && <span className="iconLock"></span>}</Link></div>
                                     <div className="date"><span>{convertDateUTC(item.date)} <span>&#x2B1D;</span> {convertTimeUTC(item.date)}</span></div></SwiperSlide>)
                             })
                         }
@@ -46,7 +46,7 @@ export const UrgentNews = ({ news }) => {
                                 news && news.map(item => {
                                     return (
                                         <div className="newsItem" key={item.id} >
-                                            <div className="newsTitle"><Link href={`${item.catUrl}/${item.subCatUrl}/${item.id}`}>{item.photo && <span className="type">FOTO</span>}{item.video && <span className="type">VİDEO</span>}{item.title}{item.paid_info && <span className="iconLock"></span>}</Link></div>
+                                            <div className="newsTitle"><Link href={`/${item.subCatUrl ? item.subCatUrl : item.catUrl}/${item.id}`}>{item.photo && <span className="type">FOTO</span>}{item.video && <span className="type">VİDEO</span>}{item.title}{item.paid_info && <span className="iconLock"></span>}</Link></div>
                                             <div className="date"><span>{convertDateUTC(item.date)} <span>&#x2B1D;</span> {convertTimeUTC(item.date)}</span></div>
                                         </div>
                                     )

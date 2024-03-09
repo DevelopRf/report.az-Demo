@@ -6,13 +6,16 @@ import Link from "next/link"
 import { convertToJSON } from "@/app/libs/newsData"
 import { convertDateUTC, convertTimeUTC } from "@/app/libs/date"
 
-const SingleNews = ({ singleNews, latestNews }) => {
+const SingleNews = ({ singleNews, latestNews, userInfo }) => {
+
+    const user = userInfo && userInfo.find(item => item.id === singleNews.user_id)
+
     return (
 
         <section className={styles.newsContent}>
             <div className="container">
                 <div className="row">
-                    <div className="col-8 p-x">
+                    <div className=" col-lg-8 p-x ">
                         <div className={styles.title}>
                             <h1>{singleNews.title}</h1>
                         </div>
@@ -68,17 +71,17 @@ const SingleNews = ({ singleNews, latestNews }) => {
                             </ul>
                             <div className={styles.author}>
                                 <div className={styles.image}>
-                                    <Link href="#">
-                                        <Image src={singleNews.author_img} width={38} height={38} alt={singleNews.author_name} />
+                                    <Link href="/author">
+                                        <Image src={user.author_img} width={38} height={38} alt={user.author_name} />
                                     </Link>
                                 </div>
                                 <div className={styles.authorName}>
-                                    <Link href="#">{singleNews.author_name}</Link>
+                                    <Link href="/author">{user.author_name}</Link>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="col-4 p-x">
+                    <div className="d-none col-lg-4 d-lg-block p-x">
                         <div className={styles.ad}></div>
                         <LatestNews news={latestNews} />
                     </div>

@@ -2,133 +2,40 @@
 @import "../../styles/partials/extend";
 @import "../../styles/partials/mixin";
 
-.categories {
+.allNews {
     @extend %section;
     position: relative;
-
-    .overlay {
-        position: fixed;
-        display: none;
-        z-index: 10;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        background-color: #1a1a1a6f;
-
-        &.active {
-            display: block;
-        }
-
-        .modal {
-            width: 450px;
-            padding: 15px 20px;
-            border-radius: 10px;
-            position: relative;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: var(--important);
-
-            .close {
-                position: absolute;
-                width: 25px;
-                height: 25px;
-                top: 15px;
-                right: 15px;
-                cursor: pointer;
-
-                i {
-                    color: $clr_second;
-                    font-size: 14px;
-                }
-            }
-
-            .title {
-                padding: 15px;
-
-                h2 {
-                    @include Font($f-s: 18px, $l-s: .5);
-                }
-
-                max-width: 400px;
-                margin: 0 auto;
-            }
-
-            form {
-                border: 1px solid var(--border-color);
-                padding: 30px;
-                border-radius: 5px;
-
-                input {
-                    width: 100%;
-                    padding: 10px;
-                    margin: 0 0 10px;
-                    border: 1px solid var(--border-color);
-                    background-color: var(--btn-bg);
-                    color: var(--input-color);
-                    border-radius: 5px;
-                    outline: none;
-                }
-
-                span {
-                    @extend %message;
-                }
-
-                button {
-                    width: 100%;
-                    padding: 10px;
-                    margin: 30px 0 0;
-                    border: 1px solid var(--second-border-color);
-                    background-color: var(--btn-bg);
-                    color: var(--color);
-                    border-radius: 5px;
-                    transition: all .3s;
-
-                    &:hover {
-                        background-color: var(--color);
-                        color: var(--btn-bg);
-                    }
-                }
-            }
-        }
-    }
 
     .wrapper {
         .title {
             @include Flex($j-c: space-between);
 
-            h1 {
-                @extend %titleGlobal;
+            &.active {
+                display: none;
             }
 
+            @extend %titleGlobal;
+
             .addNews {
+                @include Flex($f-w: wrap, $g: 5px);
+
+                &.active {
+                    display: none;
+                }
+
                 button {
                     font-family: "Montserrat-SemiBold", sans-serif;
                     transition: all .4s;
-                    &:nth-child(1) {
-                        padding: 10px 15px;
-                        display: block;
-                        border: 1px solid #1a1a1a;
-                        background-color: var(--btn-bg);
-                        color: var(--color);
-                        &:hover {
-                            background-color: var(--color);
-                            color: var(--btn-bg);
-                        }
-                    }
 
-                    &:nth-child(2) {
-                        margin: 15px;
-                        background-color: transparent;
-                        border: none;
-                        color: var(--color);
-                        &:hover{
-                            opacity: .8;
-                        }
-                        &.active {
-                            display: none;
-                        }
+                    padding: 10px 15px;
+                    display: block;
+                    border: 1px solid #1a1a1a;
+                    background-color: var(--btn-bg);
+                    color: var(--color);
+
+                    &:hover {
+                        background-color: var(--color);
+                        color: var(--btn-bg);
                     }
                 }
             }
@@ -142,17 +49,28 @@
             @extend %filters;
             @extend %customScroll;
 
+            &.active {
+                display: none;
+            }
+
         }
 
         .contentWrapper {
             .content {
-                position: relative;
                 padding: 20px 14px;
-                @include Flex();
+                @include Flex($f-d: column, $r-g: 8px, $a-i: center);
                 @extend %contentType;
 
+                @include screenSize(mobil) {
+                    flex-direction: row;
+                }
+
                 .info {
-                    padding: 0 0 0 30px;
+                    padding: 0;
+
+                    @include screenSize(mobil) {
+                        padding: 0 0 0 30px;
+                    }
 
                     .newsTitle {
                         a {
@@ -165,65 +83,21 @@
                         @extend %date;
                         font-size: 12px;
                     }
-                }
-
-                .edit {
-                    position: absolute;
-                    right: 10px;
-                    top: 10px;
-                    height: 20px;
-                    overflow: hidden;
-
-                    li {
-                        margin: 0 0 5px;
-
-                        i {
-                            font-size: 18px;
-                            color: var(--color);
-                            opacity: 0.5;
-                        }
-
-                        button {
-                            border: none;
-                            background-color: transparent;
-                        }
-
-                        &:nth-child(1),
-                        &:nth-child(2),
-                        &:nth-child(3) {
-                            i {
-                                &:hover {
-                                    opacity: 0.8;
-                                }
-                            }
-                        }
-
-                        &:nth-child(2) {
-                            i {
-                                &:hover {
-                                    color: #ffcc00;
-                                }
-                            }
-                        }
-
-                        &:nth-child(3) {
-                            i {
-                                &:hover {
-                                    color: $clr_second;
-                                }
-                            }
-                        }
-                    }
-
-                    &.active {
-                        height: auto;
-                    }
-
-                    &.userNo {
-                        display: none;
-                    }
-                }
+                }                
             }
         }
+    }
+
+    .errorTitle {
+        h2 {
+            @include Font($f-s: 16px, $l-s: 1px);
+
+            @include screenSize(mobil) {
+                font-size: 20px;
+                color: var(--color);
+            }
+        }
+
+        margin: 0 0 20px;
     }
 }

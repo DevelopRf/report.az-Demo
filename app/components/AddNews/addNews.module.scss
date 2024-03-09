@@ -15,9 +15,12 @@
 
     .author {
         @extend %author;
-        justify-content: space-between;
 
-        .exit {
+        .authorName {
+            font-family: "Montserrat-SemiBold", sans-serif;
+            font-size: 14px;
+            max-width: 110px;
+
             a {
                 color: var(--color);
             }
@@ -48,6 +51,7 @@
         }
 
         select {
+            flex-grow: 1;
             cursor: pointer;
 
             &.active {
@@ -60,8 +64,9 @@
             position: relative;
             cursor: pointer;
             padding: 0 0 0 25px;
-            margin: 0 25px 0 0;
-
+            flex-grow: 1;
+            letter-spacing: 1px;
+margin: 0 15px 0 0;
             input {
                 appearance: none;
 
@@ -108,12 +113,11 @@
         }
 
         .count {
-
-            padding: 0 0 0 35px;
-
+            text-align: right;
+letter-spacing: 1px;
             span {
-                color: $clr_third;
-                margin: 0 26px 0 10px;
+                color: var(--count-color);
+                margin: 0 0 0 12px;
             }
 
             &.active {
@@ -124,14 +128,27 @@
         }
 
         .info {
-            line-height: 26px;
-            span {
-                color: $clr_third;
-                padding: 0 5px 0;
-                margin: 0 5px 0;
-                background-color: var(--color);
-                color: var(--second-color);
+
+            @include Font($f-s: 14px, $l-s: .4, $l-h: 22px);
+
+            p {
+                margin: 0 0 10px;
+                span {
+
+                &:first-child {
+                    color: $clr_second;
+                }
+
+                &:last-child {
+                    padding: 0 5px 0;
+                    margin: 0 5px 0;
+                    background-color: var(--color);
+                    color: var(--second-color);
+                }
             }
+            }
+
+           
         }
 
         textarea {
