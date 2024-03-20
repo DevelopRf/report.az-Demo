@@ -72,7 +72,8 @@ export const getCategories = async () => {
             throw new Error(`Məlumat əldə edilə bilmədi. Status: ${res.status}`)
         }
         const data = await res.json()
-        return data
+        const dataFilter = await data.filter(item => item.catUrl !== "/" && item.catUrl !== "/son-xeberler")
+        return dataFilter
     } catch (error) {
         console.error('Xəta baş verdi', error)
         throw error

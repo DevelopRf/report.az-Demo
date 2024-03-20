@@ -78,10 +78,11 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
             dataCount === 0 ? setDisable(true) : setDisable(false)
         }
         else {
-            setDisable(false)
-            console.log("false");
+            if (data) {
+                !data.slider && dataCount === 0 ? setDisable(true) : setDisable(false)
+            }
         }
-    }, [disable])
+    }, [disable, data])
 
     useEffect(() => {
         dataCount > 0 ? setWarning(false) : setWarning(true)
@@ -114,6 +115,11 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
         }
         onload()
     }, [])
+
+    const sliderOnClick = () => {
+        disable && alert('5-dən çox xəbər slaytı yerləşdirə bilməzsiniz. Yeni xəbər slaytı əlavə etmək üçün slayt-da görsənməsini istəmədiyiniz xəbərin redəktə bölməsinə gedin və "Əsas slayt" qarşısındakı işarəni götürün. Bundan sonra yeni slayt əlavə edə bilərsiniz.')
+
+    }
 
     const exit = () => {
         const question = window.confirm("İstifadəçi profilindən çıxış edilsin?")
@@ -150,7 +156,6 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
             refPaidInfo.current.checked = data.paid_info
             refText.current.value = data.text
         }
-        console.log(sessionStorage.getItem("usr"))
     }, [data])
 
     useEffect(() => {
@@ -207,8 +212,6 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
         }
     }
 
-
-
     return (
         <section className={styles.addNews}>
             <div className="container">
@@ -251,7 +254,7 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
                             </select>
                         </div>
                         <div className="col-12 col-xl-6 p-x gy-4 d-flex flex-wrap row-gap-2 justify-content-end align-items-center">
-                            <label htmlFor="slider" className={styles.checkBox}>Əsas slayt
+                            <label htmlFor="slider" className={styles.checkBox} onClick={sliderOnClick}>Əsas slayt
                                 <input type="checkbox" name="slider" ref={refSlide} id="slider" disabled={disable} checked={check} onChange={checkControl} />
                                 <span></span>
                             </label>
@@ -269,13 +272,13 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
                             </label>
                         </div>
                         <div className="col-12 p-x gy-4">
-                        <p className={`${styles.count} ${warning ? styles.active : ""}`}>Maksimum yerləşdiriləcək slider sayı:<span>{dataCount}</span></p>
+                            <p className={`${styles.count} ${warning ? styles.active : ""}`}>Maksimum yerləşdiriləcək slider sayı:<span>{dataCount}</span></p>
                         </div>
                         <div className="col-12 p-x gy-4">
                             <div className={styles.info}>
-                            <p><span>*</span> Qaın yazı üçün söz və ya mətnin əvvəl və sonuna <span>&nbsp;*b&nbsp;</span> yazmaq lazımdır</p>
-                            <p><span>*</span> Maili yazı üçün söz və ya mətnin əvvəl və sonuna <span>&nbsp;*i&nbsp;</span> yazmaq lazımdır</p>
-                            <p><span>*</span> Yazının maili və qalın olması üçün söz və ya mətnin əvvəl və sonuna <span>&nbsp;*bi&nbsp;</span> yazmaq lazımdır</p>
+                                <p><span>*</span> Qaın yazı üçün söz və ya mətnin əvvəl və sonuna <span>&nbsp;*b&nbsp;</span> yazmaq lazımdır</p>
+                                <p><span>*</span> Maili yazı üçün söz və ya mətnin əvvəl və sonuna <span>&nbsp;*i&nbsp;</span> yazmaq lazımdır</p>
+                                <p><span>*</span> Yazının maili və qalın olması üçün söz və ya mətnin əvvəl və sonuna <span>&nbsp;*bi&nbsp;</span> yazmaq lazımdır</p>
                             </div>
                         </div>
                         <div className="col-12 p-x gy-4">
