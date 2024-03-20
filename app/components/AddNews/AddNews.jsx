@@ -1,12 +1,11 @@
 'use client'
 import styles from "./addNews.module.scss"
-import Link from "next/link"
-import Image from "next/image"
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useState } from "react"
 import { useAppContext } from "@/app/Hooks/Hook"
 import { convertChars } from "@/app/libs/newsData"
 import { useRouter } from "next/navigation"
 import { useRef } from "react"
+import { toast } from 'react-toastify';
 
 const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
     const { update, newsId } = useAppContext()
@@ -117,7 +116,7 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
     }, [])
 
     const sliderOnClick = () => {
-        disable && alert('5-dən çox xəbər slaytı yerləşdirə bilməzsiniz. Yeni xəbər slaytı əlavə etmək üçün slayt-da görsənməsini istəmədiyiniz xəbərin redəktə bölməsinə gedin və "Əsas slayt" qarşısındakı işarəni götürün. Bundan sonra yeni slayt əlavə edə bilərsiniz.')
+        disable && toast.warning('5-dən çox xəbər slaytı yerləşdirə bilməzsiniz. Yeni xəbər slaytı əlavə etmək üçün slayt-da görsənməsini istəmədiyiniz xəbərin redəktə bölməsinə gedin və "Əsas slayt" qarşısındakı işarəni götürün. Bundan sonra yeni slayt əlavə edə bilərsiniz.')
 
     }
 
@@ -176,7 +175,7 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
         if (!refText.current.value) activeClass(refText.current)
 
         if (!refTitle.current.value || !refImage.current.value || refCat.current.value === "all" || !status && refSubCat.current.value === "all" || refType.current.value === "all" || !refText.current.value) {
-            setMessage(true)
+            toast.error("Boş qalan bölmələri doldurun")
         }
         else {
             if (!update) {
@@ -190,6 +189,7 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
                         body: JSON.stringify(data)
                     })
                     router.push("/son-xeberler")
+                    toast.success("Xəbər uğurla əlavə edildi")
                     router.refresh()
                 }
                 else return
@@ -205,6 +205,7 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
                         body: JSON.stringify(data)
                     })
                     router.push("/son-xeberler")
+                    toast.success("Xəbər uğurla yeniləndi")
                     router.refresh()
                 }
                 else return
@@ -286,10 +287,7 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
                         </div>
                     </div>
 
-                    <div className={`${styles.btn} ${message ? styles.warning : ""}`}>
-                        {
-                            message ? <span>Boş qalan bölmələri doldurun</span> : ""
-                        }
+                    <div className={styles.btn}>
                         <button type="submit">Əlavə et</button>
                     </div>
                 </form>

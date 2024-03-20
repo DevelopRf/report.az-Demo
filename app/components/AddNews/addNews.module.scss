@@ -164,10 +164,6 @@ letter-spacing: 1px;
         .btn {
             @include Flex($j-c: flex-end, $a-i: center);
 
-            &.warning {
-                justify-content: space-between;
-            }
-
             span {
                 display: block;
                 @extend %message;

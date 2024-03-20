@@ -8,6 +8,8 @@ import Image from "next/image"
 import React from "react"
 import { url } from "@/app/libs/newsData"
 import "../../styles/fontello/css/fontello.css"
+import { Flip, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Header = ({ userInfo }) => {
 
@@ -241,9 +243,21 @@ const Header = ({ userInfo }) => {
             behavior: "smooth"
         })
     }
-
     return (
         <header className={styles.header}>
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                draggable
+                transition={Flip}
+                rtl={false} //false - progressbarın sağdan sola azalması / true - progressbarın sağdan sola azalması
+                pauseOnFocusLoss                
+                pauseOnHover
+                theme={`${dark ? "dark" : "light"}`}
+            />
             <div className={`${styles.overlay} ${modalLogin ? styles.active : ""}`} onClick={() => { setModalLLogin(false) }}>
                 <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
                     <div className={styles.close} onClick={() => { setModalLLogin(false) }}>
