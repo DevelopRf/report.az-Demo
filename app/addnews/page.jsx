@@ -29,7 +29,12 @@ const addNews = async () => {
 
     const count = news && news.filter(item => item.slider)
 
-    return <AddNews categories={data} catData={cat} newsType={type} userInfo={userInfo} count={count} />
+    return (
+        <main>
+            <AddNews categories={data} catData={cat} newsType={type} userInfo={userInfo} count={count} />
+        </main>
+    )
+
 
 }
 

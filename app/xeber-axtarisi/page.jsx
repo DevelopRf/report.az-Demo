@@ -9,7 +9,9 @@ const search = async () => {
     const data = await getNews()
 
     return (
-        <AllNews searchNews={data} />
+        <main>
+            <AllNews searchNews={data} />
+        </main>
     )
 }
 

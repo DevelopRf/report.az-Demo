@@ -10,7 +10,9 @@ const latest = async () => {
     const data = await getNews()
     const userInfo = await getUser()
     return (
-        <AllNews news={data} />
+        <main>
+            <AllNews news={data} />
+        </main>
     )
 }
 
