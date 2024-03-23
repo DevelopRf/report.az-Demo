@@ -110,6 +110,11 @@ h6 {
   padding: 0 var(--bs-gutter-x) 0 var(--bs-gutter-x);
 }
 
+.pm-0 {
+  padding: 0;
+  margin: 0;
+}
+
 .row {
   --bs-gutter-x: 15px;
   margin-left: calc(-1 * var(--bs-gutter-x));

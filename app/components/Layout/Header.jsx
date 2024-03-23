@@ -344,7 +344,7 @@ const Header = ({ userInfo }) => {
                 </div>
             </div>
             <div className={styles.headerBottom}>
-                <div className="container p-x">
+                <div className="container">
                     <div className="row">
                         <div className="col-12 p-x">
                             <div className={styles.logoLang}>
@@ -407,7 +407,7 @@ const Header = ({ userInfo }) => {
                                         alt="report.az logo"
                                     /></Link>
                                 </div>
-                                <div className={styles.bottomRight}>
+                                <div className={`${styles.userInfo} ${login ? styles.active : ""}`}>
                                     <button className={login ? styles.active : ""} onClick={() => { setModalLLogin(true); setBtnLogin(true); setBtnRegis(false) }}><span className="icon-user"></span></button>
                                     <div className={styles.author}>
                                         <div className={`${styles.image} ${!user ? styles.active : ""}`}>

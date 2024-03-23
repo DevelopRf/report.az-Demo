@@ -420,9 +420,13 @@
                 }
             }
 
-            .bottomRight {
+            .userInfo {
                 padding: 0 0 0 15px;
-                @include Flex($c-g: 10px, $a-i: center);
+                @include Flex($a-i: center);
+
+                &.active{
+                    column-gap: 10px;
+                }
 
                 button {
                     background-color: transparent;
@@ -444,38 +448,40 @@
 
                 @include screenSize(large) {
                     position: absolute;
-                    right: 10px;
+                    right: 0;
                     top: 50%;
                     transform: translateY(-50%);
                 }
-            }
 
-            .author {
-                @include Flex();
-                @extend %author;
-
-                .image {
+                .author {
+                    @include Flex();
+                    @extend %author;
+    
+                    .image {
+                        &.active {
+                            display: none;
+                        }
+                    }
+                }
+    
+                .exit {
+                    display: none;
+    
+                    @include screenSize(large) {
+                        display: block;
+                    }
+    
+                    a {
+                        color: var(--color);
+                    }
+    
                     &.active {
                         display: none;
                     }
                 }
+
             }
 
-            .exit {
-                display: none;
-
-                @include screenSize(large) {
-                    display: block;
-                }
-
-                a {
-                    color: var(--color);
-                }
-
-                &.active {
-                    display: none;
-                }
-            }
         }
 
         .menu {
