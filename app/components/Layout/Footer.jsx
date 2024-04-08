@@ -3,6 +3,8 @@ import styles from "./Footer.module.scss"
 import Image from "next/image"
 import Link from "next/link"
 import { useAppContext } from "@/app/Hooks/Hook"
+import { SiGooglepodcasts } from "react-icons/si";
+import { FaTelegramPlane } from "react-icons/fa";
 
 const Footer = () => {
     const { dark } = useAppContext()
@@ -47,13 +49,13 @@ const Footer = () => {
                                         <li><Link href="#"><i className="icon-mobile"></i></Link></li>
                                         <li><Link href="https://www.facebook.com/www.report.az/"><i className="icon-facebook"></i></Link></li>
                                         <li><Link href="https://www.instagram.com/report.az/"><i className="icon-instagram"></i></Link></li>
-                                        <li><Link href="https://t.me/reportnewsaz"><i className="icon-telegram"></i></Link></li>
+                                        <li><Link href="https://t.me/reportnewsaz"><FaTelegramPlane style={{width: 18, height: 18}}/></Link></li>
                                         <li><Link href="https://twitter.com/reportnewsaz"><i className="icon-twitter"></i></Link></li>
                                         <li><Link href="https://www.linkedin.com/company/report-news-agency"><i className="icon-linkedin"></i></Link></li>
                                         <li><Link href="https://www.youtube.com/channel/UCPSpgPJwGhr5uB0Uui8Lj8g"><i className="icon-youtube-play"></i></Link></li>
                                         <li><Link href="https://report.az/rss/"><i className="icon-rss"></i></Link></li>
                                         <li><Link href="#"><i className="icon-podcast"></i></Link></li>
-                                        <li><Link href="#"><i className="icon-podcast"></i></Link></li>
+                                        <li><Link href="#"><SiGooglepodcasts style={{width: 18, height: 18}}/></Link></li>
                                     </ul>
                                 </div>
                             </div>

@@ -10,6 +10,7 @@ import { url } from "@/app/libs/newsData"
 import "../../styles/fontello/css/fontello.css"
 import { Flip, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FaTelegramPlane } from "react-icons/fa";
 
 const Header = ({ userInfo }) => {
 
@@ -325,7 +326,7 @@ const Header = ({ userInfo }) => {
                                 <ul className={styles.social}>
                                     <li><Link href="https://www.facebook.com/www.report.az/"><i className="icon-facebook"></i></Link></li>
                                     <li><Link href="https://www.instagram.com/report.az/"><i className="icon-instagram"></i></Link></li>
-                                    <li><Link href="https://t.me/reportnewsaz"><i className="icon-telegram"></i></Link></li>
+                                    <li><Link href="https://t.me/reportnewsaz"><FaTelegramPlane /></Link></li>
                                     <li><Link href="https://twitter.com/reportnewsaz"><i className="icon-twitter"></i></Link></li>
                                     <li><Link href="https://www.linkedin.com/company/report-news-agency"><i className="icon-linkedin"></i></Link></li>
                                     <li><Link href="https://www.youtube.com/channel/UCPSpgPJwGhr5uB0Uui8Lj8g"><i className="icon-youtube-play"></i></Link></li>
