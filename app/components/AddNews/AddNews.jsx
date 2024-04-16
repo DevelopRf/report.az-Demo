@@ -120,11 +120,6 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
 
     }
 
-    const exit = () => {
-        const question = window.confirm("İstifadəçi profilindən çıxış edilsin?")
-        if (question) sessionStorage.removeItem("usr")
-        else return
-    }
     const getSelectedCat = (e) => {
         setCatValue(e.target.value)
     }
