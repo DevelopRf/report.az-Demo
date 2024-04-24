@@ -67,7 +67,7 @@ const Footer = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col p-x">
-                            <p>"Report" müstəqil informasiya agentliyi sayt və gündəlik bülletenlər vasitəsi ilə Azərbaycan, rus və ingilis dillərində siyasət, iqtisadiyyat, cəmiyyət, idman, mədəniyyət sahələri üzrə ölkədə və dünyada baş verən ən vacib hadisələri öz oxucularına operativ şəkildə çatdırır. O cümlədən, saytın “Analitika” bölməsində Azərbaycanda və dünyada gedən proseslərlə bağlı analitik materiallar təqdim edilir.</p>
+                            <p>&ldquo;Report&ldquo; müstəqil informasiya agentliyi sayt və gündəlik bülletenlər vasitəsi ilə Azərbaycan, rus və ingilis dillərində siyasət, iqtisadiyyat, cəmiyyət, idman, mədəniyyət sahələri üzrə ölkədə və dünyada baş verən ən vacib hadisələri öz oxucularına operativ şəkildə çatdırır. O cümlədən, saytın &ldquo;Analitika&ldquo; bölməsində Azərbaycanda və dünyada gedən proseslərlə bağlı analitik materiallar təqdim edilir.</p>
                         </div>
                     </div>
                 </div>

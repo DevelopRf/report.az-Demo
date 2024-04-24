@@ -70,7 +70,7 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
         if (data && data.slider) {
             !refSlide.current.checked ? setDataCount(sliderCount + 1) : setDataCount(sliderCount)
         }
-    }, [check, data])
+    }, [check, data]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         if (!update) {
@@ -81,7 +81,7 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
                 !data.slider && dataCount === 0 ? setDisable(true) : setDisable(false)
             }
         }
-    }, [disable, data])
+    }, [disable, data]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         dataCount > 0 ? setWarning(false) : setWarning(true)
@@ -113,7 +113,7 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
             }
         }
         onload()
-    }, [])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     const sliderOnClick = () => {
         disable && toast.warning('5-dən çox xəbər slaytı yerləşdirə bilməzsiniz. Yeni xəbər slaytı əlavə etmək üçün slayt-da görsənməsini istəmədiyiniz xəbərin redəktə bölməsinə gedin və "Əsas slayt" qarşısındakı işarəni götürün. Bundan sonra yeni slayt əlavə edə bilərsiniz.')
@@ -150,7 +150,7 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
             refPaidInfo.current.checked = data.paid_info
             refText.current.value = data.text
         }
-    }, [data])
+    }, [data]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         const subCats = catData.filter(item => item.cat === refCat.current.value && item.sub_cat !== "")

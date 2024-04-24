@@ -35,7 +35,7 @@ const AllNews = ({ news, searchNews }) => {
 
     useEffect(() => {
         filter ? setData(filter) : setData(news)
-    }, [filter])
+    }, [filter]) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <section className={styles.allNews}>

@@ -47,7 +47,7 @@ const SubCategories = ({ news, categoryName, subCats, author }) => {
 
     useEffect(() => {
         authorNews ? setData(authorNews) || setAuthorPage(true) : setData(news) || setAuthorPage(false)
-    }, [authorNews, authorPage])
+    }, [authorNews, authorPage]) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <main>

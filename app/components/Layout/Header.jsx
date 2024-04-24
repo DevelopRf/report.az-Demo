@@ -50,7 +50,7 @@ const Header = ({ userInfo }) => {
     const addActiveClass = (el) => el.classList.add(styles.active)
     const removeActiveClass = (el) => el.classList.remove(styles.active)
 
-    const user = sessionStorage.getItem("usr") !== null && userInfo && userInfo.find(item => item.id === sessionStorage.getItem("usr"))
+    const user = typeof sessionStorage !== 'undefined' && sessionStorage.getItem("usr") !== null && userInfo && userInfo.find(item => item.id === sessionStorage.getItem("usr"))
 
     const darkMode = () => {
         window.localStorage.setItem("theme", "dark Mode")
@@ -72,7 +72,7 @@ const Header = ({ userInfo }) => {
             const element = ref.current
             element.value = ""
         })
-    }, [login, modalLogin])
+    }, [login, modalLogin])  // eslint-disable-line react-hooks/exhaustive-deps
 
     const inputEnter = (e) => {
         if (e.key === "Enter") {
@@ -227,16 +227,18 @@ const Header = ({ userInfo }) => {
         else return
     }
 
-    window.addEventListener("scroll", () => {
-        const scrollTop = document.body.scrollTop || document.documentElement.scrollTop
-        setScrolling(scrollTop)
-        if (scrollTop > 200 && scrollTop < (scrolling)) {
-            setVisibleGoUp(true)
-        }
-        else {
-            setVisibleGoUp(false)
-        }
-    })
+    useEffect(() => {
+        window.addEventListener("scroll", () => {
+            const scrollTop = document.body.scrollTop || document.documentElement.scrollTop
+            setScrolling(scrollTop)
+            if (scrollTop > 200 && scrollTop < (scrolling)) {
+                setVisibleGoUp(true)
+            }
+            else {
+                setVisibleGoUp(false)
+            }
+        })
+    }, [])
 
     const goUp = () => {
         window.scrollTo({
@@ -255,7 +257,7 @@ const Header = ({ userInfo }) => {
                 draggable
                 transition={Flip}
                 rtl={false} //false - progressbarın sağdan sola azalması / true - progressbarın sağdan sola azalması
-                pauseOnFocusLoss                
+                pauseOnFocusLoss
                 pauseOnHover
                 theme={`${dark ? "dark" : "light"}`}
             />
