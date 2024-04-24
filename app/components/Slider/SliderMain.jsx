@@ -53,24 +53,28 @@ const SliderMain = ({ news }) => {
             )
           })}
         </Swiper>
-        <Swiper
-          onSwiper={setThumbsSwiper}
-          loop={true}
-          spaceBetween={10}
-          slidesPerView={5}
-          freeMode={true}
-          watchSlidesProgress={true}
-          modules={[FreeMode, Navigation, Thumbs]}
-          className="mySwiper"
-        >
-          {news && news.map(item => {
-            return (
-              <SwiperSlide key={item.id}>
-                <Image src={item.img} width={823} height={500} alt={item.title} />
-              </SwiperSlide>
-            )
-          })}
-        </Swiper>
+        {
+          thumbsSwiper && (
+            <Swiper
+              onSwiper={setThumbsSwiper}
+              loop={true}
+              spaceBetween={10}
+              slidesPerView={5}
+              freeMode={true}
+              watchSlidesProgress={true}
+              modules={[FreeMode, Navigation, Thumbs]}
+              className="mySwiper"
+            >
+              {news && news.map(item => {
+                return (
+                  <SwiperSlide key={item.id}>
+                    <Image src={item.img} width={823} height={500} alt={item.title} />
+                  </SwiperSlide>
+                )
+              })}
+            </Swiper>
+          )
+        }
       </div>
     </section>
   )

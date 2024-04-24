@@ -12,7 +12,7 @@ import { Flip, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaTelegramPlane } from "react-icons/fa";
 
-const Header = ({ userInfo }) => {
+const Header = ({ userData }) => {
 
     const { toggle, setToggle, setSearchValue, dark, setDark, login, setLogin } = useAppContext()
 
@@ -50,7 +50,7 @@ const Header = ({ userInfo }) => {
     const addActiveClass = (el) => el.classList.add(styles.active)
     const removeActiveClass = (el) => el.classList.remove(styles.active)
 
-    const user = typeof sessionStorage !== 'undefined' && sessionStorage.getItem("usr") !== null && userInfo && userInfo.find(item => item.id === sessionStorage.getItem("usr"))
+    const user = typeof window !== "undefined" && window.sessionStorage.getItem("usr") && userData && userData.find(item => item.id === window.sessionStorage.getItem("usr"))
 
     const darkMode = () => {
         window.localStorage.setItem("theme", "dark Mode")
@@ -65,7 +65,7 @@ const Header = ({ userInfo }) => {
     }
 
     useEffect(() => {
-        const user = sessionStorage.getItem("usr")
+        const user = window.sessionStorage.getItem("usr")
         user ? setLogin(true) : setLogin(false)
         handleInput()
         Object.values(refs).forEach(ref => {
@@ -99,8 +99,8 @@ const Header = ({ userInfo }) => {
         }
 
         else {
-            const user = userInfo && userInfo.find(item => item.user_name === logUsername.current.value && item.password === logPassword.current.value)
-            user ? sessionStorage.setItem("usr", user.id) || setLogin(true) || setModalLLogin(false) : logMessage.current.innerText = "İstifadəçi adı və ya parol yalnışdır!"
+            const user = userData && userData.find(item => item.user_name === logUsername.current.value && item.password === logPassword.current.value)
+            user ? window.sessionStorage.setItem("usr", user.id) || setLogin(true) || setModalLLogin(false) : logMessage.current.innerText = "İstifadəçi adı və ya parol yalnışdır!"
             logUsername.current.value = ""
             logPassword.current.value = ""
         }
@@ -116,7 +116,7 @@ const Header = ({ userInfo }) => {
         }
 
         else {
-            const user = userInfo && userInfo.find(item => item.user_name === regisUsername.current.value)
+            const user = userData && userData.find(item => item.user_name === regisUsername.current.value)
 
             if (user) {
                 addActiveClass(regisUsername.current)
@@ -220,7 +220,7 @@ const Header = ({ userInfo }) => {
     const exit = () => {
         const question = window.confirm("İstifadəçi profilindən çıxış edilsin?")
         if (question) {
-            sessionStorage.removeItem("usr")
+            window.sessionStorage.removeItem("usr")
             setLogin(false)
             setBtnLogin(false)
         }
@@ -415,7 +415,9 @@ const Header = ({ userInfo }) => {
                                     <div className={styles.author}>
                                         <div className={`${styles.image} ${!user ? styles.active : ""}`}>
                                             <Link href="/author">
-                                                <Image src={user.author_img} width={38} height={38} alt={user.author_name} />
+                                                {
+                                                    user && <Image src={user.author_img} width={38} height={38} alt={user.author_name} />
+                                                }
                                             </Link>
                                         </div>
                                     </div>

@@ -46,7 +46,7 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
 
     const removeActiveClass = (element) => element.classList.remove(styles.active)
 
-    const user = sessionStorage.getItem("usr") !== null && userInfo && userInfo.find(item => item.id === sessionStorage.getItem("usr"))
+    const user = typeof sessionStorage !== 'undefined' && userInfo && userInfo.find(item => item.id === sessionStorage.getItem("usr"))
 
 
     const d = new Date()

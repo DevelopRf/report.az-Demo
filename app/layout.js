@@ -12,13 +12,13 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
 
-  const userInfo = await getUser()
+  const userData = await getUser()
 
   return (
     <html lang="az">
       <HookProvider>
         <body>
-          <Header userInfo={userInfo}/>
+          <Header userData={userData}/>
           {children}
           <Footer />
         </body>
