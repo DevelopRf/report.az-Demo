@@ -66,7 +66,6 @@ const category = async ({ params: { cat } }) => {
     else {
         return <NotFound />
     }
-
 }
 
 export default category

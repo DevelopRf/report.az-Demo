@@ -53,7 +53,7 @@ const Header = ({ userData }) => {
 
     useEffect(() => {
         setUser(typeof window !== "undefined" && window.sessionStorage.getItem("usr") && userData && userData.find(item => item.id === window.sessionStorage.getItem("usr")))
-    }, [userData])
+    }, [userData, login])
 
     const darkMode = () => {
         window.localStorage.setItem("theme", "dark Mode")
@@ -68,14 +68,13 @@ const Header = ({ userData }) => {
     }
 
     useEffect(() => {
-        const user = window.sessionStorage.getItem("usr")
         user ? setLogin(true) : setLogin(false)
         handleInput()
         Object.values(refs).forEach(ref => {
             const element = ref.current
             element.value = ""
         })
-    }, [login, modalLogin])  // eslint-disable-line react-hooks/exhaustive-deps
+    }, [login, modalLogin, user])  // eslint-disable-line react-hooks/exhaustive-deps
 
     const inputEnter = (e) => {
         if (e.key === "Enter") {
@@ -102,8 +101,8 @@ const Header = ({ userData }) => {
         }
 
         else {
-            const user = userData && userData.find(item => item.user_name === logUsername.current.value && item.password === logPassword.current.value)
-            user ? window.sessionStorage.setItem("usr", user.id) || setLogin(true) || setModalLLogin(false) : logMessage.current.innerText = "İstifadəçi adı və ya parol yalnışdır!"
+            const userInfo = userData && userData.find(item => item.user_name === logUsername.current.value && item.password === logPassword.current.value)
+            userInfo ? window.sessionStorage.setItem("usr", userInfo.id) || setLogin(true) || setModalLLogin(false) : logMessage.current.innerText = "İstifadəçi adı və ya parol yalnışdır!"
             logUsername.current.value = ""
             logPassword.current.value = ""
         }
@@ -415,7 +414,7 @@ const Header = ({ userData }) => {
                                 </div>
                                 <div className={`${styles.userInfo} ${login ? styles.active : ""}`}>
                                     <button className={login ? styles.active : ""} onClick={() => { setModalLLogin(true); setBtnLogin(true); setBtnRegis(false) }}><span className="icon-user"></span></button>
-                                    <div className={`${styles.authorImage} ${!user ? styles.active : ""}`}>
+                                    <div className={`${styles.authorImage} ${login === false ? styles.active : ""}`}>
                                         <Link href="/author">
                                             {user && <Image src={user.author_img} width={38} height={38} alt={user.author_name} />}
                                         </Link>

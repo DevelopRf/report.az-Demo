@@ -8,7 +8,7 @@ import { convertDateUTC, convertTimeUTC } from "@/app/libs/date"
 
 const SingleNews = ({ singleNews, latestNews, userInfo }) => {
 
-    const user = userInfo && userInfo.find(item => item.id === singleNews.user_id)
+    const user = userInfo.find(item => item.id === singleNews.user_id)
 
     return (
 

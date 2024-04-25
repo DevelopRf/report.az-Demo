@@ -6,6 +6,7 @@ import { convertChars } from "@/app/libs/newsData"
 import { useRouter } from "next/navigation"
 import { useRef } from "react"
 import { toast } from 'react-toastify';
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner"
 
 const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
     const { update, newsId } = useAppContext()

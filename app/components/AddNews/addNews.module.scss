@@ -13,20 +13,6 @@
         }
     }
 
-    .author {
-        @extend %author;
-
-        .authorName {
-            font-family: "Montserrat-SemiBold", sans-serif;
-            font-size: 14px;
-            max-width: 110px;
-
-            a {
-                color: var(--color);
-            }
-        }
-    }
-
     .formContent {
 
         input[type=text],

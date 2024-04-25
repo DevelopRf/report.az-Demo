@@ -151,8 +151,11 @@
         }
 
         .author {
-            @extend %author;
-            column-gap: 7px;
+            @include Flex($a-i: center, $c-g: 10px);
+
+            .image {
+                @extend %image;
+            }
         }
     }
 
