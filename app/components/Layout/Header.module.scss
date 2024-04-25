@@ -424,7 +424,7 @@
                 padding: 0 0 0 15px;
                 @include Flex($a-i: center);
 
-                &.active{
+                &.active {
                     column-gap: 10px;
                 }
 
@@ -453,28 +453,28 @@
                     transform: translateY(-50%);
                 }
 
-                .author {
-                    @include Flex();
-                    @extend %author;
-    
-                    .image {
-                        &.active {
-                            display: none;
-                        }
+                .authorImage {
+                    width: 38px;
+                    height: 38px;
+                    border-radius: 50%;
+                    overflow: hidden;
+
+                    &.active {
+                        display: none;
                     }
                 }
-    
+
                 .exit {
                     display: none;
-    
+
                     @include screenSize(large) {
                         display: block;
                     }
-    
+
                     a {
                         color: var(--color);
                     }
-    
+
                     &.active {
                         display: none;
                     }

@@ -1,5 +1,4 @@
 import Main from './components/Main/Main';
-import { HookProvider } from './Hooks/Hook';
 import { getNews, getVideoLink } from './libs/newsData';
 
 export const metadata = {

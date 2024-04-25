@@ -390,18 +390,3 @@
     color: $clr_second;
     font-size: 14px;
 }
-
-%image {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    overflow: hidden;
-}
-
-%author {
-    @include Flex($a-i: center);
-
-    .image {
-        @extend %image
-    }
-}

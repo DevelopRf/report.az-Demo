@@ -37,6 +37,7 @@ const Header = ({ userData }) => {
     const [modalLogin, setModalLLogin] = useState(false)
     const [scrolling, setScrolling] = useState(0)
     const [visibleGoUp, setVisibleGoUp] = useState(false)
+    const [user, setUser] = useState()
 
     const refs = {
         logUsername,
@@ -50,7 +51,9 @@ const Header = ({ userData }) => {
     const addActiveClass = (el) => el.classList.add(styles.active)
     const removeActiveClass = (el) => el.classList.remove(styles.active)
 
-    const user = typeof window !== "undefined" && window.sessionStorage.getItem("usr") && userData && userData.find(item => item.id === window.sessionStorage.getItem("usr"))
+    useEffect(() => {
+        setUser(typeof window !== "undefined" && window.sessionStorage.getItem("usr") && userData && userData.find(item => item.id === window.sessionStorage.getItem("usr")))
+    }, [userData])
 
     const darkMode = () => {
         window.localStorage.setItem("theme", "dark Mode")
@@ -238,7 +241,7 @@ const Header = ({ userData }) => {
                 setVisibleGoUp(false)
             }
         })
-    }, [])
+    }, [])  // eslint-disable-line react-hooks/exhaustive-deps
 
     const goUp = () => {
         window.scrollTo({
@@ -412,14 +415,10 @@ const Header = ({ userData }) => {
                                 </div>
                                 <div className={`${styles.userInfo} ${login ? styles.active : ""}`}>
                                     <button className={login ? styles.active : ""} onClick={() => { setModalLLogin(true); setBtnLogin(true); setBtnRegis(false) }}><span className="icon-user"></span></button>
-                                    <div className={styles.author}>
-                                        <div className={`${styles.image} ${!user ? styles.active : ""}`}>
-                                            <Link href="/author">
-                                                {
-                                                    user && <Image src={user.author_img} width={38} height={38} alt={user.author_name} />
-                                                }
-                                            </Link>
-                                        </div>
+                                    <div className={`${styles.authorImage} ${!user ? styles.active : ""}`}>
+                                        <Link href="/author">
+                                            {user && <Image src={user.author_img} width={38} height={38} alt={user.author_name} />}
+                                        </Link>
                                     </div>
                                     <div className={`${styles.exit} ${!login ? styles.active : ""}`}>
                                         <Link href="/" onClick={exit}><i className="icon-logout"></i></Link>

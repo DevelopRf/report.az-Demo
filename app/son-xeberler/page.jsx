@@ -1,4 +1,4 @@
-import { getNews, getUser } from "../libs/newsData"
+import { getNews } from "../libs/newsData"
 import AllNews from "../components/AllNews/AllNews"
 
 export const metadata = {
@@ -8,7 +8,6 @@ export const metadata = {
 const latest = async () => {
 
     const data = await getNews()
-    const userInfo = await getUser()
     return (
         <main>
             <AllNews news={data} />

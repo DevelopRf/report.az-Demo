@@ -156,7 +156,7 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
         const subCats = catData.filter(item => item.cat === refCat.current.value && item.sub_cat !== "")
         setSubCategories(subCats)
         subCats && subCats.length > 0 ? setStatus(false) : setStatus(true)
-    }, [catValue, data])
+    }, [catValue, data])  // eslint-disable-line react-hooks/exhaustive-deps
 
     const submitForm = (e) => {
         e.preventDefault()
