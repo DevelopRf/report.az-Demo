@@ -8,6 +8,7 @@ import "../../styles/fontello/css/fontello.css"
 import { useRouter } from "next/navigation"
 import { useAppContext } from "@/app/Hooks/Hook"
 import NotFound from "../NotFound/NotFound"
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner"
 
 const AllNews = ({ news, searchNews }) => {
     const { searchValue, login, setUpdate } = useAppContext()
@@ -45,7 +46,7 @@ const AllNews = ({ news, searchNews }) => {
                         <div className={styles.wrapper}>
                             <div className={`${styles.title} ${!searchValue && searchNews ? styles.active : ""}`}>
                                 <h1>{`${searchNews ? `Açar sözü: ${searchValue}` : "Son xəbərlər"}`}</h1>
-                                <div className={`${styles.addNews} ${searchNews || !login ? styles.active : ""}`}>                                    
+                                <div className={`${styles.addNews} ${searchNews || !login ? styles.active : ""}`}>
                                     <button onClick={() => { router.push("/addnews") || setUpdate(false) }}>Xəbər əlavə et</button>
                                 </div>
                             </div>
@@ -60,7 +61,7 @@ const AllNews = ({ news, searchNews }) => {
 
                             <div className={styles.contentWrapper}>
                                 {
-                                    data && data.slice(0, newsCount).map((item, index) => {
+                                    data ? data.slice(0, newsCount).map((item, index) => {
                                         return (
                                             <div key={item.id} className={`${styles.content} ${item.urgent && styles.urgent} ${item.important && styles.important}`}>
                                                 <div className={styles.image}>
@@ -82,7 +83,7 @@ const AllNews = ({ news, searchNews }) => {
                                                 </div>
                                             </div>
                                         )
-                                    })
+                                    }) : <LoadingSpinner />
                                 }
                             </div>
 

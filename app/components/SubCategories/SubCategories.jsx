@@ -6,6 +6,7 @@ import { convertDateUTC, convertTimeUTC } from "@/app/libs/date"
 import { useState, useEffect } from "react"
 import { useAppContext } from "@/app/Hooks/Hook"
 import NotFound from "../NotFound/NotFound"
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner"
 
 const SubCategories = ({ news, categoryName, subCats, author }) => {
     const { setUpdate, setNewsId, } = useAppContext()
@@ -64,7 +65,7 @@ const SubCategories = ({ news, categoryName, subCats, author }) => {
                     }
                     <div className="row">
                         {
-                            data && data.map((item, index) => {
+                            data ? data.map((item, index) => {
                                 return (
                                     <div className="col-lg-3 col-md-4 col-sm-6 p-x mb-5" key={item.id}>
                                         <div className={styles.card}>
@@ -96,7 +97,7 @@ const SubCategories = ({ news, categoryName, subCats, author }) => {
                                         </div>
                                     </div>
                                 )
-                            })
+                            }) : <LoadingSpinner/>
                         }
                     </div>
                 </div>
