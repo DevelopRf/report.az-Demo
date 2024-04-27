@@ -5,7 +5,6 @@ import styles from "./SubCategories.module.scss"
 import { convertDateUTC, convertTimeUTC } from "@/app/libs/date"
 import { useState, useEffect } from "react"
 import { useAppContext } from "@/app/Hooks/Hook"
-import NotFound from "../NotFound/NotFound"
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner"
 
 const SubCategories = ({ news, categoryName, subCats, author }) => {
@@ -51,7 +50,7 @@ const SubCategories = ({ news, categoryName, subCats, author }) => {
     }, [authorNews, authorPage]) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <main>
+        data ? <main>
             <section className={styles.newsCategory}>
                 <div className="container p-x">
                     <div className={styles.title}><h1>{categoryName}</h1></div>
@@ -65,7 +64,7 @@ const SubCategories = ({ news, categoryName, subCats, author }) => {
                     }
                     <div className="row">
                         {
-                            data ? data.map((item, index) => {
+                            data && data.map((item, index) => {
                                 return (
                                     <div className="col-lg-3 col-md-4 col-sm-6 p-x mb-5" key={item.id}>
                                         <div className={styles.card}>
@@ -97,12 +96,12 @@ const SubCategories = ({ news, categoryName, subCats, author }) => {
                                         </div>
                                     </div>
                                 )
-                            }) : <LoadingSpinner/>
+                            })
                         }
                     </div>
                 </div>
-            </section>
-        </main>
+            </section> 
+        </main>: <LoadingSpinner />
     )
 }
 

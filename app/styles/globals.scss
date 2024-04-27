@@ -125,7 +125,6 @@ h6 {
 .loading {
   @include Flex ($j-c: center, $a-i: center);
   height: 80vh;
-  margin: 0 auto;
 }
 
 .notFound {

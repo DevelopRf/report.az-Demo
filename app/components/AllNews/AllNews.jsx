@@ -3,7 +3,7 @@ import Link from "next/link"
 import Image from "next/image"
 import styles from "./AllNews.module.scss"
 import { convertDateUTC, convertTimeUTC } from "@/app/libs/date"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import "../../styles/fontello/css/fontello.css"
 import { useRouter } from "next/navigation"
 import { useAppContext } from "@/app/Hooks/Hook"
@@ -13,7 +13,6 @@ import LoadingSpinner from "../LoadingSpinner/LoadingSpinner"
 const AllNews = ({ news, searchNews }) => {
     const { searchValue, login, setUpdate } = useAppContext()
     const [newsCount, setNewsCount] = useState(20)
-    const [edit, setEdit] = useState(null)
     const router = useRouter()
     const [data, setData] = useState(null)
     const [filter, setFilter] = useState(false)
@@ -39,7 +38,7 @@ const AllNews = ({ news, searchNews }) => {
     }, [filter]) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <section className={styles.allNews}>
+        data ? <section className={styles.allNews}>
             <div className="container">
                 <div className="row">
                     <div className="col-12 p-x">
@@ -61,7 +60,7 @@ const AllNews = ({ news, searchNews }) => {
 
                             <div className={styles.contentWrapper}>
                                 {
-                                    data ? data.slice(0, newsCount).map((item, index) => {
+                                    data && data.slice(0, newsCount).map((item, index) => {
                                         return (
                                             <div key={item.id} className={`${styles.content} ${item.urgent && styles.urgent} ${item.important && styles.important}`}>
                                                 <div className={styles.image}>
@@ -83,7 +82,7 @@ const AllNews = ({ news, searchNews }) => {
                                                 </div>
                                             </div>
                                         )
-                                    }) : <LoadingSpinner />
+                                    })
                                 }
                             </div>
 
@@ -95,7 +94,7 @@ const AllNews = ({ news, searchNews }) => {
                 </div>
             </div>
             {!searchValue && searchNews && <NotFound />}
-        </section>
+        </section> : <LoadingSpinner />
     )
 }
 

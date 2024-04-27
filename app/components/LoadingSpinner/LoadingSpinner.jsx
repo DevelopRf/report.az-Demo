@@ -1,4 +1,3 @@
-"use client"
 import { PulseLoader } from "react-spinners"
 const LoadingSpinner = () => {
     return (

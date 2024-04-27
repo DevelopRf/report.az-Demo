@@ -5,6 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { convertToJSON } from "@/app/libs/newsData"
 import { convertDateUTC, convertTimeUTC } from "@/app/libs/date"
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner"
 
 const SingleNews = ({ singleNews, latestNews, userInfo }) => {
 
@@ -12,7 +13,7 @@ const SingleNews = ({ singleNews, latestNews, userInfo }) => {
 
     return (
 
-        <section className={styles.newsContent}>
+       singleNews ? <section className={styles.newsContent}>
             <div className="container">
                 <div className="row">
                     <div className=" col-lg-8 p-x ">
@@ -87,7 +88,7 @@ const SingleNews = ({ singleNews, latestNews, userInfo }) => {
                     </div>
                 </div>
             </div>
-        </section>
+        </section> : <LoadingSpinner />
 
     )
 }

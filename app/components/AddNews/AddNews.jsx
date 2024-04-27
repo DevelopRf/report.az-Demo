@@ -26,7 +26,6 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
     const [subCategories, setSubCategories] = useState([])
     const [catValue, setCatValue] = useState(null)
     const [status, setStatus] = useState(false)
-    const [message, setMessage] = useState(false)
     const [check, setCheck] = useState(false)
     const [dataCount, setDataCount] = useState(5 - count.length)
     const [initialLoad, setInitialLoad] = useState(true);
@@ -210,7 +209,7 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
     }
 
     return (
-        <section className={styles.addNews}>
+        data ? <section className={styles.addNews}>
             <div className="container">
                 <div className="row">
                     <div className="col-12 p-x">
@@ -289,7 +288,7 @@ const AddNews = ({ categories, catData, newsType, userInfo, count }) => {
                 </form>
 
             </div>
-        </section>
+        </section> : <LoadingSpinner />
     )
 }
 
